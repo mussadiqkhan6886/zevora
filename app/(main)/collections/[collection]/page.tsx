@@ -21,8 +21,8 @@ const page = async ({params}: {params: Promise<{collection: string}>}) => {
 
 
   return (
-    <main className='pt-35 max-w-7xl mx-auto'>
-      <h1 className={`${serif.className} capitalize text-2xl md:text-4xl my-10`}>{category}</h1>
+    <main className='pt-35 px-3 max-w-7xl mx-auto'>
+      <h1 className={`${serif.className} capitalize text-4xl my-10`}>{category}</h1>
       <div className='flex justify-between items-center'>
         <div>
             <label className="text-zinc-500 text-sm inline-block mr-4">Sort By:</label>
