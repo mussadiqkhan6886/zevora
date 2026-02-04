@@ -23,7 +23,7 @@ const Menu = ({
       animate={{ x: 0 }}
       exit={{ x: '-100%' }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="fixed inset-0 top-35 z-50 bg-white overflow-y-auto"
+      className="fixed inset-0 top-30 z-50 bg-white overflow-y-auto"
     >
       <nav className="pt-6">
         <ul className="flex flex-col gap-6 text-lg font-light px-10">

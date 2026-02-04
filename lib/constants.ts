@@ -2,6 +2,7 @@ export const headerLinks = [
   {name: "All", link: "/collections/all", subCategory: []},
   {name: "Watches", link: "/collections/watches", subCategory: []},
   {name: "Jewelry Set", link: "/collections/jewelry-set", subCategory: []},
+  {name: "Perfumes", link: "/collections/perfumes", subCategory: []},
   {name: "Stainless Steel Jewelry", link: "", subCategory: [
     {name: "Bracelets", link: "/collections/bracelets"},
     {name: "Earrings", link: "/collections/earrings"},
