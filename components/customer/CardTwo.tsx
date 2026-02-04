@@ -6,7 +6,7 @@ import React from 'react'
 const CardTwo = ({name, price, salePrice, onSale, image, link}: {name: string, price: number, salePrice: number, onSale: boolean, image: string, link: string}) => {
   return (
     <Link href={link} className='relative group mb-4'>
-      <Image className='object-center object-cover h-[340px]' src={image} alt={name} width={400} height={400} />
+      <Image className='object-center object-cover w-full h-[340px]' src={image} alt={name} width={400} height={400} />
         {onSale && <div className='absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 text-black'>Sale</div>}
       <h3 className={`${serif.className} text-base group-hover:underline  tracking-wider mt-2 px-2 text-black`}>{name}</h3>
       <div className='flex gap-5 text-black px-2 mt-1 items-center'>

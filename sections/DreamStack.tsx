@@ -6,7 +6,7 @@ import React from 'react'
 
 const DreamStack = () => {
   return (
-    <section className='px-20 mb-4'>
+    <section className='px-5 sm:px-10 md:px-20 mb-4'>
        <Link href={"/"} className={`underline ${serif.className} inline-block hover:text-main text-black text-4xl py-8`}>
             Dream Stacks
         </Link>
