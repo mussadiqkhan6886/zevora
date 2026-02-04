@@ -9,3 +9,14 @@ export const headerLinks = [
     {name: "Rings", link: "/collections/rings"},
     {name: "Pendants", link: "/collections/pendants"},
 ]
+
+export const watches = [
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch1.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch2.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch3.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch4.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch1.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch2.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch3.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: "4000", salePrice: "3000", onSale: true, image: "/watch4.jpg"},
+]

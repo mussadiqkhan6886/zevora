@@ -23,7 +23,7 @@ const Header = () => {
         slidesPerView={1}
         autoplay={{delay: 2500, disableOnInteraction: false}}
         loop
-        className={`bg-main text-white text-[13px] ${serif.className}`}
+        className={`bg-header text-white text-[13px] ${serif.className}`}
       >
         <SwiperSlide className='py-2 text-center tracking-widest'>Delivery charges 190rs Free delivery for orders above 3000rs</SwiperSlide>
         <SwiperSlide className='py-2 text-center tracking-widest'>All products come with 1 year colour warranty</SwiperSlide>
