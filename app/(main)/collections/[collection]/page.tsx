@@ -3,7 +3,7 @@ import { products } from '@/lib/constants'
 import { serif } from '@/lib/fonts'
 import React from 'react'
 
-const page = async ({params}: {params: {collection: Promise<string>}}) => {
+const page = async ({params}: {params: Promise<{collection: string}>}) => {
 
     const slug = (await (await params).collection)
     const category = (await (await params).collection).replace("-", " ")
