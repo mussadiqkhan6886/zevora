@@ -42,3 +42,15 @@ export const newArrivals = [
     {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: 4000, salePrice: 3000, onSale: true, image: "/watch3.jpg"},
     {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: 4000, salePrice: 3000, onSale: true, image: "/watch4.jpg"},
 ]
+
+export const collections = [
+    {image: "/jew1.jpg",name: "New Arrival", link: "/collections/new-arrival"},
+    {image: "/jew2.jpg",name: "Watches", link: "/collections/watches"},
+    {image: "/jew3.jpg",name: "Jewellery Sets", link: "/collections/jewellery-sets"},
+    {image: "/jew4.jpg",name: "Dream Stacking", link: "/collections/dream-stacking"},
+    {image: "/jew5.jpg",name: "Best Selling", link: "/collections/best-selling"},
+    {image: "/jew6.jpg",name: "Bracelets", link: "/collections/bracelets"},
+    {image: "/watch1.jpg",name: "Earrings", link: "/collections/earrings"},
+    {image: "/watch2.jpg",name: "Rings", link: "/collections/rings"},
+    {image: "/watch3.jpg",name: "Pendants", link: "/collections/pendants"},
+]
