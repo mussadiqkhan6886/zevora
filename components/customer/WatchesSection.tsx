@@ -24,7 +24,7 @@ const WatchesSection = ({ watchesList }: { watchesList: any[] }) => {
   }, []);
 
   return (
-    <section className="relative w-full px-2">
+    <section className="relative w-full">
       
       {/* Swiper */}
       <Swiper
@@ -34,9 +34,9 @@ const WatchesSection = ({ watchesList }: { watchesList: any[] }) => {
         breakpoints={{
           0: { slidesPerView: 1.1 },
           480: { slidesPerView: 1.4 },
-          640: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
+          640: { slidesPerView: 2.4 },
+          768: { slidesPerView: 3.4 },
+          1024: { slidesPerView: 4.4 },
         }}
       >
         {watchesList.map((item, index) => (
