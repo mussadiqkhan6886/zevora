@@ -11,10 +11,10 @@ const SearchBar = ({isSearchOpen}: {isSearchOpen: (searchOpen: boolean) => void}
   return (
     <div className='w-full h-full bg-black/20 fixed inset-0 top-10'>
       <div className='bg-white flex items-center justify-center py-10'>
-        <div className='border flex items-center relative w-4xl px-5'>
+        <div className='border flex items-center relative w-md sm:w-lg md:w-2xl lg:w-4xl px-5'>
             <p className='absolute text-[10px] text-zinc-700 top-2 left-5'>Search</p>
             <input type='text' className='w-full border-none py-4 pt-6 outline-none' />
-            <FiSearch className='text-2xl cursor-pointer' onClick={search} />
+            <FiSearch className='text-lg md:text-2xl cursor-pointer' onClick={search} />
         </div>
         <FiX className='text-2xl ml-6 cursor-pointer' onClick={() => isSearchOpen(false)} />
       </div>
