@@ -1,5 +1,5 @@
 export const headerLinks = [
-    {name: "New Arrival", link: "/collections/new-arrival"},
+    {name: "All", link: "/collections/all"},
     {name: "Watches", link: "/collections/watches"},
     {name: "Jewellery Sets", link: "/collections/jewellery-sets"},
     {name: "Dream Stacking", link: "/collections/dream-stacking"},
@@ -470,7 +470,7 @@ export const products = [
 
 
 export const collections = [
-    {image: "/jew1.jpg",name: "New Arrival", link: "/collections/new-arrival"},
+    {image: "/jew1.jpg",name: "All", link: "/collections/all"},
     {image: "/jew2.jpg",name: "Watches", link: "/collections/watches"},
     {image: "/jew3.jpg",name: "Jewellery Sets", link: "/collections/jewellery-sets"},
     {image: "/jew4.jpg",name: "Dream Stacking", link: "/collections/dream-stacking"},

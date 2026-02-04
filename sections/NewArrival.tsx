@@ -11,7 +11,7 @@ const NewArrival = () => {
             New Arrivals
         </Link>
         <NewArrivalsSection products={products} />
-        <button className='text-center w-full mt-8'><Link className='bg-black text-white text-center px-6 py-3 text-sm' href={"/collections/new-arrival"}>View All</Link></button>
+        <button className='text-center w-full mt-8'><Link className='bg-black text-white text-center px-6 py-3 text-sm' href={"/collections/all"}>View All</Link></button>
     </section>
   )
 }
