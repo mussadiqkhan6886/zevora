@@ -1,13 +1,19 @@
 export const headerLinks = [
-    {name: "All", link: "/collections/all"},
-    {name: "Watches", link: "/collections/watches"},
-    {name: "Jewellery Sets", link: "/collections/jewellery-sets"},
-    {name: "Dream Stacking", link: "/collections/dream-stacking"},
-    {name: "Best Selling", link: "/collections/best-selling"},
+  {name: "All", link: "/collections/all", subCategory: []},
+  {name: "Watches", link: "/collections/watches", subCategory: []},
+  {name: "Jewelry Set", link: "/collections/jewelry-set", subCategory: []},
+  {name: "Stainless Steel Jewelry", link: "", subCategory: [
     {name: "Bracelets", link: "/collections/bracelets"},
     {name: "Earrings", link: "/collections/earrings"},
     {name: "Rings", link: "/collections/rings"},
     {name: "Pendants", link: "/collections/pendants"},
+  ]},
+  {name: "Gold Platted Jewelry", link: "", subCategory: [
+    {name: "Bracelets", link: "/collections/bracelets"},
+    {name: "Earrings", link: "/collections/earrings"},
+    {name: "Rings", link: "/collections/rings"},
+    {name: "Pendants", link: "/collections/pendants"},
+  ]},
 ]
 
 export const products = [

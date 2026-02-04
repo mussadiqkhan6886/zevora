@@ -7,7 +7,7 @@ import "swiper/css"
 import { serif } from '@/lib/fonts';
 import Link from 'next/link';
 import { headerLinks } from '@/lib/constants';
-import {FiMenu, FiSearch, FiShoppingCart, FiX} from "react-icons/fi"
+import {FiChevronDown, FiChevronRight, FiMenu, FiSearch, FiShoppingCart, FiX} from "react-icons/fi"
 import Menu from './Menu';
 import SearchBar from './SearchBar';
 
@@ -16,6 +16,8 @@ const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false)
     const [scrolled, setScrolled ] = useState(false)
+   const [openMenu, setOpenMenu] = useState<string | null>(null)
+
 
     useEffect(() => {
       const handleScroll = () => {
@@ -68,10 +70,50 @@ useEffect(() => {
             </div>
             
             <ul className='lg:flex mx-6 justify-between gap-8 flex-wrap items-center hidden'>
-                {headerLinks.map(link => (
-                    <li key={link.name}><Link className='text-sm font-light hover:underline transition-all duration-400' href={link.link}>{link.name}</Link></li>
-                ))}
-            </ul>
+  {headerLinks.map(link => (
+    <li key={link.name} className='relative'>
+      
+      {link.subCategory.length > 0 ? (
+        <p
+          onClick={() =>
+            setOpenMenu(openMenu === link.name ? null : link.name)
+          }
+          className='flex gap-2 text-sm items-center font-light hover:underline cursor-pointer'
+        >
+          {link.name}
+          <FiChevronDown
+            className={`transition-transform ${
+              openMenu === link.name ? 'rotate-180' : ''
+            }`}
+          />
+        </p>
+      ) : (
+        <Link
+          className='text-sm flex items-center gap-2 font-light hover:underline'
+          href={link.link}
+        >
+          {link.name}
+        </Link>
+      )}
+
+      {openMenu === link.name && (
+        <div className='absolute top-full mt-3 bg-white  flex flex-col min-w-[180px] z-50'>
+          {link.subCategory.map((sub, i) => (
+            <Link
+              key={i}
+              href={sub.link}
+              className='px-4 py-2 text-sm hover:bg-zinc-100'
+              onClick={() => setOpenMenu(null)}
+            >
+              {sub.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </li>
+  ))}
+</ul>
+
         </nav>
          <Link href={"/"} className='lg:hidden'>
             <h2>Zevora</h2>
