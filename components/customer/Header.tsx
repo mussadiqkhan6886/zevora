@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Swiper, SwiperSlide} from "swiper/react"
 import {Autoplay} from "swiper/modules"
 import "swiper/css"
@@ -13,8 +13,21 @@ import SearchBar from './SearchBar';
 
 const Header = () => {
 
-    const [menuOpen, isMenuOpen] = useState(false)
-    const [searchOpen, isSearchOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false)
+    const [searchOpen, setSearchOpen] = useState(false)
+    const [scrolled, setScrolled ] = useState(false)
+
+    useEffect(() => {
+      const handleScroll = () => {
+        setScrolled(window.scrollY > 40)
+      } 
+
+      window.addEventListener("scroll", handleScroll)
+      handleScroll()
+
+      return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
+
 
   return (
     <header>
@@ -29,16 +42,16 @@ const Header = () => {
         <SwiperSlide className='py-2 text-center tracking-widest'>All products come with 1 year colour warranty</SwiperSlide>
       </Swiper>
 
-      <div className='px-5 md:px-10 lg:px-20 border-b border-zinc-300 flex justify-between py-8 items-center'> 
+      <div className={`${scrolled ? "top-0 fixed" : "top-8 absolute"} px-5 md:px-10 lg:px-20 border-b border-zinc-300 flex justify-between py-8 items-center  w-full z-50 bg-white`}> 
         <Link href={"/"} className='hidden lg:block'>
             <h2>Zevora</h2>
             <h3>Official</h3>
         </Link>
         <nav className='flex justify-between  items-center'>
             <div className='lg:hidden'>
-                {!menuOpen && <FiMenu onClick={() => isMenuOpen(true)} className='cursor-pointer text-xl' />}
-                {menuOpen && <FiX onClick={() => isMenuOpen(false)} className='cursor-pointer text-xl' />}
-                {menuOpen && <Menu isMenuOpen={isMenuOpen} />}
+                {!menuOpen && <FiMenu onClick={() => setMenuOpen(true)} className='cursor-pointer text-xl' />}
+                {menuOpen && <FiX onClick={() => setMenuOpen(false)} className='cursor-pointer text-xl' />}
+                {menuOpen && <Menu isMenuOpen={setMenuOpen} />}
             </div>
             
             <ul className='lg:flex mx-6 justify-between gap-8 flex-wrap items-center hidden'>
@@ -52,8 +65,8 @@ const Header = () => {
             <h3>Official</h3>
         </Link>
         <div className='flex gap-6 items-center'>
-            <FiSearch className='cursor-pointer' onClick={() => isSearchOpen(true)} />
-            {searchOpen && <SearchBar isSearchOpen={isSearchOpen} />}
+            <FiSearch className='cursor-pointer' onClick={() => setSearchOpen(true)} />
+            {searchOpen && <SearchBar isSearchOpen={setSearchOpen} />}
             <FiShoppingCart />
         </div>
       </div>

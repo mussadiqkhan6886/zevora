@@ -6,7 +6,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <main>
+    <main className='pt-25'>
       <Watches />
       <DreamStack />
       <About />
