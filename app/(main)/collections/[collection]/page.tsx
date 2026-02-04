@@ -5,6 +5,7 @@ import React from 'react'
 
 const page = async ({params}: {params: {collection: Promise<string>}}) => {
 
+    const slug = (await (await params).collection)
     const category = (await (await params).collection).replace("-", " ")
     
     const filtered = products.filter(product => {
@@ -36,7 +37,7 @@ const page = async ({params}: {params: {collection: Promise<string>}}) => {
       </div>
       <section className='grid gap-6 grid-col-2 md:grid-cols-3 lg:grid-cols-4 my-10'>
         {filtered.map((item, i) => (
-            <CardTwo key={i} {...item} />
+            <CardTwo key={i} collectionSlug={slug} {...item} />
         ))}
       </section>
     </main>

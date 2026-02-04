@@ -47,7 +47,7 @@ const NewArrivalsSection = ({ products }: { products: any[] }) => {
       >
         {newArrivals.map((item, index) => (
           <SwiperSlide key={index}>
-            <CardTwo {...item} />
+            <CardTwo collectionSlug='collections/all' {...item} />
           </SwiperSlide>
         ))}
       </Swiper>

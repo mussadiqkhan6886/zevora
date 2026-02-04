@@ -41,7 +41,7 @@ const WatchesSection = ({ watches }: { watches: any[] }) => {
       >
         {watches.map((item, index) => (
           <SwiperSlide key={index}>
-            <Card {...item} />
+            <Card collectionSlug="collections/watches" {...item} />
           </SwiperSlide>
         ))}
       </Swiper>

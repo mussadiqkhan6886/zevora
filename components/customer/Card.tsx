@@ -4,9 +4,9 @@ import Link from 'next/link'
 import React from 'react'
 import SwiperImages from './SwiperImages'
 
-const Card = ({name, price, salePrice, onSale, images, slug}: {name: string, price: number, salePrice: number, onSale: boolean, images: string[], slug: string}) => {
+const Card = ({name, price, salePrice, onSale, images, slug, collectionSlug}: {name: string, price: number, salePrice: number, onSale: boolean, images: string[], slug: string, collectionSlug: string}) => {
   return (
-    <Link href={slug} className='relative group'>
+    <Link href={`${collectionSlug}/${slug}`} className='relative group'>
       <Image src={images[0]} alt={"images"} width={400} className='w-full' height={400} />
         {onSale && <div className='absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 z-40 text-black'>Sale</div>}
       <h3 className={`${serif.className} text-base  tracking-wider mt-2 px-2 text-white group-hover:underline`}>{name}</h3>
