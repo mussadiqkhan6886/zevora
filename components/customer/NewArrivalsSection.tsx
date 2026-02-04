@@ -9,7 +9,7 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const NewArrivalsSection = ({ newArrivals }: { newArrivals: any[] }) => {
+const NewArrivalsSection = ({ products }: { products: any[] }) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<any>(null);
@@ -22,6 +22,12 @@ const NewArrivalsSection = ({ newArrivals }: { newArrivals: any[] }) => {
       swiperRef.current.navigation.update();
     }
   }, []);
+
+  const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    const newArrivals = products.filter(product => new Date(product.createdAt) > sevenDaysAgo);
+
 
   return (
     <section className="relative w-full">

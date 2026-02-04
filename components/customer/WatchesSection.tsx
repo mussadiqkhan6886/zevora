@@ -9,7 +9,7 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const WatchesSection = ({ watchesList }: { watchesList: any[] }) => {
+const WatchesSection = ({ watches }: { watches: any[] }) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<any>(null);
@@ -39,7 +39,7 @@ const WatchesSection = ({ watchesList }: { watchesList: any[] }) => {
           1024: { slidesPerView: 4.4 },
         }}
       >
-        {watchesList.map((item, index) => (
+        {watches.map((item, index) => (
           <SwiperSlide key={index}>
             <Card {...item} />
           </SwiperSlide>
