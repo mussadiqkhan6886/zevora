@@ -28,6 +28,19 @@ const Header = () => {
       return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
+useEffect(() => {
+  if (menuOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
+
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
+}, [menuOpen]);
+
+
 
   return (
     <header>
@@ -36,7 +49,7 @@ const Header = () => {
         slidesPerView={1}
         autoplay={{delay: 2500, disableOnInteraction: false}}
         loop
-        className={`bg-header text-white text-[13px] ${serif.className}`}
+        className={`bg-main text-white text-[13px] ${serif.className}`}
       >
         <SwiperSlide className='py-2 text-center tracking-widest'>Delivery charges 190rs Free delivery for orders above 3000rs</SwiperSlide>
         <SwiperSlide className='py-2 text-center tracking-widest'>All products come with 1 year colour warranty</SwiperSlide>
@@ -51,7 +64,7 @@ const Header = () => {
             <div className='lg:hidden'>
                 {!menuOpen && <FiMenu onClick={() => setMenuOpen(true)} className='cursor-pointer text-xl' />}
                 {menuOpen && <FiX onClick={() => setMenuOpen(false)} className='cursor-pointer text-xl' />}
-                {menuOpen && <Menu isMenuOpen={setMenuOpen} />}
+                {menuOpen && <Menu setMenuOpen={setMenuOpen} />}
             </div>
             
             <ul className='lg:flex mx-6 justify-between gap-8 flex-wrap items-center hidden'>
@@ -64,7 +77,7 @@ const Header = () => {
             <h2>Zevora</h2>
             <h3>Official</h3>
         </Link>
-        <div className='flex gap-6 items-center'>
+        <div className='flex gap-4 md:gap-6 items-center'>
             <FiSearch className='cursor-pointer' onClick={() => setSearchOpen(true)} />
             {searchOpen && <SearchBar isSearchOpen={setSearchOpen} />}
             <FiShoppingCart />
