@@ -31,3 +31,14 @@ export const jewellery = [
     {name: "a long jewellery name to check overflow and other issue 2 line", link: "/", price: 5000, salePrice: 4000, onSale: true, image: "/jew3.jpg"},
     {name: "a long jewellery name to check overflow and other issue 2 line", link: "/", price: 5000, salePrice: 4000, onSale: true, image: "/jew4.jpg"},
 ]
+
+export const newArrivals = [
+    {name: "a long jewellery name to check overflow and other issue 2 line", link: "/", price: 5000, salePrice: 4000, onSale: true, image: "/jew3.jpg"},
+    {name: "a long jewellery name to check overflow and other issue 2 line", link: "/", price: 5000, salePrice: 4000, onSale: true, image: "/jew4.jpg"},
+    {name: "a long jewellery name to check overflow and other issue 2 line", link: "/", price: 5000, salePrice: 4000, onSale: true, image: "/jew1.jpg"},
+    {name: "a long jewellery name to check overflow and other issue 2 line", link: "/", price: 5000, salePrice: 4000, onSale: true, image: "/jew2.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: 4000, salePrice: 3000, onSale: true, image: "/watch1.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: 4000, salePrice: 3000, onSale: true, image: "/watch2.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: 4000, salePrice: 3000, onSale: true, image: "/watch3.jpg"},
+    {name: "a long watch name to check overflow and other issue 2 line", link: "/", price: 4000, salePrice: 3000, onSale: true, image: "/watch4.jpg"},
+]
