@@ -9,10 +9,12 @@ import Link from 'next/link';
 import { headerLinks } from '@/lib/constants';
 import {FiMenu, FiSearch, FiShoppingCart, FiX} from "react-icons/fi"
 import Menu from './Menu';
+import SearchBar from './SearchBar';
 
 const Header = () => {
 
     const [menuOpen, isMenuOpen] = useState(false)
+    const [searchOpen, isSearchOpen] = useState(false)
 
   return (
     <header>
@@ -50,7 +52,8 @@ const Header = () => {
             <h3>Official</h3>
         </Link>
         <div className='flex gap-6 items-center'>
-            <FiSearch />
+            <FiSearch className='cursor-pointer' onClick={() => isSearchOpen(true)} />
+            {searchOpen && <SearchBar isSearchOpen={isSearchOpen} />}
             <FiShoppingCart />
         </div>
       </div>
