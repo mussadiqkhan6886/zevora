@@ -127,12 +127,12 @@ export default function AddProductUI() {
 
           <div className='div'>
             <label htmlFor="name">Product Name:</label>
-            <input id='name' autoComplete='off' name="name" value={data.name} onChange={handleChange} placeholder="Product Name" className="input" />
+            <input required id='name' autoComplete='off' name="name" value={data.name} onChange={handleChange} placeholder="Product Name" className="input" />
           </div>
 
         <div className='div'>
             <label htmlFor='category' className='mb-2 ml-1'>Category:</label>
-          <select id='category' name="category" value={data.category} onChange={handleChange} className="input">
+          <select required id='category' name="category" value={data.category} onChange={handleChange} className="input">
             {categories.map(cat => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
@@ -143,21 +143,21 @@ export default function AddProductUI() {
 
           <div className='div'>
             <label htmlFor="volume">Volume:</label>
-            <input id='volume' type='number' placeholder='volume in ml' name='volume' value={data.volume} onChange={handleChange} className='input' />
+            <input required id='volume' type='number' placeholder='volume in ml' name='volume' value={data.volume} onChange={handleChange} className='input' />
           </div>
 
           <div className='div'>
             <label htmlFor="fragranceType">Fragrance Type:</label>
-            <input id='fragranceType' type='text' placeholder='Unisex, Male, Women' name='fragranceType' value={data.fragranceType} onChange={handleChange} className='input' />
+            <input required id='fragranceType' type='text' placeholder='Unisex, Male, Women' name='fragranceType' value={data.fragranceType} onChange={handleChange} className='input' />
           </div>
         </>}
 
         <div className='div'>
           <label htmlFor="price">Price:</label>
-         <input id='price' name="price" value={data.price} onChange={handleChange} placeholder="Price" type="number" className="input" />
+         <input required id='price' name="price" value={data.price} onChange={handleChange} placeholder="Price" type="number" className="input" />
         </div>
 
-        {data.onSale &&  <input name="salePrice" value={data.salePrice} onChange={handleChange} placeholder="Sale Price" type="number" className="input" />}
+        {data.onSale &&  <input required name="salePrice" value={data.salePrice} onChange={handleChange} placeholder="Sale Price" type="number" className="input" />}
           
           <label className="flex gap-2 items-center my-2">
             <input type="checkbox" name="onSale" checked={data.onSale} onChange={handleChange} />
@@ -166,20 +166,20 @@ export default function AddProductUI() {
 
           <div className='div'>
             <label htmlFor="stock">Stock</label>
-            <input id='stock' name="stock" value={data.stock} onChange={handleChange} placeholder="Stock Quantity" type="number" className="input" />
+            <input required id='stock' name="stock" value={data.stock} onChange={handleChange} placeholder="Stock Quantity" type="number" className="input" />
           </div>
 
 
-          <textarea name="description" value={data.description} onChange={handleChange} placeholder="Description" className="input h-24" />
+          <textarea required name="description" value={data.description} onChange={handleChange} placeholder="Description" className="input h-24" />
 
           <div className='div'>
             <label htmlFor="keywords">Keywords: </label>
-            <input name="keywords" value={data.keywords} onChange={handleChange} placeholder="Keywords (comma separated)" className="input" />
+            <input required name="keywords" value={data.keywords} onChange={handleChange} placeholder="Keywords (comma separated)" className="input" />
           </div>
           
           <div className='div'>
             <label htmlFor="sizes">Sizes: </label>
-            <input id='sizes' name="sizes" value={data.sizes} onChange={handleChange} placeholder="Sizes (rings only, comma separated)" className="input" />
+            <input required id='sizes' name="sizes" value={data.sizes} onChange={handleChange} placeholder="Sizes (rings only, comma separated)" className="input" />
           </div>
 
           <div>
