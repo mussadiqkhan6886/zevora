@@ -15,8 +15,8 @@ export default function AddProductUI() {
       onSale: false,
       stock: '',
       description: '',
-      keywords: '',
-      sizes: '',
+      keywords: [],
+      sizes: [],
       volume: '',
       fragranceType: '',
   })
@@ -92,8 +92,8 @@ export default function AddProductUI() {
           onSale: false,
           stock: '',
           description: '',
-          keywords: '',
-          sizes: '',
+          keywords: [],
+          sizes: [],
           volume: '',
           fragranceType: '',
         });
@@ -117,6 +117,30 @@ export default function AddProductUI() {
     const newPreviews = selectedFiles.map((file) => URL.createObjectURL(file));
     setPreviews((prev) => [...prev, ...newPreviews]);
   };
+
+
+  const [keywordsInput, setKeywordsInput] = useState('');
+const [sizesInput, setSizesInput] = useState('');
+
+
+  const handleCommaSeparatedChange = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  field: 'keywords' | 'sizes'
+) => {
+  const rawValue = e.target.value;
+
+  if (field === 'keywords') setKeywordsInput(rawValue);
+  if (field === 'sizes') setSizesInput(rawValue);
+
+  setData(prev => ({
+    ...prev,
+    [field]: rawValue
+      .split(',')
+      .map(item => item.trim())
+      .filter(Boolean),
+  }));
+};
+
 
 
 
@@ -174,12 +198,12 @@ export default function AddProductUI() {
 
           <div className='div'>
             <label htmlFor="keywords">Keywords: </label>
-            <input required name="keywords" value={data.keywords} onChange={handleChange} placeholder="Keywords (comma separated)" className="input" />
+            <input required name="keywords" value={keywordsInput}  onChange={(e) => handleCommaSeparatedChange(e, "keywords")} placeholder="Keywords (comma separated)" className="input" />
           </div>
           
           <div className='div'>
             <label htmlFor="sizes">Sizes: </label>
-            <input required id='sizes' name="sizes" value={data.sizes} onChange={handleChange} placeholder="Sizes (rings only, comma separated)" className="input" />
+            <input required id='sizes' name="sizes" value={sizesInput} onChange={(e) => handleCommaSeparatedChange(e, "sizes")} placeholder="Sizes (rings only, comma separated)" className="input" />
           </div>
 
           <div>
