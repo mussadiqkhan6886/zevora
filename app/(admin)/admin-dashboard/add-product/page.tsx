@@ -203,7 +203,7 @@ const [sizesInput, setSizesInput] = useState('');
           
           <div className='div'>
             <label htmlFor="sizes">Sizes: </label>
-            <input required id='sizes' name="sizes" value={sizesInput} onChange={(e) => handleCommaSeparatedChange(e, "sizes")} placeholder="Sizes (rings only, comma separated)" className="input" />
+            <input id='sizes' name="sizes" value={sizesInput} onChange={(e) => handleCommaSeparatedChange(e, "sizes")} placeholder="Sizes (rings only, comma separated)" className="input" />
           </div>
 
           <div>
