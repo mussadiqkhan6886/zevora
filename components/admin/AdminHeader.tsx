@@ -7,15 +7,15 @@ const AdminHeader = () => {
     <header className='px-2 md:px-10 lg:px-16 py-5 border-b border-zinc-400'>
       <nav className='flex flex-col md:flex-row gap-y-8 justify-between items-center'>
         <div className='flex items-center gap-3 md:gap-7'>
-            <Link href={"admin-dashboard/add-product"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
+            <Link href={"/admin-dashboard/add-product"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
                 <FiPlusCircle />
                 <span className='text-sm'>Add Product</span>
             </Link>
-            <Link href={"admin-dashboard/products-list"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
+            <Link href={"/admin-dashboard/products-list"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
                 <FiList />
                 <span className='text-sm'>Products</span>
             </Link>
-            <Link href={"admin-dashboard/orders"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
+            <Link href={"/admin-dashboard/orders"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
                 <FiShoppingBag />
                 <span className='text-sm'>Orders</span>
             </Link>
