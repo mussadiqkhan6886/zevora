@@ -4,17 +4,30 @@ export const headerLinks = [
   {name: "Jewelry Set", link: "/collections/jewelry-set", subCategory: []},
   {name: "Perfumes", link: "/collections/perfumes", subCategory: []},
   {name: "Stainless Steel Jewelry", link: "", subCategory: [
-    {name: "Bracelets", link: "/collections/bracelets"},
-    {name: "Earrings", link: "/collections/earrings"},
-    {name: "Rings", link: "/collections/rings"},
-    {name: "Pendants", link: "/collections/pendants"},
+    {name: "Stainless Steel Bracelets", link: "/collections/stainless-steel-jewelry-bracelets"},
+    {name: "Stainless Steel Earrings", link: "/collections/stainless-steel-jewelry-earrings"},
+    {name: "Stainless Steel Rings", link: "/collections/stainless-steel-jewelry-rings"},
+    {name: "Stainless Steel Pendants", link: "/collections/stainless-steel-jewelry-pendants"},
   ]},
   {name: "Gold Platted Jewelry", link: "", subCategory: [
-    {name: "Bracelets", link: "/collections/bracelets"},
-    {name: "Earrings", link: "/collections/earrings"},
-    {name: "Rings", link: "/collections/rings"},
-    {name: "Pendants", link: "/collections/pendants"},
+    {name: "Gold Platted Bracelets", link: "/collections/gold-platted-jewelry-bracelets"},
+    {name: "Gold Platted Earrings", link: "/collections/gold-platted-jewelry-earrings"},
+    {name: "Gold Platted Rings", link: "/collections/gold-platted-jewelry-rings"},
+    {name: "Gold Platted Pendants", link: "/collections/gold-platted-jewelry-pendants"},
   ]},
+]
+export const categories = [
+  'watches',
+  'jewelry-set',
+  'perfumes',
+  'stainless-steel-bracelets',
+  'stainless-steel-earrings',
+  'stainless-steel-rings',
+  'stainless-steel-pendants',
+  'gold-platted-bracelets',
+  'gold-platted-earrings',
+  'gold-platted-rings',
+  'gold-platted-pendants',
 ]
 
 export const products = [
@@ -25,23 +38,12 @@ export const products = [
     price: 12000,
     salePrice: 10000,
     onSale: true,
-    hotSeller: true,
     stock: 15,
-    sku: "WCH-001",
-    rating: 4.7,
-    reviews: 24,
-    tags: ["silver", "leather strap", "water-resistant"],
+    inStock: true,
     description: "Elegant silver watch with leather strap, perfect for daily wear and formal occasions.",
     material: "Stainless steel, leather strap",
-    care: "Avoid water, clean with soft cloth",
-    delivery: "3-5 business days",
     images: ["/watch1.jpg", "/watch2.jpg", "/watch3.jpg"],
-    variants: [
-      { color: "silver", strap: "leather", price: 12000, salePrice: 10000, sku: "WCH-001-S" },
-      { color: "gold", strap: "leather", price: 12500, salePrice: 10500, sku: "WCH-001-G" }
-    ],
-    sizes: [],
-    createdAt: new Date("2026-01-15")
+    sizes: [], // for rings rings
   },
   {
     name: "Rose Gold Ring",
