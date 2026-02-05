@@ -17,6 +17,7 @@ const Header = () => {
     const [searchOpen, setSearchOpen] = useState(false)
     const [scrolled, setScrolled ] = useState(false)
    const [openMenu, setOpenMenu] = useState<string | null>(null)
+   const [small, setSmall] = useState(false)
 
 
     useEffect(() => {
@@ -30,8 +31,19 @@ const Header = () => {
       return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
+    useEffect(() => {
+      const handleSize = () => {
+        setSmall(window.innerWidth <= 1024)
+      }
+
+      window.addEventListener("resize", handleSize)
+      handleSize()
+
+      return () => window.addEventListener("resize", handleSize)
+    }, [])
+
 useEffect(() => {
-  if (menuOpen) {
+  if (menuOpen && small) {
     document.body.style.overflow = 'hidden';
   } else {
     document.body.style.overflow = 'auto';
@@ -40,7 +52,7 @@ useEffect(() => {
   return () => {
     document.body.style.overflow = 'auto';
   };
-}, [menuOpen]);
+}, [menuOpen, small]);
 
 
 

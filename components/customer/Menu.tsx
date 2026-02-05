@@ -18,6 +18,7 @@ const Menu = ({
   };
 
   return (
+    <AnimatePresence>
     <motion.aside
       initial={{ x: '-100%' }}
       animate={{ x: 0 }}
@@ -82,6 +83,7 @@ const Menu = ({
         </ul>
       </nav>
     </motion.aside>
+    </AnimatePresence>
   );
 };
 
