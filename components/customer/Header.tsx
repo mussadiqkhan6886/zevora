@@ -10,6 +10,7 @@ import { headerLinks } from '@/lib/constants';
 import {FiChevronDown, FiChevronRight, FiMenu, FiSearch, FiShoppingCart, FiX} from "react-icons/fi"
 import Menu from './Menu';
 import SearchBar from './SearchBar';
+import Image from 'next/image';
 
 const Header = () => {
 
@@ -69,10 +70,9 @@ useEffect(() => {
         <SwiperSlide className='py-2 text-center tracking-widest'>All products come with 1 year colour warranty</SwiperSlide>
       </Swiper>
 
-      <div className={`${scrolled ? "top-0 fixed" : "top-8 absolute"} px-5 md:px-10 lg:px-20 border-b border-zinc-300 flex justify-between py-8 items-center  w-full z-50 bg-white`}> 
+      <div className={`${scrolled ? "top-0 fixed" : "top-8 absolute"} px-3 md:px-8 lg:px-18 border-b border-zinc-300 flex justify-between py-5 items-center  w-full z-50 bg-white`}> 
         <Link href={"/"} className='hidden lg:block'>
-            <h2>Zevora</h2>
-            <h3>Official</h3>
+            <Image src="/logo.png" alt='logo image' className='object-cover object-center z-50' width={200} height={200} />
         </Link>
         <nav className='flex justify-between  items-center'>
             <div className='lg:hidden'>
@@ -128,8 +128,7 @@ useEffect(() => {
 
         </nav>
          <Link href={"/"} className='lg:hidden'>
-            <h2>Zevora</h2>
-            <h3>Official</h3>
+           <Image src="/logo.png" alt='logo image' width={200} height={200} />
         </Link>
         <div className='flex gap-4 md:gap-6 items-center'>
             <FiSearch className='cursor-pointer' onClick={() => setSearchOpen(true)} />
