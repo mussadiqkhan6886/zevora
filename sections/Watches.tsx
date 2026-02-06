@@ -1,13 +1,20 @@
-import SectionTitle from '@/components/customer/SectionTitle'
 import WatchesSection from '@/components/customer/WatchesSection'
-import { products } from '@/lib/constants'
+import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
+import ProductSchema from '@/lib/models/ProductSchema'
 import Link from 'next/link'
 import React from 'react'
 
-const Watches = () => {
+const Watches = async () => {
 
-  const watches = products.filter(product => product.category === "watches")
+  await connectDB()
+
+  const res = await ProductSchema.find({category: "watches"}).sort({_id: -1}).limit(12).lean()
+
+  const watches = JSON.parse(JSON.stringify(res))
+
+  console.log(watches)
+
 
   return (
     <section className='bg-main pb-4 px-2 md:px-0'>

@@ -13,7 +13,8 @@ const ProductSchema = new Schema({
     keywords: {type: [String], require: true},
     sizes: {type: [String], default: null},
     volume: {type: String, default: null},
-    fragranceType: {type: String, default: null}
+    fragranceType: {type: String, default: null},
+    images: {type: [String], require: true}
 },{
     timestamps: true
 }

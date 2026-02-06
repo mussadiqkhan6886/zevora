@@ -1,19 +1,25 @@
 import DreamStackSecion from '@/components/customer/DreamStackSecion'
-import { products } from '@/lib/constants'
+import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
+import ProductSchema from '@/lib/models/ProductSchema'
 import Link from 'next/link'
 import React from 'react'
 
-const DreamStack = () => {
+const DreamStack = async () => {
 
-  const dreamStack = products.filter(product => product.category === "dream stacking")
+  await connectDB()
+
+  const res = await ProductSchema.find({category: "jewelry-set"}, {limit: 12}).sort("-1").lean()
+
+  const dreamStack = JSON.parse(JSON.stringify(res))
+
   return (
     <section className='px-5 sm:px-10 md:px-20 mb-4'>
        <Link href={"/"} className={`underline ${serif.className} inline-block hover:text-main text-black text-4xl py-8`}>
-            Dream Stacks
+            Jewelry Set
         </Link>
        <DreamStackSecion products={dreamStack} />
-       <button className='text-center w-full mt-8'><Link className='bg-black text-white text-center px-6 py-3 text-sm' href={"/collections/dream-stacking"}>View All</Link></button>
+       <button className='text-center w-full mt-8'><Link className='bg-black text-white text-center px-6 py-3 text-sm' href={"/collections/jewelry-set"}>View All</Link></button>
     </section>
   )
 }

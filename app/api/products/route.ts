@@ -61,7 +61,7 @@ export const POST = async (req: NextRequest) => {
             const arrayBuffer = await file.arrayBuffer()
             const buffer = Buffer.from(arrayBuffer)
 
-            const uploadResult = await new Promise((resolve, reject) => {
+            const uploadResult : any = await new Promise((resolve, reject) => {
                 cloudinary.uploader
                     .upload_stream({
                         folder: "zevora",
@@ -99,7 +99,7 @@ export const POST = async (req: NextRequest) => {
         console.log(newProduct)
         return NextResponse.json({success:true, message: "Product Added Successfully", data: newProduct}, {status: 201})
         
-    }catch(err){
+    }catch(err: any){
         console.error("❌ Upload error:", err);
         return NextResponse.json({success: false, message: err.message || "Product Failed to Add"}, {status: 500})
     }

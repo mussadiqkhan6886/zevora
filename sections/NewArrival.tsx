@@ -1,10 +1,18 @@
 import NewArrivalsSection from '@/components/customer/NewArrivalsSection'
-import { products } from '@/lib/constants'
+import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
+import ProductSchema from '@/lib/models/ProductSchema'
 import Link from 'next/link'
 import React from 'react'
 
-const NewArrival = () => {
+const NewArrival = async () => {
+
+  await connectDB()
+
+  const res = await ProductSchema.find({createdAt: new Date().getDate() - 7}).sort("-1").lean() 
+
+  const products = JSON.parse(JSON.stringify(res))
+
   return (
     <section className='mb-10 px-2 md:px-0'>
         <Link href={"/"} className={`underline ${serif.className} inline-block ml-20 hover:text-main text-black text-4xl py-8`}>

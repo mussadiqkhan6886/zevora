@@ -1,10 +1,8 @@
 import { serif } from '@/lib/fonts'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import SwiperImages from './SwiperImages'
 
-const Card = ({name, price, salePrice, onSale, images, slug, collectionSlug}: {name: string, price: number, salePrice: number, onSale: boolean, images: string[], slug: string, collectionSlug: string}) => {
+const Card = ({name, price, salePrice, onSale, images, slug, collectionSlug}: {name: string, price: number, salePrice: number | null, onSale: boolean, images: string[], slug: string, collectionSlug: string}) => {
   return (
     <Link href={`${collectionSlug}/${slug}`} className='relative group'>
       <Image src={images[0]} alt={"images"} width={400} className='w-full' height={400} />

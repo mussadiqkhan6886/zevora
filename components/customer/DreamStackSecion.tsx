@@ -1,7 +1,8 @@
 import React from 'react'
 import CardTwo from './CardTwo'
+import { productType } from '@/type'
 
-const DreamStackSecion = ({products}: {products: any[]}) => {
+const DreamStackSecion = ({products}: {products: productType[]}) => {
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
       {products.map((item, index) => (

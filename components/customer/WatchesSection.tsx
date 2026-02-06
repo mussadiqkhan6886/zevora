@@ -8,8 +8,9 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { productType } from '@/type';
 
-const WatchesSection = ({ watches }: { watches: any[] }) => {
+const WatchesSection = ({ watches }: { watches: productType[] }) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const swiperRef = useRef<any>(null);
