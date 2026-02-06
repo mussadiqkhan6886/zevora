@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
 
-  manifest: '/site.webmanifest',
+  // manifest: '/site.webmanifest',
 
   category: 'ecommerce',
 }
