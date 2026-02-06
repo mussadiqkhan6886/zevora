@@ -17,15 +17,6 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const query = (await searchParams).q || "";
   const products = query ? await getData(query) : [];
 
-  // const updatedSlug =
-  // products.length > 0 && products[0].collection
-  //   ? products[0].collection
-  //       .split('-')
-  //       .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-  //       .join(' ')
-  //   : '';
-
-
   return (
     <main className="max-w-7xl mx-auto px-4 py-30">
       <h1 className='font-semibold text-lg'>Search Result for "{query}"</h1>
