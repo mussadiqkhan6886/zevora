@@ -1,6 +1,7 @@
 import CardTwo from '@/components/customer/CardTwo'
-import { products } from '@/lib/constants'
+import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
+import ProductSchema from '@/lib/models/ProductSchema'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -9,9 +10,23 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
 
     const productSlug = (await params).slug
     
-    const productFound = products.find(product => product.slug === productSlug)
+    await connectDB()
 
-     if (!productFound) {
+   const product = await ProductSchema.findOne({ slug: productSlug }).lean()
+    
+   const products = await ProductSchema.aggregate([
+      {
+        $match: {
+          category: product.category,
+          _id: { $ne: product._id }, // exclude current product
+          stock: { $gt: 0 }          // only in-stock items
+        },
+      },
+      { $sample: { size: 8 } },      // random 8
+    ])
+
+
+     if (!product) {
     return (
       <main className="min-h-screen flex items-center justify-center">
         <h1 className="text-2xl font-medium">Product Not Found</h1>
@@ -25,8 +40,8 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
         
         <div>
           <Image
-            src={productFound.images[0]}
-            alt={productFound.name}
+            src={product.images[0]}
+            alt={product.name}
             width={600}
             height={600}
             className="w-full h-full object-cover"
@@ -35,24 +50,24 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
 
         <div className="flex flex-col gap-5 lg:pt-10">
           <h1 className={`${serif.className} text-4xl tracking-wider`}>
-            {productFound.name}
+            {product.name}
           </h1>
 
           <div className="flex items-center gap-4">
             <h2
               className={`${
-                productFound.onSale
+                product.onSale
                   ? 'line-through text-sm text-zinc-400'
                   : 'text-xl font-medium'
               }`}
             >
-              Rs.{productFound.price}
+              Rs.{product.price}
             </h2>
 
-            {productFound.onSale && (
+            {product.onSale && (
               <>
                 <h2 className="text-xl font-semibold">
-                  Rs.{productFound.salePrice}
+                  Rs.{product.salePrice}
                 </h2>
                 <span className="text-xs px-3 py-1 rounded-full border border-zinc-300">
                   Sale
@@ -89,16 +104,8 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
       <section>
         <h3 className={`${serif.className} text-xl md:text-3xl my-10`}>You May Also Like</h3>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
-            {products.filter(product => product.category === productFound.category).map((item, i) => (
-                <Link key={i} href={`${item.slug}`} className='relative group mb-4'>
-                    <Image className='object-center object-cover w-full h-85' src={item.images[0]} alt={item.name} width={400} height={400} />
-                        {item.onSale && <div className='absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 text-black'>Sale</div>}
-                    <h3 className={`${serif.className} text-base group-hover:underline  tracking-wider mt-2 px-2 text-black`}>{item.name}</h3>
-                    <div className='flex gap-5 text-black px-2 mt-1 items-center'>
-                        <p className={`${item.onSale ? "line-through text-[12px]" : "text-sm"}`}>Rs.{item.price} PKR</p>
-                        {item.onSale && <p className='tracking-wider'>Rs.{item.salePrice} PKR</p>}
-                    </div>
-                </Link>
+            {products.map((item, i) => (
+                <CardTwo key={i} collectionSlug={item.category} {...item} />
             ))}
         </div>
       </section>

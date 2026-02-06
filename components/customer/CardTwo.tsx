@@ -59,7 +59,7 @@ const CardTwo = ({
 
   return (
     <Link
-      href={`/${collectionSlug}/${slug}`}
+      href={`/collections/${collectionSlug}/${slug}`}
       className="relative group mb-4 block"
     >
       <Image
