@@ -11,7 +11,7 @@ import { productType } from '@/type';
 
 interface ProductTableProps {
   products: productType[]; 
-  setProducts: (product: ProductType) => void 
+  setProducts: (product: productType[]) => void 
 }
 
 export default function ProductTable({ products, setProducts }: ProductTableProps) {
