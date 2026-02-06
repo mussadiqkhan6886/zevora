@@ -5,7 +5,6 @@ import { serif } from '@/lib/fonts'
 import ProductSchema from '@/lib/models/ProductSchema'
 import { productType } from '@/type'
 import React from 'react'
-import { StringDecoder } from 'string_decoder'
 
 export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }) {
   const { collection } = await params
@@ -46,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
   }
 }
 
-const page = async ({params, searchParams}: {params: Promise<{collection: string}>, searchParams: Promise<{sort?: StringDecoder}>}) => {
+const page = async ({params, searchParams}: {params: Promise<{collection: string}>, searchParams: Promise<{sort?: string}>}) => {
 
   const {collection} = (await params)
   const {sort} = (await searchParams)
