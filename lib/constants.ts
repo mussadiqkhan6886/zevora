@@ -4,16 +4,16 @@ export const headerLinks = [
   {name: "Jewelry Set", link: "/collections/jewelry-set", subCategory: []},
   {name: "Perfumes", link: "/collections/perfumes", subCategory: []},
   {name: "Stainless Steel Jewelry", link: "", subCategory: [
-    {name: "Stainless Steel Bracelets", link: "/collections/stainless-steel-jewelry-bracelets"},
-    {name: "Stainless Steel Earrings", link: "/collections/stainless-steel-jewelry-earrings"},
-    {name: "Stainless Steel Rings", link: "/collections/stainless-steel-jewelry-rings"},
-    {name: "Stainless Steel Pendants", link: "/collections/stainless-steel-jewelry-pendants"},
+    {name: "Stainless Steel Bracelets", link: "/collections/stainless-steel-bracelets"},
+    {name: "Stainless Steel Earrings", link: "/collections/stainless-steel-earrings"},
+    {name: "Stainless Steel Rings", link: "/collections/stainless-steel-rings"},
+    {name: "Stainless Steel Pendants", link: "/collections/stainless-steel-pendants"},
   ]},
   {name: "Gold Platted Jewelry", link: "", subCategory: [
-    {name: "Gold Platted Bracelets", link: "/collections/gold-platted-jewelry-bracelets"},
-    {name: "Gold Platted Earrings", link: "/collections/gold-platted-jewelry-earrings"},
-    {name: "Gold Platted Rings", link: "/collections/gold-platted-jewelry-rings"},
-    {name: "Gold Platted Pendants", link: "/collections/gold-platted-jewelry-pendants"},
+    {name: "Gold Platted Bracelets", link: "/collections/gold-platted-bracelets"},
+    {name: "Gold Platted Earrings", link: "/collections/gold-platted-earrings"},
+    {name: "Gold Platted Rings", link: "/collections/gold-platted-rings"},
+    {name: "Gold Platted Pendants", link: "/collections/gold-platted-pendants"},
   ]},
 ]
 export const categories = [

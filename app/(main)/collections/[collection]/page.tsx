@@ -1,28 +1,24 @@
 import CardTwo from '@/components/customer/CardTwo'
-import { products } from '@/lib/constants'
+import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
+import ProductSchema from '@/lib/models/ProductSchema'
 import React from 'react'
 
 const page = async ({params}: {params: Promise<{collection: string}>}) => {
 
-    const slug = (await (await params).collection)
-    const category = (await (await params).collection).replace("-", " ")
-    
-    const filtered = products.filter(product => {
-        if(category === "all"){
-            return true
-        }else if(category === "best selling"){
-            return product.hotSeller
-        }
-        else{
-            return product.category === category
-        }
-    })
+  const {collection} = (await params)
 
+  await connectDB()
+
+  const res = await ProductSchema.find(collection === "all" ? {} : {category: collection}).sort({_id: -1}).lean()
+
+  const products = JSON.parse(JSON.stringify(res))
+
+  console.log(products)
 
   return (
     <main className='pt-35 px-3 max-w-7xl mx-auto'>
-      <h1 className={`${serif.className} capitalize text-4xl my-10`}>{category}</h1>
+      <h1 className={`${serif.className} capitalize text-4xl my-10`}>{collection.replaceAll("-", " ")}</h1>
       <div className='flex justify-between items-center'>
         <div>
             <label className="text-zinc-500 text-sm inline-block mr-4">Sort By:</label>
@@ -33,11 +29,11 @@ const page = async ({params}: {params: Promise<{collection: string}>}) => {
                 <option>Price, High to Low</option>
             </select>
         </div>
-        <p className="text-sm text-zinc-500">{filtered.length} products</p>
+        <p className="text-sm text-zinc-500">{products.length} products</p>
       </div>
       <section className='grid gap-6 grid-col-2 md:grid-cols-3 lg:grid-cols-4 my-10'>
-        {filtered.map((item, i) => (
-            <CardTwo key={i} collectionSlug={slug} {...item} />
+        {products.map((item, i) => (
+            <CardTwo key={i} collectionSlug={collection} {...item} />
         ))}
       </section>
     </main>
