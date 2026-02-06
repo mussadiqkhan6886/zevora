@@ -8,6 +8,50 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  await connectDB()
+  const {slug} = await params
+  const product = await ProductSchema.findOne({ slug: slug }).lean()
+
+  if (!product) {
+    return {
+      title: 'Product Not Found | Zevora',
+      description: 'This product could not be found.',
+    }
+  }
+
+  const ogImage = product.images?.[0] || '/logo.png'
+
+  return {
+    title: `${product.name}`,
+    description: product.description?.slice(0, 160) || 'Premium product from Zevora.',
+    alternates: {
+      canonical: `/collections/${product.category}/${product.slug}`,
+    },
+    openGraph: {
+      title: `${product.name} | Zevora`,
+      description: product.description?.slice(0, 160),
+      url: `/collections/${product.category}/${product.slug}`,
+      type: 'website',
+      siteName: 'Zevora',
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: product.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.name} | Zevora`,
+      description: product.description?.slice(0, 160),
+      images: [ogImage],
+    },
+  }
+}
+
 const page = async ({params}: {params: Promise<{slug: string}>}) => {
 
     const productSlug = (await params).slug

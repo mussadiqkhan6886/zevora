@@ -39,11 +39,11 @@ const CardTwo = ({
           Sold Out
         </div>
 
-        <h3
+        <h2
           className={`${serif.className} text-base text-center tracking-wider mt-2 px-2 text-black`}
         >
           {name}
-        </h3>
+        </h2>
 
         <div className="flex gap-5 text-black px-2 mt-1 items-center justify-center">
           <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
@@ -76,11 +76,11 @@ const CardTwo = ({
         </div>
       )}
 
-      <h3
+      <h2
         className={`${serif.className} text-base text-center tracking-wider mt-2 px-2 text-black group-hover:underline`}
       >
         {name}
-      </h3>
+      </h2>
 
       <div className="flex gap-5 text-black px-2 mt-1 items-center justify-center">
         <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>

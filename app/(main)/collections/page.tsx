@@ -4,6 +4,40 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FiArrowRight } from 'react-icons/fi'
 
+export const metadata: Metadata = {
+  title: 'Collections',
+  description:
+    'Explore all premium collections of watches, jewelry sets, and luxury perfumes at Zevora. Browse categories and discover timeless designs.',
+  alternates: {
+    canonical: '/collections',
+  },
+
+  openGraph: {
+    title: 'Collections | Zevora',
+    description:
+      'Browse all premium collections of watches, jewelry sets, and luxury perfumes. Find your perfect style.',
+    url: '/collections',
+    type: 'website',
+    siteName: 'Zevora',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Zevora Collections – Watches, Jewelry & Perfumes',
+      },
+    ],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Collections | Zevora',
+    description:
+      'Browse premium collections of watches, jewelry sets, and luxury perfumes. Find your perfect style.',
+    images: ['/logo.png'],
+  },
+}
+
 const Page = () => {
   return (
     <main className='pt-35 max-w-7xl mx-auto mb-14'>

@@ -7,6 +7,45 @@ import { productType } from '@/type'
 import React from 'react'
 import { StringDecoder } from 'string_decoder'
 
+export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }) {
+  const { collection } = await params
+  const categoryName = collection.replaceAll('-', ' ')
+
+  await connectDB()
+
+  const sampleProduct = await ProductSchema.findOne({ category: collection }).lean()
+  const ogImage = sampleProduct?.images?.[0] || '/logo.png'
+
+  return {
+    title: `${categoryName}`,
+    description: `Explore our premium ${categoryName} collection. Shop top-quality watches, jewelry sets, and luxury perfumes at Zevora.`,
+    alternates: {
+      canonical: `/collections/${collection}`,
+    },
+    openGraph: {
+      title: `${categoryName} | Zevora`,
+      description: `Discover the best ${categoryName} products at Zevora. Elegant designs and fast delivery.`,
+      url: `/collections/${collection}`,
+      type: 'website',
+      siteName: 'Zevora',
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${categoryName} Collection - Zevora`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${categoryName} | Zevora`,
+      description: `Shop premium ${categoryName} products at Zevora. Elegant designs and fast delivery.`,
+      images: [ogImage],
+    },
+  }
+}
+
 const page = async ({params, searchParams}: {params: Promise<{collection: string}>, searchParams: Promise<{sort?: StringDecoder}>}) => {
 
   const {collection} = (await params)

@@ -9,8 +9,12 @@ async function getData(query: string) {
   return res.data.products;
 }
 
-export const generateMetadata = (): Metadata => { return {
-  title: "Search Result"
+export const generateMetadata = async ({searchParams}: { searchParams: Promise<{ q?: string }> }): Metadata => { 
+  const query = (await searchParams).q || "";
+
+  return {
+    title: `Search Result for ${query}`,
+    description: `Search Result for ${query}, Discover Premium Watches, Jewelry and perfumes`
 } };
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
