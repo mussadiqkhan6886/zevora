@@ -78,7 +78,7 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
               (product.sizes !== null && product.sizes.length > 0) && (<div>
                 <h3 className="font-semibold">Sizes:</h3>
                 <div className="flex gap-3 mt-2">
-                {product.sizes.map(item => (
+                {product.sizes.map((item: string) => (
                   <button className="text-black border border-zinc-700 rounded-full cursor-pointer px-5 text-sm py-1 font-semibold" key={item}>{item}</button>
                 ))}
                 </div>
