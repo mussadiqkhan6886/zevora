@@ -9,12 +9,19 @@ const NewArrival = async () => {
 
   await connectDB()
 
-  const res = await ProductSchema.find({createdAt: new Date().getDate() - 7}).sort("-1").lean() 
+  const sevenDaysAgo = new Date()
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+
+  const res = await ProductSchema
+    .find({ createdAt: { $gte: sevenDaysAgo } })
+    .sort({ createdAt: -1 }) // newest first
+    .lean()
 
   const products = JSON.parse(JSON.stringify(res))
 
+
   return (
-    <section className='mb-10 px-2 md:px-0'>
+    <section className='mb-10 px-2 md:px-1'>
         <Link href={"/"} className={`underline ${serif.className} inline-block ml-20 hover:text-main text-black text-4xl py-8`}>
             New Arrivals
         </Link>

@@ -13,8 +13,6 @@ const Watches = async () => {
 
   const watches = JSON.parse(JSON.stringify(res))
 
-  console.log(watches)
-
 
   return (
     <section className='bg-main pb-4 px-2 md:px-0'>

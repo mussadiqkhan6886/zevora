@@ -9,9 +9,11 @@ const DreamStack = async () => {
 
   await connectDB()
 
-  const res = await ProductSchema.find({category: "jewelry-set"}, {limit: 12}).sort("-1").lean()
+  const res = await ProductSchema.find({category: "jewelry-set"}).sort({_id: -1}).limit(12).lean()
 
   const dreamStack = JSON.parse(JSON.stringify(res))
+
+  console.log(dreamStack)
 
   return (
     <section className='px-5 sm:px-10 md:px-20 mb-4'>
