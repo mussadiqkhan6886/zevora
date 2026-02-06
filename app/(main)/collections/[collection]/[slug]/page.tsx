@@ -1,4 +1,5 @@
 import CardTwo from '@/components/customer/CardTwo'
+import Images from '@/components/customer/Images'
 import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
 import ProductSchema from '@/lib/models/ProductSchema'
@@ -37,17 +38,9 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
 
   return (
     <main className="pt-32 px-6 max-w-7xl mx-auto">
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-14">
+      <section className="grid grid-cols-1  md:grid-cols-2 gap-10">
         
-        <div>
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            width={600}
-            height={600}
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <Images images={product.images} name={product.name} />
 
         <div className="flex flex-col gap-5 lg:pt-10">
           <h1 className={`${serif.className} text-4xl tracking-wider`}>
