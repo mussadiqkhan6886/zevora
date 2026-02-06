@@ -9,7 +9,7 @@ async function getData(query: string) {
   return res.data.products;
 }
 
-export const generateMetadata = async ({searchParams}: { searchParams: Promise<{ q?: string }> }): Metadata => { 
+export const generateMetadata = async ({searchParams}: { searchParams: Promise<{ q?: string }> }): Promise<Metadata> => { 
   const query = (await searchParams).q || "";
 
   return {
