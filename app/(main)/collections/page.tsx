@@ -1,5 +1,6 @@
 import { collections } from '@/lib/constants'
 import { serif } from '@/lib/fonts'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FiArrowRight } from 'react-icons/fi'
