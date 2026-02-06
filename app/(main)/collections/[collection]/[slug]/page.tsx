@@ -15,7 +15,7 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
     await connectDB()
 
    const product = await ProductSchema.findOne({ slug: productSlug }).lean()
-    
+    console.log(product)
    const products = await ProductSchema.aggregate([
       {
         $match: {
@@ -43,7 +43,7 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
         <Images images={product.images} name={product.name} />
 
         <div className="flex flex-col gap-5 lg:pt-10">
-          <h1 className={`${serif.className} text-4xl tracking-wider`}>
+          <h1 className={`${serif.className} capitalize text-4xl tracking-wider`}>
             {product.name}
           </h1>
 
@@ -74,7 +74,31 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
             Shipping calculated at checkout
           </p>
 
-          {/* Quantity */}
+            {
+              (product.sizes !== null && product.sizes.length > 0) && (<div>
+                <h3 className="font-semibold">Sizes:</h3>
+                <div className="flex gap-3 mt-2">
+                {product.sizes.map(item => (
+                  <button className="text-black border border-zinc-700 rounded-full cursor-pointer px-5 text-sm py-1 font-semibold" key={item}>{item}</button>
+                ))}
+                </div>
+              </div>)
+            }
+
+            {
+              (product.volume !== "" && product.fragranceType !== "" && product.volume !== null) && (
+                <>
+                <div className='text-sm'>
+                  <h3><span className='font-semibold'>Volume:</span> {product.volume} ml</h3>
+                </div>
+                <div className='text-sm'>
+                  <h3><span className='font-semibold'>Fragrance Type:</span> {product.fragranceType}</h3>
+                </div>
+                </>
+              )
+            }
+
+
           <div className="flex flex-col gap-2">
             <p className="text-sm font-medium">Quantity</p>
             <div className="flex items-center w-max border px-4 py-2 gap-6">
@@ -82,6 +106,12 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
               <span className="text-sm">1</span>
               <button className="text-lg hover:opacity-70">+</button>
             </div>
+          </div>
+          
+
+          <div>
+            <h3 className='font-semibold'>Description: </h3>
+            <p className="text-zinc-800">{product.description}</p>
           </div>
 
           {/* Buttons */}
