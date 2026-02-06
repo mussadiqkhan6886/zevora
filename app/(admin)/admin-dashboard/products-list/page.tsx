@@ -23,13 +23,13 @@ export default function AdminProductsPage() {
     fetchProducts();
   }, []);
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) return <div className="text-center py-40">Loading...</div>;
 
 
   return (
     <div className="lg:p-5">
       <h1 className="text-2xl text-center font-semibold mb-4">Product List</h1>
-      <ProductTable products={products} />
+      <ProductTable products={products} setProducts={setProducts} />
     </div>
   );
 }

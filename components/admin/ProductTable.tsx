@@ -11,9 +11,10 @@ import { productType } from '@/type';
 
 interface ProductTableProps {
   products: productType[]; 
+  setProducts: (product: ProductType) => void 
 }
 
-export default function ProductTable({ products }: ProductTableProps) {
+export default function ProductTable({ products, setProducts }: ProductTableProps) {
 
   const handleDelete = async (id: string) => {
 
@@ -23,6 +24,7 @@ export default function ProductTable({ products }: ProductTableProps) {
       if (res.status === 200) {
         alert("Product deleted successfully!");
       }
+      setProducts(products.filter(product => product._id !== id))
     } catch (err) {
       console.error(err);
       alert("Failed to delete product.");
@@ -102,7 +104,7 @@ export default function ProductTable({ products }: ProductTableProps) {
 ];
 
   return (
-    <Box sx={{ height: 600, width: '100%', p: 2, borderRadius: 2 }}>
+    <Box sx={{ height: 600, width: '100%', p: 1, borderRadius: 2 }}>
       <DataGrid
         rows={products}
         columns={columns}

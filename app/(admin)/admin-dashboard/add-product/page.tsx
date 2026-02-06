@@ -146,7 +146,7 @@ const [sizesInput, setSizesInput] = useState('');
 
   return (
     <main className="p-2 md:p-8 bg-gray-50 min-h-screen max-w-6xl mx-auto">
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow">
+        <form onSubmit={handleSubmit} className="bg-white p-4 md:p-6 rounded-xl shadow">
           <h1 className="text-3xl text-center font-bold mb-4">Add Product</h1>
 
           <div className='div'>
@@ -221,7 +221,7 @@ const [sizesInput, setSizesInput] = useState('');
           <button type='submit' disabled={loading} className="w-full mt-4 bg-black text-white py-2 rounded">
             {loading ? "Loading..." : "Add Product"}
           </button>
-          <p>{result}</p>
+          <p className='text-center mt-2'>{result}</p>
         </form>
 
       {/* Tailwind helper */}

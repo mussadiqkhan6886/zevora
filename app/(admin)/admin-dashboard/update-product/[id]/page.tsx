@@ -29,8 +29,6 @@ const page = ({params}: {params: Promise<{id: string}>}) => {
     const [previews, setPreviews] = useState<string[]>([]);
     const [existingImages, setExistingImages] = useState<string[]>([]);
     const [result, setResult] = useState('')
-    // const [sizesInput, setSizesInput] = useState('')
-    // const [keywordsInput, setKeywordsInput] = useState('')
     const [loading, setLoading] = useState(false)
     const router = useRouter()
 
@@ -166,9 +164,6 @@ const page = ({params}: {params: Promise<{id: string}>}) => {
       field: 'keywords' | 'sizes'
     ) => {
       const rawValue = e.target.value;
-    
-    //   if (field === 'keywords') setKeywordsInput(rawValue);
-    //   if (field === 'sizes') setSizesInput(rawValue);
     
       setData(prev => ({
         ...prev,
