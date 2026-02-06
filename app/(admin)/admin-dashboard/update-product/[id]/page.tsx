@@ -174,8 +174,7 @@ const page = ({params}: {params: Promise<{id: string}>}) => {
         ...prev,
         [field]: rawValue
           .split(',')
-          .map(item => item.trim())
-          .filter(Boolean),
+          .map(item => item.trim()),
       }));
     };
 
