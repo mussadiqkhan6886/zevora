@@ -15,7 +15,7 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
     await connectDB()
 
    const product = await ProductSchema.findOne({ slug: productSlug }).lean()
-    console.log(product)
+
    const products = await ProductSchema.aggregate([
       {
         $match: {
@@ -38,11 +38,11 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
 
   return (
     <main className="pt-32 px-6 max-w-7xl mx-auto">
-      <section className="grid grid-cols-1  md:grid-cols-2 gap-10">
+      <section className="grid grid-cols-1 min-h-[90vh] md:grid-cols-2 gap-10">
         
         <Images images={product.images} name={product.name} />
 
-        <div className="flex flex-col gap-5 lg:pt-10">
+        <div className="flex flex-col justify-between lg:pt-10">
           <h1 className={`${serif.className} capitalize text-4xl tracking-wider`}>
             {product.name}
           </h1>
@@ -69,10 +69,6 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
               </>
             )}
           </div>
-
-          <p className="text-sm text-zinc-500">
-            Shipping calculated at checkout
-          </p>
 
             {
               (product.sizes !== null && product.sizes.length > 0) && (<div>
@@ -123,6 +119,9 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
               Buy it now
             </button>
           </div>
+          <p className="text-sm text-zinc-500">
+            Shipping calculated at checkout
+          </p>
         </div>
       </section>
       <section>

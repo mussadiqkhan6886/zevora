@@ -96,7 +96,6 @@ export const POST = async (req: NextRequest) => {
 
         await newProduct.save()
 
-        console.log(newProduct)
         return NextResponse.json({success:true, message: "Product Added Successfully", data: newProduct}, {status: 201})
         
     }catch(err: any){
