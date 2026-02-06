@@ -268,7 +268,7 @@ const page = ({params}: {params: Promise<{id: string}>}) => {
 
              <div>
                <label className="block font-semibold mb-1">Upload Product Images</label>
-               <input type="file" multiple accept="image/*" required onChange={handleImageChange} className="w-full border rounded-lg p-2" />
+               <input type="file" multiple accept="image/*" onChange={handleImageChange} className="w-full border rounded-lg p-2" />
                {previews.length > 0 && (
                  <div className="flex flex-wrap gap-3 mt-4">
                    {previews.map((url, idx) => (
