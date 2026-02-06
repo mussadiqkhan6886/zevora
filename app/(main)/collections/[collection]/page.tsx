@@ -2,6 +2,7 @@ import CardTwo from '@/components/customer/CardTwo'
 import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
 import ProductSchema from '@/lib/models/ProductSchema'
+import { productType } from '@/type'
 import React from 'react'
 
 const page = async ({params}: {params: Promise<{collection: string}>}) => {
@@ -32,8 +33,8 @@ const page = async ({params}: {params: Promise<{collection: string}>}) => {
         <p className="text-sm text-zinc-500">{products.length} products</p>
       </div>
       <section className='grid gap-6 grid-col-2 md:grid-cols-3 lg:grid-cols-4 my-10'>
-        {products.map((item, i) => (
-            <CardTwo key={i} collectionSlug={collection} {...item} />
+        {products.map((item : productType) => (
+            <CardTwo key={item._id} collectionSlug={collection} {...item} />
         ))}
       </section>
     </main>

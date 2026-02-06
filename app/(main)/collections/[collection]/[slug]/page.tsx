@@ -2,6 +2,7 @@ import CardTwo from '@/components/customer/CardTwo'
 import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
 import ProductSchema from '@/lib/models/ProductSchema'
+import { productType } from '@/type'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -104,8 +105,8 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
       <section>
         <h3 className={`${serif.className} text-xl md:text-3xl my-10`}>You May Also Like</h3>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
-            {products.map((item, i) => (
-                <CardTwo key={i} collectionSlug={item.category} {...item} />
+            {products.map((item: productType) => (
+                <CardTwo key={item._id} collectionSlug={item.category} {...item} />
             ))}
         </div>
       </section>
