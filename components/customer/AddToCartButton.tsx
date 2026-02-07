@@ -44,7 +44,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
       image: product.images[0],
 
       variant: selectedVariant ?? {
-        label: "default",
+        label: product.variants[0].label,
         stock: product.variants[0].stock
       },
 

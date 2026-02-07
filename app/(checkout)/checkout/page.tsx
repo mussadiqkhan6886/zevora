@@ -50,20 +50,6 @@ const CheckoutPage = () => {
       return;
     }
 
-    // Validate stock before sending
-    for (const item of cart) {
-      if (item.variant && item.quantity > item.variant.stock) {
-        alert(
-          `Stock for ${item.name} (${item.variant.label}) is insufficient!`
-        );
-        return;
-      }
-      if (!item.variant && item.quantity > item.variant?.stock!) {
-        alert(`Stock for ${item.name} is insufficient!`);
-        return;
-      }
-    }
-
     setStatus("Sending...");
     setLoading(true);
 
@@ -282,7 +268,7 @@ const CheckoutPage = () => {
                     <Image
                       width={70}
                       height={70}
-                      className="object-cover rounded"
+                      className="object-cover"
                       src={item.image}
                       alt={item.name}
                     />
@@ -293,7 +279,7 @@ const CheckoutPage = () => {
                   )}
                   <div>
                     <p className="font-medium">
-                      {item.name} {item.variant?.label || ""}
+                      {item.name} {item.variant?.label === "default" ? "" : "(" + item.variant?.label + ")"}
                     </p>
                     <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                   </div>

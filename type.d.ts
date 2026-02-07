@@ -27,7 +27,7 @@ export type CartItem = {
 
   image: string
 
-  variant?: {
+  variant: {
     label: string
     stock: number
   }
@@ -38,5 +38,17 @@ export type CartItem = {
 
   finalPrice: number   // calculated once when added
   quantity: number
+}
+
+export type checkoutItem = {
+  productId: string
+  name: string
+  price: number
+  onSale: boolean
+  salePrice: number
+  finalPrice: number
+  quantity: number
+  image: string
+  variant: string
 }
 

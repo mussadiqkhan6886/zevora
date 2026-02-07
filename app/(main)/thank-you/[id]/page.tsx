@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import order from "@/lib/models/OrderSchema";
-import { connectDB } from "@/lib/config/database/db";
 
 interface ItemType {
   _id: number
@@ -17,6 +15,8 @@ interface ItemType {
 
 import type { Metadata } from 'next';
 import { CheckCircle } from "lucide-react";
+import order from "@/lib/models/OrderSchema";
+import { connectDB } from "@/lib/config/database";
 
 export const generateMetadata = (): Metadata => {
   return {

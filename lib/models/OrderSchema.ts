@@ -5,7 +5,7 @@ const OrderSchema = new Schema({
  orderId: { type: String, default: () => uuidv4(), unique: true },
     items: [
       {
-      id: {
+      productId: {
         type: String,
         required: true,
       },
@@ -25,22 +25,27 @@ const OrderSchema = new Schema({
         type: Number,
         default: null,
       },
+      finalPrice: {
+        type: Number,
+        required: true,
+      },
       quantity: {
         type: Number,
         required: true,
         min: 1,
       },
-      images: {
+      image: {
         type: String,
         required: true,
       },
-      selectedSize: {
+      variant: {
         type: String,
-        default: ""
+        required: true
       }
     }
     ],
     totalPrice: { type: Number, required: true },
+    shippingCost: {type:Number, required: true},
     userDetails: {
       fullName: {type: String, required: true},
       phone: {type: String, required: true},
