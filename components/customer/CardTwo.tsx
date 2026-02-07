@@ -80,7 +80,7 @@ const CardTwo = ({
       )}
 
       <h2
-        className={`${serif.className} text-base text-center tracking-wider mt-2 px-2 text-black group-hover:underline`}
+        className={`${serif.className} capitalize text-base text-center tracking-wider mt-2 px-2 text-black group-hover:underline`}
       >
         {name}
       </h2>

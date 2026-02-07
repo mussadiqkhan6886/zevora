@@ -73,7 +73,7 @@ const Card = ({
       )}
 
       <h3
-        className={`${serif.className} text-base text-center tracking-wider mt-2 px-2 text-white group-hover:underline`}
+        className={`${serif.className} capitalize text-base text-center tracking-wider mt-2 px-2 text-white group-hover:underline`}
       >
         {name}
       </h3>
