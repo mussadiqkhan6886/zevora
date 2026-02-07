@@ -29,6 +29,7 @@ export type CartItem = {
 
   variant?: {
     label: string
+    stock: number
   }
 
   price: number        // base price

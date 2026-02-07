@@ -16,24 +16,37 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([])
 
   const addToCart = (item: CartItem) => {
-    setCart(prev => {
-      const existing = prev.find(
-        p =>
-          p.productId === item.productId &&
-          p.variant?.label === item.variant?.label
-      )
+  setCart(prev => {
+    const existing = prev.find(
+      p =>
+        p.productId === item.productId &&
+        p.variant?.label === item.variant?.label
+    )
 
-      if (existing) {
-        return prev.map(p =>
-          p === existing
-            ? { ...p, quantity: p.quantity + item.quantity }
-            : p
-        )
+    const stockAvailable = item.variant?.stock ?? 999
+
+    if (existing) {
+      const newQuantity = existing.quantity + item.quantity
+      if (newQuantity > stockAvailable) {
+        alert(`Only ${stockAvailable} items available in stock!`)
+        return prev
       }
+      // merge quantity safely
+      return prev.map(p =>
+        p === existing ? { ...p, quantity: newQuantity } : p
+      )
+    }
 
-      return [...prev, item]
-    })
-  }
+    if (item.quantity > stockAvailable) {
+      alert(`Only ${stockAvailable} items available in stock!`)
+      return prev
+    }
+
+    // Add new item
+    return [...prev, item]
+  })
+}
+
 
   const removeFromCart = (productId: string, variantLabel?: string) => {
     setCart(prev =>

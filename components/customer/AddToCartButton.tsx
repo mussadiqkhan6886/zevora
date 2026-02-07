@@ -13,12 +13,14 @@ const AddToCartButton = ({ product }: { product: productType }) => {
 
   const [selectedVariant, setSelectedVariant] = useState<{
     label: string
+    stock: number
   } | null>(null)
 
   const [quantity, setQuantity] = useState(1)
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("Add To Cart")
   const [popUp, setPopUp] = useState(false)
+  const [flag, setFlag] = useState(false)
 
   const baseFinalPrice = product.onSale && product.salePrice
     ? product.salePrice
@@ -27,6 +29,20 @@ const AddToCartButton = ({ product }: { product: productType }) => {
   const finalPrice = baseFinalPrice
 
   const addToCartHandler = () => {
+    let stockAvailable = 0;
+    setFlag(true)
+    if (selectedVariant) {
+      const variantStock = product.variants.find(
+        (v: {label: string}) => v.label === selectedVariant.label
+      )?.stock
+      stockAvailable = variantStock ?? 0
+    }
+
+    if (quantity > stockAvailable) {
+      alert(`Only ${stockAvailable} items available in stock!`)
+      return
+    }
+
     if (hasVariants && !selectedVariant) {
       setPopUp(true)
       return
@@ -56,9 +72,10 @@ const AddToCartButton = ({ product }: { product: productType }) => {
   useEffect(() => {
     setTimeout(() => {
       setStatus("Add To Cart")
+      setFlag(false)
     }, 1500)
 
-  }, [cart])
+  }, [cart, flag])
 
 
   return (
@@ -82,7 +99,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
                   key={v.label}
                   disabled={v.stock <= 0}
                   onClick={() =>
-                    setSelectedVariant({ label: v.label })
+                    setSelectedVariant({ label: v.label, stock: v.stock })
                   }
                   className={`px-5 py-1 rounded-full border text-sm font-semibold
                     ${
@@ -123,7 +140,8 @@ const AddToCartButton = ({ product }: { product: productType }) => {
       <div className="flex flex-col gap-3 mt-4">
         <button
           onClick={addToCartHandler}
-          className="w-full py-3 bg-black text-white hover:bg-white hover:text-black border border-black transition"
+          disabled={loading || status === "Added"}
+          className="w-full py-3 disabled:opacity-70 bg-black text-white not-disabled:hover:bg-white not-disabled:hover:text-black not-disabled:cursor-pointer border border-black transition"
         >
           {loading ? <p className='animate-bounce'>Loading...</p>  : status}
         </button>
