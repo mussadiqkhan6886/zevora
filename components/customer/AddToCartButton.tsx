@@ -29,19 +29,8 @@ const AddToCartButton = ({ product }: { product: productType }) => {
   const finalPrice = baseFinalPrice
 
   const addToCartHandler = () => {
-    let stockAvailable = 0;
     setFlag(true)
-    if (selectedVariant) {
-      const variantStock = product.variants.find(
-        (v: {label: string}) => v.label === selectedVariant.label
-      )?.stock
-      stockAvailable = variantStock ?? 0
-    }
-
-    if (quantity > stockAvailable) {
-      alert(`Only ${stockAvailable} items available in stock!`)
-      return
-    }
+   
 
     if (hasVariants && !selectedVariant) {
       setPopUp(true)
@@ -54,7 +43,10 @@ const AddToCartButton = ({ product }: { product: productType }) => {
       slug: product.slug,
       image: product.images[0],
 
-      variant: selectedVariant ?? undefined,
+      variant: selectedVariant ?? {
+        label: "default",
+        stock: product.variants[0].stock
+      },
 
       price: product.price,
       salePrice: product.salePrice ?? null,
@@ -125,14 +117,14 @@ const AddToCartButton = ({ product }: { product: productType }) => {
       {/* QUANTITY */}
       <div>
         <p className="text-sm font-medium mb-1">Quantity</p>
-        <div className="flex items-center w-max border px-4 py-2 gap-6">
-          <button
+        <div className="flex items-center w-max border px-1 py-2 gap-4">
+          <button className=' px-4 py-1'
             onClick={() => setQuantity(q => Math.max(1, q - 1))}
           >
             −
           </button>
           <span>{quantity}</span>
-          <button onClick={() => setQuantity(q => q + 1)}>+</button>
+          <button className=' px-4 py-1' onClick={() => setQuantity(q => q + 1)}>+</button>
         </div>
       </div>
 
