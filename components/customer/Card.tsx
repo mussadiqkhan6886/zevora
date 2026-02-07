@@ -9,19 +9,25 @@ type CardProps = {
   slug: string
   collectionSlug: string
   variants: Variant[]
+  price: number;
+  salePrice?: number | null;
+  onSale?: boolean;
+  hasVariants: boolean
 }
 
 const Card = ({
   name,
+  price,
+  salePrice,
+  onSale,
   images,
   slug,
   collectionSlug,
-  variants,
+  hasVariants,
+  variants
 }: CardProps) => {
 
-  const isOnSale = variants.find(item => item.onSale)
-
-  if ((variants[0].attributes.size === null && variants[0].attributes.volume === null) && variants[0].stock <= 0) {
+  if (variants[0].stock <= 0 && !hasVariants) {
     return (
       <div className="relative opacity-60 cursor-not-allowed">
         <Image
@@ -41,10 +47,10 @@ const Card = ({
         </h3>
 
         <div className="flex gap-5 text-white px-2 mt-1 items-center justify-center">
-          <p className={`${isOnSale?.onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
-            Rs.{variants[0].price} PKR
+          <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
+            Rs.{price} PKR
           </p>
-          {isOnSale?.onSale && <p className="tracking-wider">Rs.{isOnSale?.price} PKR</p>}
+          {onSale && <p className="tracking-wider">Rs.{salePrice} PKR</p>}
         </div>
       </div>
     )
@@ -60,7 +66,7 @@ const Card = ({
         className="w-full h-[350px] object-cover"
       />
 
-      {isOnSale && (
+      {onSale && (
         <div className="absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 z-40 text-black">
           Sale
         </div>

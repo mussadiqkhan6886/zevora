@@ -4,11 +4,12 @@ import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
 import ProductSchema from '@/lib/models/ProductSchema'
 import { productType } from '@/type'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) : Promise<Metadata> {
   await connectDB()
   const {slug} = await params
   const product = await ProductSchema.findOne({ slug: slug }).lean()
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: `/collections/${product.category}/${product.slug}`,
     },
-    keywords: product.keywords,
+    keywords: product.keywords || ["zevora", "watch", "jewelry", "rings"],
     openGraph: {
       title: `${product.name} | Zevora`,
       description: product.description?.slice(0, 160),
@@ -116,11 +117,11 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
           </div>
 
             {
-              (product.sizes !== null && product.sizes.length > 0) && (<div>
+              (product.hasVariants ) && (<div>
                 <h3 className="font-semibold">Sizes:</h3>
                 <div className="flex gap-3 mt-2">
-                {product.sizes.map((item: string) => (
-                  <button className="text-black border border-zinc-700 rounded-full cursor-pointer px-5 text-sm py-1 font-semibold" key={item}>{item}</button>
+                {product.variants.map((item: {label: string}) => (
+                  <button className="text-black border border-zinc-700 rounded-full cursor-pointer px-5 text-sm py-1 font-semibold" key={item.label}>{item.label}</button>
                 ))}
                 </div>
               </div>)

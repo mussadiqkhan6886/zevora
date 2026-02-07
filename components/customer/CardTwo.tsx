@@ -1,16 +1,18 @@
 import { serif } from '@/lib/fonts'
+import { Variant } from '@/type'
 import Image from 'next/image'
 import Link from 'next/link'
 
 type CardTwoProps = {
   name: string
   price: number
-  salePrice: number | null
-  onSale: boolean
+  salePrice?: number | null
+  onSale?: boolean
   images: string[]
   slug: string
   collectionSlug: string
-  stock: number
+  variants: Variant[]
+  hasVariants: boolean
 }
 
 const CardTwo = ({
@@ -21,10 +23,11 @@ const CardTwo = ({
   images,
   slug,
   collectionSlug,
-  stock,
+  variants,
+  hasVariants,
 }: CardTwoProps) => {
 
-  if (stock <= 0) {
+  if (variants[0].stock <= 0 && !hasVariants) {
     return (
       <div className="relative mb-4 opacity-60 cursor-not-allowed">
         <Image
