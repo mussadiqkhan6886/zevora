@@ -133,7 +133,9 @@ useEffect(() => {
         <div className='flex gap-4 md:gap-6 items-center'>
             <FiSearch className='cursor-pointer' onClick={() => setSearchOpen(true)} />
             {searchOpen && <SearchBar isSearchOpen={setSearchOpen} />}
-            <FiShoppingCart />
+            <Link href="/cart">
+              <FiShoppingCart />
+            </Link>
         </div>
       </div>
     </header>
