@@ -54,7 +54,6 @@ export const PATCH = async (
     .getAll("keywords")
     .filter((x): x is string => typeof x === "string")
     .map((x) => JSON.parse(x));
-    const volume = formData.get("volume") as string
     const fragranceType = formData.get("fragranceType") as string
     const onSale = formData.get("onSale") === "true";
     const files = formData.getAll("images") as File[];
@@ -127,7 +126,7 @@ export const PATCH = async (
       keywords,
       variants,
       onSale,
-      volume,
+      hasVariants,
       fragranceType,
       images: updatedImages,
     };

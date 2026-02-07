@@ -39,7 +39,6 @@ export const POST = async (req: NextRequest) => {
     const category = formData.get("category") as string;
     const description = formData.get("description") as string;
     const fragranceType = formData.get("fragranceType") as string | null;
-    const volume = formData.get("volume") as string
 
     const keywords = formData
       .getAll("keywords")
@@ -136,7 +135,6 @@ export const POST = async (req: NextRequest) => {
       images: uploadedImages,
       hasVariants,
       variants,
-      volume
     });
 
     await newProduct.save();
