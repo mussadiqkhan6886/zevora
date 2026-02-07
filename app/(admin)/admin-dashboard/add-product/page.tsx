@@ -7,7 +7,6 @@ import axios from "axios"
 
 type VariantInput = {
   label: string
-  price: string
   stock: string
 }
 
@@ -20,58 +19,39 @@ export default function AddProductUI() {
     keywords: [] as string[],
     fragranceType: '',
     hasVariants: false,
-    variantType: null as "size" | "volume" | null,
+    price: '',       
+    salePrice: '',   
+    onSale: false,   
   })
 
-  const [variants, setVariants] = useState<VariantInput[]>([
-    { label: '', price: '', stock: '' }
-  ])
-
+  const [variants, setVariants] = useState<VariantInput[]>([{ label: '', stock: '' }])
   const [files, setFiles] = useState<File[]>([])
   const [previews, setPreviews] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState("")
 
-  /* ---------------- SLUG ---------------- */
   const toSlug = (str: string) =>
     str.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
 
   const productSlug = useMemo(() => toSlug(data.name), [data.name])
-
   useEffect(() => {
     setData(prev => ({ ...prev, slug: productSlug }))
   }, [productSlug])
 
-  /* ---------------- HANDLERS ---------------- */
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type, checked } = e.target as HTMLInputElement
-    setData(prev => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value
-    }))
+    setData(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }))
   }
 
-  const handleVariantChange = (
-    index: number,
-    field: keyof VariantInput,
-    value: string
-  ) => {
+  const handleVariantChange = (index: number, field: keyof VariantInput, value: string) => {
     const updated = [...variants]
     updated[index][field] = value
     setVariants(updated)
   }
 
-  const addVariant = () => {
-    setVariants(prev => [...prev, { label: '', price: '', stock: '' }])
-  }
+  const addVariant = () => setVariants(prev => [...prev, { label: '', stock: '' }])
+  const removeVariant = (index: number) => setVariants(prev => prev.filter((_, i) => i !== index))
 
-  const removeVariant = (index: number) => {
-    setVariants(prev => prev.filter((_, i) => i !== index))
-  }
-
-  /* ---------------- IMAGES ---------------- */
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
     const selected = Array.from(e.target.files)
@@ -79,29 +59,37 @@ export default function AddProductUI() {
     setPreviews(prev => [...prev, ...selected.map(f => URL.createObjectURL(f))])
   }
 
-  /* ---------------- SUBMIT ---------------- */
+  const [keywordsInput, setKeywordsInput] = useState('')
+  const handleKeywords = (e: ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value
+    setKeywordsInput(raw)
+    setData(prev => ({ ...prev, keywords: raw.split(',').map(k => k.trim()).filter(Boolean) }))
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
       const formData = new FormData()
-
       formData.append("name", data.name)
       formData.append("slug", data.slug)
       formData.append("category", data.category)
       formData.append("description", data.description)
       formData.append("hasVariants", String(data.hasVariants))
-      formData.append("variantType", data.variantType ?? "")
       formData.append("fragranceType", data.fragranceType)
+      formData.append("price", data.price)
+      formData.append("salePrice", data.salePrice)
+      formData.append("onSale", String(data.onSale))
 
-      data.keywords.forEach(k =>
-        formData.append("keywords", JSON.stringify(k))
-      )
+      data.keywords.forEach(k => formData.append("keywords", JSON.stringify(k)))
 
-      variants.forEach(v =>
-        formData.append("variants", JSON.stringify(v))
-      )
+      variants.forEach(v => {
+        formData.append("variants", JSON.stringify({
+          label: v.label || 'Default',
+          stock: v.stock,
+        }))
+      })
 
       for (const file of files) {
         const compressed = await imageCompression(file, {
@@ -116,7 +104,7 @@ export default function AddProductUI() {
 
       if (res.status === 201) {
         setResult("✅ Product added successfully")
-        setVariants([{ label: '', price: '', stock: '' }])
+        setVariants([{ label: '', stock: '' }])
         setFiles([])
         setPreviews([])
         setData({
@@ -124,11 +112,14 @@ export default function AddProductUI() {
           slug: '',
           category: 'watches',
           description: '',
-          keywords: [] as string[],
+          keywords: [""] as string[],
           fragranceType: '',
           hasVariants: false,
-          variantType: null as "size" | "volume" | null,
+          price: '',
+          salePrice: '',
+          onSale: false
         })
+        
       }
     } catch (err) {
       console.error(err)
@@ -136,17 +127,6 @@ export default function AddProductUI() {
     } finally {
       setLoading(false)
     }
-  }
-
-  /* ---------------- KEYWORDS ---------------- */
-  const [keywordsInput, setKeywordsInput] = useState('')
-  const handleKeywords = (e: ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value
-    setKeywordsInput(raw)
-    setData(prev => ({
-      ...prev,
-      keywords: raw.split(',').map(k => k.trim()).filter(Boolean)
-    }))
   }
 
   return (
@@ -157,6 +137,15 @@ export default function AddProductUI() {
 
         <input required name="name" value={data.name} onChange={handleChange} placeholder="Product Name" className="input" />
 
+        <input required name="price" type="number" value={data.price} onChange={handleChange} placeholder="Price" className="input" />
+        <label className="flex gap-2 items-center my-2">
+          <input type="checkbox" name="onSale" checked={data.onSale} onChange={handleChange} />
+          On Sale
+        </label>
+        {data.onSale && (
+          <input name="salePrice" type="number" value={data.salePrice} onChange={handleChange} placeholder="Sale Price" className="input" />
+        )}
+
         <select name="category" value={data.category} onChange={handleChange} className="input">
           {categories.map(cat => <option key={cat}>{cat}</option>)}
         </select>
@@ -165,33 +154,29 @@ export default function AddProductUI() {
 
         <input name="keywords" value={keywordsInput} onChange={handleKeywords} placeholder="Keywords (comma separated)" className="input" />
 
-        <label className="flex gap-2 items-center my-2">
+        {data.category.includes("perfumes") && (
+          <input name="fragranceType" value={data.fragranceType} onChange={handleChange} placeholder="Fragrance Type" className="input" />
+        )}
+
+        {data.category.includes("ring") && <label className="flex gap-2 items-center my-2">
           <input type="checkbox" checked={data.hasVariants}
             onChange={e =>
               setData(prev => ({
                 ...prev,
                 hasVariants: e.target.checked,
-                variantType: e.target.checked ? "size" : null
               }))
             } />
-          Has Variants (Sizes / Volume)
-        </label>
-
-        {data.category.includes("perfumes") && (
-          <input name="fragranceType" value={data.fragranceType} onChange={handleChange} placeholder="Fragrance Type" className="input" />
-        )}
+          Has Variants
+        </label>}
 
         <h2 className="text-xl font-semibold mt-4">Variants</h2>
 
         {variants.map((v, i) => (
           <div key={i} className="border p-3 rounded-lg mt-2">
-            <input placeholder="Label (S, M, 100ml)" value={v.label}
+            <input placeholder="Label" value={v.label}
               onChange={e => handleVariantChange(i, "label", e.target.value)} className="input" />
-            <input placeholder="Price" type="number" value={v.price}
-              onChange={e => handleVariantChange(i, "price", e.target.value)} className="input" />
             <input placeholder="Stock" type="number" value={v.stock}
               onChange={e => handleVariantChange(i, "stock", e.target.value)} className="input" />
-
             {variants.length > 1 && (
               <button type="button" onClick={() => removeVariant(i)} className="text-red-500 mt-1">
                 Remove
@@ -200,11 +185,12 @@ export default function AddProductUI() {
           </div>
         ))}
 
-        <button type="button" onClick={addVariant} className="mt-2 text-blue-600">
+        {data.category.includes("ring") && <button type="button" onClick={addVariant} className="mt-2 text-blue-600">
           + Add Variant
-        </button>
+        </button>}
 
-        <input type="file" multiple accept="image/*" required onChange={handleImageChange} className="input mt-4" />
+        <label className="mt-3 font-semibold block">Images: </label>
+        <input type="file" multiple accept="image/*" required onChange={handleImageChange} className="input mt-2" />
 
         <div className="flex gap-3 mt-3 flex-wrap">
           {previews.map((src, i) => (

@@ -46,60 +46,28 @@ export default function ProductTable({ products, setProducts }: ProductTableProp
         ) : <span>No Image</span>
       ),
     },
-    { field: 'name', headerName: 'Product Name', minWidth: 140 },
+    { field: 'name', headerName: 'Product Name', minWidth: 190 },
     {
       field: 'price',
       headerName: 'Price',
-      width: 300,
-       renderCell: (params) => {
-        return params.row.variants.map((v: any) => v.label !== "default" ? (v.label + ": PKR " + v.price) : "PKR " + v.price).join(", ");
-      }
+      width: 130,
     },
 
     {
       field: 'salePrice',
       headerName: 'Sale Price',
       width: 120,
-      renderCell: (params) => {
-        const variants = params.row.variants || [];
-        return (
-          <div>
-            {variants.map(
-              (item: { salePrice: number | null; label: string; onSale: boolean }, index: number) => (
-                <p key={index}>
-                  {item.onSale && item.label !== "Default"
-                    ? `${item.label}: PKR ${item.salePrice}`
-                    : item.onSale && item.label === "Default"
-                    ? `PKR ${item.salePrice}`
-                    : ""}
-                </p>
-              )
-            )}
-          </div>
-        );
-      }
     },
    {
       field: 'onSale',
       headerName: 'On Sale',
       width: 120,
-      renderCell: (params) => {
-        const variants = params.row.variants || [];
-        return variants
-          .map((v: any) =>
-            v.label !== "Default"
-              ? `${v.label}: ${v.onSale ? "✔" : "❌"}`
-              : v.onSale
-              ? "✔"
-              : "❌"
-          )
-          .join(", ");
-      },
+      type: "boolean"
     },
     {
       field: 'stock',
       headerName: 'Stock',
-      width: 120,
+      width: 220,
       renderCell: (params) => {
         return params.row.variants.map((v: any) => v.label !== "default" ? (v.label + ": " + v.stock) : " " + v.stock).join(", ");
       }
@@ -107,19 +75,14 @@ export default function ProductTable({ products, setProducts }: ProductTableProp
     {
       field: 'category',
       headerName: 'Category',
-      width: 200,
-    },
-    {
-      field: 'variantType',
-      headerName: 'Variant Type',
-      width: 120,
+      width: 180,
     },
     {
       field: 'variants',
       headerName: 'Variants',
       width: 200,
       renderCell: (params) => {
-        if (!params.row.hasVariants) return "Default";
+        if (!params.row.hasVariants) return "No Variants";
         return params.row.variants.map((v: any) => v.label).join(", ");
       }
     },

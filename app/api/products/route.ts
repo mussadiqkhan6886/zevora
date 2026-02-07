@@ -50,6 +50,9 @@ export const POST = async (req: NextRequest) => {
     /* ---------- BASIC FIELDS ---------- */
     const name = formData.get("name") as string;
     const slug = formData.get("slug") as string;
+    const price = Number(formData.get("price"));
+    const salePrice = Number(formData.get("salePrice"));
+    const onSale = formData.get("onSale") === "true";
     const category = formData.get("category") as string;
     const description = formData.get("description") as string;
     const fragranceType = formData.get("fragranceType") as string | null;
@@ -66,7 +69,7 @@ export const POST = async (req: NextRequest) => {
 
     const files = formData.getAll("images");
 
-    if (!name || !slug || !category || !description) {
+    if (!name || !slug || !price || !category || !description) {
       throw new Error("Missing required fields");
     }
 
@@ -76,11 +79,10 @@ export const POST = async (req: NextRequest) => {
 
 
     /* ---------- VARIANT TYPE DECISION ---------- */
-    const resolveVariantType = (category: string): "size" | "volume" | null => {
+    const resolveVariantType = (category: string): "size" | null => {
         const normalized = category.toLowerCase();
 
         if (normalized.includes("ring")) return "size";
-        if (normalized.includes("perfume")) return "volume";
 
         return null;
     };
@@ -92,31 +94,22 @@ export const POST = async (req: NextRequest) => {
     /* ---------- VARIANT BUILD ---------- */
     const variants = (rawVariants.length
       ? rawVariants
-      : [{ label: "Default", price: 0, stock: 0 }]
+      : [{ label: "Default", stock: 0 }]
     ).map((v: any) => {
-      if (!v.label || !v.price || v.stock === undefined) {
+      if (!v.label || v.stock === undefined) {
         throw new Error("Invalid variant data");
       }
 
-      const attrValue = variantType === "size"
-        ? v.label
-        : variantType === "volume"
-        ? v.label
-        : "STD";
+      const attrValue = variantType === "size" ? v.label : "STD";
 
       return {
         label: v.label,
-        price: Number(v.price),
         stock: Number(v.stock),
         sku: generateSKU({
           category,
           productName: name,
           attr: attrValue,
         }),
-        attributes: {
-          size: variantType === "size" ? v.label : null,
-          volume: variantType === "volume" ? v.label : null,
-        },
       };
     });
 
@@ -149,13 +142,15 @@ export const POST = async (req: NextRequest) => {
     const newProduct = new ProductSchema({
       name,
       slug,
+      price,
+      onSale,
+      salePrice,
       category,
       description,
       keywords,
       fragranceType,
       images: uploadedImages,
       hasVariants,
-      variantType,
       variants,
     });
 

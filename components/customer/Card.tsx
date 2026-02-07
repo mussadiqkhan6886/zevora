@@ -1,30 +1,27 @@
 import { serif } from '@/lib/fonts'
+import { Variant } from '@/type'
 import Image from 'next/image'
 import Link from 'next/link'
 
 type CardProps = {
   name: string
-  price: number
-  salePrice: number | null
-  onSale: boolean
   images: string[]
   slug: string
   collectionSlug: string
-  stock: number
+  variants: Variant[]
 }
 
 const Card = ({
   name,
-  price,
-  salePrice,
-  onSale,
   images,
   slug,
   collectionSlug,
-  stock,
+  variants,
 }: CardProps) => {
 
-  if (stock <= 0) {
+  const isOnSale = variants.find(item => item.onSale)
+
+  if ((variants[0].attributes.size === null && variants[0].attributes.volume === null) && variants[0].stock <= 0) {
     return (
       <div className="relative opacity-60 cursor-not-allowed">
         <Image
@@ -44,10 +41,10 @@ const Card = ({
         </h3>
 
         <div className="flex gap-5 text-white px-2 mt-1 items-center justify-center">
-          <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
-            Rs.{price} PKR
+          <p className={`${isOnSale?.onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
+            Rs.{variants[0].price} PKR
           </p>
-          {onSale && <p className="tracking-wider">Rs.{salePrice} PKR</p>}
+          {isOnSale?.onSale && <p className="tracking-wider">Rs.{isOnSale?.price} PKR</p>}
         </div>
       </div>
     )
@@ -63,7 +60,7 @@ const Card = ({
         className="w-full h-[350px] object-cover"
       />
 
-      {onSale && (
+      {isOnSale && (
         <div className="absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 z-40 text-black">
           Sale
         </div>

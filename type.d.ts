@@ -1,4 +1,4 @@
-interface Variant {
+export interface Variant {
   label: string;
   sku: string;
   price: number;
