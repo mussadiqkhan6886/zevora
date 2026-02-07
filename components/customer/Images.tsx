@@ -1,28 +1,46 @@
 'use client';
 
-import Image from 'next/image'
-import React, { useState } from 'react'
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 const Images = ({
   images,
   name,
 }: {
-  images: string[]
-  name: string
+  images: string[];
+  name: string;
 }) => {
-  const [activeImage, setActiveImage] = useState(images[0])
+  const [activeImage, setActiveImage] = useState(images[0]);
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-6">
+    <div className="flex flex-col-reverse xl:flex-row gap-4">
       
-      <div className="flex flex-row lg:flex-col gap-4">
+      {/* THUMBNAILS */}
+      <div
+        className="
+          flex xl:flex-col gap-3
+          overflow-x-auto xl:overflow-y-auto
+          max-h-[460px]
+          xl:max-h-[600px]
+          xl:w-28
+          scrollbar-thin
+        "
+      >
         {images.map((item, i) => (
           <button
             key={i}
             onClick={() => setActiveImage(item)}
-            className={`w-20 h-20 border overflow-hidden ${
-              activeImage === item ? 'border-black' : 'border-zinc-200'
-            }`}
+            className={`
+              flex-shrink-0
+              w-22 h-22
+              overflow-hidden
+              transition
+              ${
+                activeImage === item
+                  ? 'border-black'
+                  : 'border-zinc-200 hover:border-zinc-400'
+              }
+            `}
           >
             <Image
               src={item}
@@ -35,18 +53,19 @@ const Images = ({
         ))}
       </div>
 
-      <div className="w-full max-w-[500px] aspect-square">
+      {/* MAIN IMAGE */}
+      <div className="w-full max-w-[520px] aspect-square bg-zinc-100 overflow-hidden">
         <Image
           src={activeImage}
           alt={name}
           width={600}
           height={600}
-          className="w-full h-full object-cover"
           priority
+          className="w-full h-full object-cover"
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Images
+export default Images;

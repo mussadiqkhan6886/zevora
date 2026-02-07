@@ -42,7 +42,7 @@ const Card = ({
           Out Of Stock
         </div>
 
-        <h3 className={`${serif.className} text-base text-center tracking-wider mt-2 px-2 text-white`}>
+        <h3 className={`${serif.className} capitalize text-base text-center tracking-wider mt-2 px-2 text-white`}>
           {name}
         </h3>
 

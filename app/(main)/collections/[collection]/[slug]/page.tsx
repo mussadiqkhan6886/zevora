@@ -1,185 +1,215 @@
-import CardTwo from '@/components/customer/CardTwo'
-import Images from '@/components/customer/Images'
-import { connectDB } from '@/lib/config/database'
-import { serif } from '@/lib/fonts'
-import ProductSchema from '@/lib/models/ProductSchema'
-import { productType } from '@/type'
-import { Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import CardTwo from '@/components/customer/CardTwo';
+import Images from '@/components/customer/Images';
+import { connectDB } from '@/lib/config/database';
+import { serif } from '@/lib/fonts';
+import ProductSchema from '@/lib/models/ProductSchema';
+import { productType } from '@/type';
+import { Metadata } from 'next';
+import React from 'react';
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) : Promise<Metadata> {
-  await connectDB()
-  const {slug} = await params
-  const product = await ProductSchema.findOne({ slug: slug }).lean()
+/* ---------------- METADATA ---------------- */
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  await connectDB();
+  const { slug } = await params;
+
+  const product = await ProductSchema.findOne({ slug }).lean();
 
   if (!product) {
     return {
       title: 'Product Not Found | Zevora',
       description: 'This product could not be found.',
-    }
+    };
   }
 
-  const ogImage = product.images?.[0] || '/logo.png'
+  const ogImage = product.images?.[0] || '/logo.png';
 
   return {
-    title: `${product.name}`,
-    description: product.description?.slice(0, 160) || 'Premium product from Zevora.',
+    title: product.name,
+    description: product.description?.slice(0, 160),
     alternates: {
       canonical: `/collections/${product.category}/${product.slug}`,
     },
-    keywords: product.keywords || ["zevora", "watch", "jewelry", "rings"],
+    keywords: product.keywords,
     openGraph: {
       title: `${product.name} | Zevora`,
       description: product.description?.slice(0, 160),
-      url: `/collections/${product.category}/${product.slug}`,
-      type: 'website',
-      siteName: 'Zevora',
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: product.name,
-        },
-      ],
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${product.name} | Zevora`,
-      description: product.description?.slice(0, 160),
+      title: product.name,
       images: [ogImage],
     },
-  }
+  };
 }
 
-const page = async ({params}: {params: Promise<{slug: string}>}) => {
+/* ---------------- PAGE ---------------- */
 
-    const productSlug = (await params).slug
-    
-    await connectDB()
+const Page = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  await connectDB();
+  const { slug } = await params;
 
-   const product = await ProductSchema.findOne({ slug: productSlug }).lean()
+  const product = await ProductSchema.findOne({ slug }).lean();
 
-   const products = await ProductSchema.aggregate([
-      {
-        $match: {
-          category: product.category,
-          _id: { $ne: product._id }, // exclude current product
-          stock: { $gt: 0 }          // only in-stock items
-        },
-      },
-      { $sample: { size: 8 } },      // random 8
-    ])
-
-
-     if (!product) {
+  if (!product) {
     return (
       <main className="min-h-screen flex items-center justify-center">
         <h1 className="text-2xl font-medium">Product Not Found</h1>
       </main>
-    )
+    );
   }
+
+  const relatedProducts = await ProductSchema.aggregate([
+    {
+      $match: {
+        category: product.category,
+        _id: { $ne: product._id },
+      },
+    },
+    { $sample: { size: 8 } },
+  ]);
+
+  const hasVariants = product.hasVariants && product.variants?.length > 0;
 
   return (
     <main className="pt-32 px-6 max-w-7xl mx-auto">
-      <section className="grid grid-cols-1 min-h-[90vh] md:grid-cols-2 gap-10 place-items-center">
-        
+      {/* PRODUCT SECTION */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-12 min-h-[90vh]">
+        {/* IMAGES */}
         <Images images={product.images} name={product.name} />
 
-        <div className="flex flex-col justify-between gap-6 lg:pt-10">
-          <h1 className={`${serif.className} capitalize text-4xl tracking-wider`}>
+        {/* DETAILS */}
+        <div className="flex flex-col gap-6 lg:pt-10">
+          <h1
+            className={`${serif.className} text-4xl capitalize tracking-wide`}
+          >
             {product.name}
           </h1>
 
+          {/* PRICE */}
           <div className="flex items-center gap-4">
-            <h2
+            <span
               className={`${
                 product.onSale
-                  ? 'line-through text-sm text-zinc-400'
+                  ? 'line-through text-zinc-400'
                   : 'text-xl font-medium'
               }`}
             >
               Rs.{product.price}
-            </h2>
+            </span>
 
-            {product.onSale && (
+            {product.onSale && product.salePrice && (
               <>
-                <h2 className="text-xl font-semibold">
+                <span className="text-xl font-semibold">
                   Rs.{product.salePrice}
-                </h2>
-                <span className="text-xs px-3 py-1 rounded-full border border-zinc-300">
+                </span>
+                <span className="text-xs px-3 py-1 rounded-full border">
                   Sale
                 </span>
               </>
             )}
           </div>
 
-            {
-              (product.hasVariants ) && (<div>
-                <h3 className="font-semibold">Sizes:</h3>
-                <div className="flex gap-3 mt-2">
-                {product.variants.map((item: {label: string,  stock: number}) => (
-                  <button disabled={item.stock <= 0} className={`${item.stock <= 0 ? "line-through opacity-75 text-gray-400 border border-zinc-500 cursor-not-allowed" : "cursor-pointer text-black border border-zinc-700"}  rounded-full  px-5 text-sm py-1 font-semibold`} key={item.label}>{item.label}</button>
-                ))}
-                </div>
-              </div>)
-            }
+          {/* VARIANTS (RINGS / SIZES) */}
+          {hasVariants && product.category.includes('ring') && (
+            <div>
+              <h3 className="font-semibold mb-2">Sizes</h3>
+              <div className="flex gap-3 flex-wrap">
+                {product.variants.map(
+                  (v: { label: string; stock: number }) => (
+                    <button
+                      key={v.label}
+                      disabled={v.stock <= 0}
+                      className={`px-5 py-1 rounded-full border text-sm font-semibold
+                        ${
+                          v.stock <= 0
+                            ? 'line-through opacity-50 cursor-not-allowed'
+                            : 'hover:bg-black hover:text-white transition'
+                        }`}
+                    >
+                      {v.label}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+          )}
 
-            {
-              (product.volume !== "" && product.fragranceType !== "" && product.volume !== null) && (
-                <>
-                <div className='text-sm'>
-                  <h3><span className='font-semibold'>Volume:</span> {product.volume} ml</h3>
-                </div>
-                <div className='text-sm'>
-                  <h3><span className='font-semibold'>Fragrance Type:</span> {product.fragranceType}</h3>
-                </div>
-                </>
-              )
-            }
+          {/* PERFUME INFO */}
+          {product.category.includes('perfume') && (
+            <div className="text-sm space-y-1">
+              <p>
+                <span className="font-semibold">Volume:</span>{' '}
+                {product.variants?.[0]?.label}
+              </p>
+              <p>
+                <span className="font-semibold">Fragrance Type:</span>{' '}
+                {product.fragranceType}
+              </p>
+            </div>
+          )}
 
-
-          <div className="flex flex-col gap-2">
-            <p className="text-sm font-medium">Quantity</p>
+          {/* QUANTITY */}
+          <div>
+            <p className="text-sm font-medium mb-1">Quantity</p>
             <div className="flex items-center w-max border px-4 py-2 gap-6">
               <button className="text-lg hover:opacity-70">−</button>
               <span className="text-sm">1</span>
               <button className="text-lg hover:opacity-70">+</button>
             </div>
           </div>
-          
 
+          {/* DESCRIPTION */}
           <div>
-            <h3 className='font-semibold'>Description: </h3>
+            <h3 className="font-semibold mb-1">Description</h3>
             <p className="text-zinc-800">{product.description}</p>
           </div>
 
-          {/* Buttons */}
+          {/* CTA */}
           <div className="flex flex-col gap-3 mt-4">
-            <button className="w-full py-3 cursor-pointer hover:bg-white hover:text-black border border-transparent hover:border-black duration-300 bg-black text-white hover:opacity-90 transition">
+            <button className="w-full py-3 bg-black text-white hover:bg-white hover:text-black border border-black transition">
               Add to cart
             </button>
-            <button className="w-full py-3 cursor-pointer border border-black hover:bg-black hover:text-white transition">
+            <button className="w-full py-3 border border-black hover:bg-black hover:text-white transition">
               Buy it now
             </button>
           </div>
+
           <p className="text-sm text-zinc-500">
             Shipping calculated at checkout
           </p>
         </div>
       </section>
-      <section>
-        <h3 className={`${serif.className} text-xl md:text-3xl my-10`}>You May Also Like</h3>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
-            {products.map((item: productType) => (
-                <CardTwo key={item._id} collectionSlug={item.category} {...item} />
-            ))}
+
+      {/* RELATED PRODUCTS */}
+      <section className="mt-20">
+        <h3
+          className={`${serif.className} text-2xl md:text-3xl mb-10`}
+        >
+          You May Also Like
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {relatedProducts.map((item: productType) => (
+            <CardTwo
+              key={item._id}
+              collectionSlug={item.category}
+              {...item}
+            />
+          ))}
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

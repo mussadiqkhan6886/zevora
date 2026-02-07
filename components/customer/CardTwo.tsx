@@ -43,7 +43,7 @@ const CardTwo = ({
         </div>
 
         <h2
-          className={`${serif.className} text-base text-center tracking-wider mt-2 px-2 text-black`}
+          className={`${serif.className} capitalize text-base text-center tracking-wider mt-2 px-2 text-black`}
         >
           {name}
         </h2>
