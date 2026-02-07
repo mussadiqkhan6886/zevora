@@ -13,7 +13,6 @@ const AddToCartButton = ({ product }: { product: productType }) => {
 
   const [selectedVariant, setSelectedVariant] = useState<{
     label: string
-    price: number
   } | null>(null)
 
   const [quantity, setQuantity] = useState(1)
@@ -25,7 +24,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
     ? product.salePrice
     : product.price
 
-  const finalPrice = selectedVariant?.price ?? baseFinalPrice
+  const finalPrice = baseFinalPrice
 
   const addToCartHandler = () => {
     if (hasVariants && !selectedVariant) {
@@ -83,7 +82,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
                   key={v.label}
                   disabled={v.stock <= 0}
                   onClick={() =>
-                    setSelectedVariant({ label: v.label, price: product.price })
+                    setSelectedVariant({ label: v.label })
                   }
                   className={`px-5 py-1 rounded-full border text-sm font-semibold
                     ${
