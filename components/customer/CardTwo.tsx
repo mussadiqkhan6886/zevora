@@ -27,7 +27,14 @@ const CardTwo = ({
   hasVariants,
 }: CardTwoProps) => {
 
-  if (variants[0].stock <= 0 && !hasVariants) {
+ const hasStock = hasVariants
+  ? variants.some(v => v.stock > 0)
+  : variants[0]?.stock > 0
+
+const isSoldOut = !hasStock
+
+
+  if (isSoldOut) {
     return (
       <div className="relative mb-4 opacity-60 cursor-not-allowed">
         <Image
