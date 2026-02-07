@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { roboto } from "@/lib/fonts";
+import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
   title: "Zevora",
@@ -17,7 +18,9 @@ export default function RootLayout({
       <body
         className={`antialiased ${roboto.className}`}
       >
+        <CartProvider>
         {children}
+        </CartProvider>
       </body>
     </html>
   );

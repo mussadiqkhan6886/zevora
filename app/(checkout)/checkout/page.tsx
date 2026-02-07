@@ -25,7 +25,6 @@ const Checkout = () => {
   const [paymentProof, setPaymentProof] = useState<File | null>(null); 
   const [preview, setPreview] = useState<string | null>(null);
 
-
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -49,12 +48,12 @@ const Checkout = () => {
         name: item.name,
         price: item.price,
         onSale: item.onSale,
-        discountPrice: item.discountPrice,
+        salePrice: item.salePrice,
         quantity: item.quantity,
         images: item.images[0],
-        selectedColor: item.selectedColor || "",
-        selectedSize: item.selectedSize,
+        selectedSize: item.selectedSize || "",
       })),
+      //delivery charges
       totalPrice: totalAmount + (totalAmount >= 2000 ? 0 : 250),
       userDetails: {
         fullName: formData.fullName,
@@ -268,7 +267,7 @@ const Checkout = () => {
                       </div>
                     )}
                     <div>
-                      <p className="font-medium">{item.name} - {item.selectedColor}</p>
+                      <p className="font-medium">{item.name} - {item.selectedSize}</p>
                       <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                     </div>
                   </div>

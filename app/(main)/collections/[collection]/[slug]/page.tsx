@@ -1,3 +1,4 @@
+import AddToCartButton from '@/components/customer/AddToCartButton';
 import CardTwo from '@/components/customer/CardTwo';
 import Images from '@/components/customer/Images';
 import { connectDB } from '@/lib/config/database';
@@ -59,6 +60,7 @@ const Page = async ({
   const { slug } = await params;
 
   const product = await ProductSchema.findOne({ slug }).lean();
+  const productClient = JSON.parse(JSON.stringify(product))
 
   if (!product) {
     return (
@@ -78,7 +80,6 @@ const Page = async ({
     { $sample: { size: 8 } },
   ]);
 
-  const hasVariants = product.hasVariants && product.variants?.length > 0;
 
   return (
     <main className="pt-32 px-6 max-w-7xl mx-auto">
@@ -119,30 +120,6 @@ const Page = async ({
             )}
           </div>
 
-          {/* VARIANTS (RINGS / SIZES) */}
-          {hasVariants && product.category.includes('ring') && (
-            <div>
-              <h3 className="font-semibold mb-2">Sizes</h3>
-              <div className="flex gap-3 flex-wrap">
-                {product.variants.map(
-                  (v: { label: string; stock: number }) => (
-                    <button
-                      key={v.label}
-                      disabled={v.stock <= 0}
-                      className={`px-5 py-1 rounded-full border text-sm font-semibold
-                        ${
-                          v.stock <= 0
-                            ? 'line-through opacity-50 cursor-not-allowed'
-                            : 'hover:bg-black hover:text-white transition'
-                        }`}
-                    >
-                      {v.label}
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-          )}
 
           {/* PERFUME INFO */}
           {product.category.includes('perfume') && (
@@ -158,16 +135,7 @@ const Page = async ({
             </div>
           )}
 
-          {/* QUANTITY */}
-          <div>
-            <p className="text-sm font-medium mb-1">Quantity</p>
-            <div className="flex items-center w-max border px-4 py-2 gap-6">
-              <button className="text-lg hover:opacity-70">−</button>
-              <span className="text-sm">1</span>
-              <button className="text-lg hover:opacity-70">+</button>
-            </div>
-          </div>
-
+          <AddToCartButton product={productClient} />
           {/* DESCRIPTION */}
           <div>
             <h3 className="font-semibold mb-1">Description</h3>
@@ -175,14 +143,6 @@ const Page = async ({
           </div>
 
           {/* CTA */}
-          <div className="flex flex-col gap-3 mt-4">
-            <button className="w-full py-3 bg-black text-white hover:bg-white hover:text-black border border-black transition">
-              Add to cart
-            </button>
-            <button className="w-full py-3 border border-black hover:bg-black hover:text-white transition">
-              Buy it now
-            </button>
-          </div>
 
           <p className="text-sm text-zinc-500">
             Shipping calculated at checkout

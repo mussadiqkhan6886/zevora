@@ -1,128 +1,144 @@
-'use client';
+'use client'
 
-import { useCart } from '@/hooks/useCart';
-import React, { useState, useEffect } from 'react';
-import Colors from './Colors';
-import Sizes from './Sizes';
+import { useCart } from '@/hooks/useCart'
+import { productType } from '@/type'
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { FiX } from 'react-icons/fi'
 
-interface Variant {
-  color: string;
-  size: string;
-  stock: number;
-}
+const AddToCartButton = ({ product }: { product: productType }) => {
+  const { addToCart, cart } = useCart()
 
-interface Props {
-  id: number;
-  images: string[];
-  price: number;
-  onSale: boolean;
-  discountPrice: number | null;
-  name: string;
-  quantity: number;
-  variants: Variant[];
-}
+  const hasVariants = product.hasVariants && product.variants?.length > 0
 
-const AddToCartButton = ({
-  id,
-  images,
-  price,
-  onSale,
-  discountPrice,
-  name,
-  quantity,
-  variants,
-}: Props) => {
-  const { addToCart } = useCart();
+  const [selectedVariant, setSelectedVariant] = useState<{
+    label: string
+    price: number
+  } | null>(null)
 
-  const [selectedColor, setSelectedColor] = useState('');
-  const [selectedSize, setSelectedSize] = useState('');
-  const [stock, setStock] = useState(0);
+  const [quantity, setQuantity] = useState(1)
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("Add To Cart")
+  const [popUp, setPopUp] = useState(false)
 
+  const baseFinalPrice = product.onSale && product.salePrice
+    ? product.salePrice
+    : product.price
 
-  const colors = variants
-    .filter((v) => v.color)
-    .map((v) => ({ color: v.color, colorStock: v.stock }));
+  const finalPrice = selectedVariant?.price ?? baseFinalPrice
 
-  const sizes = variants
-    .filter((v) => v.size)
-    .map((v) => ({ size: v.size, sizeStock: v.stock }));
-
-    useEffect(() => {
-  // Auto-select single color
-  if (colors.length === 1 && !selectedColor) {
-    setSelectedColor(colors[0].color);
-  }
-
-  // Auto-select single size
-  if (sizes.length === 1 && !selectedSize) {
-    setSelectedSize(sizes[0].size);
-  }
-}, [colors, sizes, selectedColor, selectedSize]);
-
-
-  // 🔹 Update stock whenever color or size changes
-  useEffect(() => {
-    let matchedVariant;
-
-    if (selectedColor && selectedSize) {
-      matchedVariant = variants.find(
-        (v) => v.color === selectedColor && v.size === selectedSize
-      );
-    } else if (selectedColor) {
-      matchedVariant = variants.find((v) => v.color === selectedColor);
-    } else if (selectedSize) {
-      matchedVariant = variants.find((v) => v.size === selectedSize);
+  const addToCartHandler = () => {
+    if (hasVariants && !selectedVariant) {
+      setPopUp(true)
+      return
     }
-
-    setStock(matchedVariant?.stock || 0);
-  }, [selectedColor, selectedSize, variants]);
-
-  const handleAddToCart = () => {
-    if ((colors.length > 1 && !selectedColor) || (sizes.length > 1 && !selectedSize) || stock === 0) return;
-
+    setLoading(true)
     addToCart({
-      id,
-      images,
-      price,
-      onSale,
-      discountPrice,
-      name,
+      productId: product._id,
+      name: product.name,
+      slug: product.slug,
+      image: product.images[0],
+
+      variant: selectedVariant ?? undefined,
+
+      price: product.price,
+      salePrice: product.salePrice ?? null,
+      onSale: Boolean(product.onSale),
+
+      finalPrice,
       quantity,
-      selectedColor,
-      selectedSize,
-      stock,
-    });
-  };
+    })
+
+    console.log(cart)
+    setLoading(false)
+    setStatus("Added")
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setStatus("Add To Cart")
+    }, 1500)
+
+  }, [cart])
+
 
   return (
-    <div className="space-y-4">
-      {colors.length > 0 && (
-        <>
-        <p>Colors:</p>
-        <Colors colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
-        </>
+    <>
+    {popUp && (
+      <div className='fixed inset-0 bg-black/30 flex items-center justify-center z-50'>
+        <div className='p-10 bg-white relative cursor-pointer'>
+          <FiX onClick={() => setPopUp(false)} className='absolute top-4 right-4' />
+          <h2 className='text-3xl font-semibold'>Please Select Variant</h2>
+        </div>
+      </div>
+    )}
+      {/* VARIANTS (RINGS / SIZES) */}
+      {hasVariants && product.category.includes('ring') && (
+        <div>
+          <h3 className="font-semibold mb-2">Sizes</h3>
+          <div className="flex gap-3 flex-wrap">
+            {product.variants.map(
+              (v: { label: string; stock: number }) => (
+                <button
+                  key={v.label}
+                  disabled={v.stock <= 0}
+                  onClick={() =>
+                    setSelectedVariant({ label: v.label, price: product.price })
+                  }
+                  className={`px-5 py-1 rounded-full border text-sm font-semibold
+                    ${
+                      selectedVariant?.label === v.label
+                        ? 'bg-black text-white'
+                        : 'hover:bg-black hover:text-white'
+                    }
+                    ${
+                      v.stock <= 0
+                        ? 'line-through opacity-40 cursor-not-allowed'
+                        : ''
+                    }
+                  `}
+                >
+                  {v.label}
+                </button>
+              )
+            )}
+          </div>
+        </div>
       )}
 
-      {sizes.length > 0 && (
-        <>
-         <p>Size:</p>
-        <Sizes sizes={sizes} selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
-        </>
-      )}
+      {/* QUANTITY */}
+      <div>
+        <p className="text-sm font-medium mb-1">Quantity</p>
+        <div className="flex items-center w-max border px-4 py-2 gap-6">
+          <button
+            onClick={() => setQuantity(q => Math.max(1, q - 1))}
+          >
+            −
+          </button>
+          <span>{quantity}</span>
+          <button onClick={() => setQuantity(q => q + 1)}>+</button>
+        </div>
+      </div>
 
-      <button
-        onClick={handleAddToCart}
-        disabled={(colors.length && !selectedColor) || (sizes.length && !selectedSize) || stock === 0}
-        className={`w-full px-6 py-3 rounded-md transition ${
-          (colors.length && !selectedColor) || (sizes.length && !selectedSize) || stock === 0
-            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            : 'bg-black text-white hover:bg-gray-800'
-        }`}
-      >
-        Add to Cart
-      </button>
-    </div>
-  );
-};
+      {/* CTA */}
+      <div className="flex flex-col gap-3 mt-4">
+        <button
+          onClick={addToCartHandler}
+          className="w-full py-3 bg-black text-white hover:bg-white hover:text-black border border-black transition"
+        >
+          {loading ? <p className='animate-bounce'>Loading...</p>  : status}
+        </button>
 
-export default AddToCartButton;
+        <Link
+          href="/checkout"
+          onClick={addToCartHandler}
+          className="w-full text-center py-3 border border-black hover:bg-black hover:text-white transition"
+        >
+          Buy it now
+        </Link>
+      </div>
+    </>
+  )
+}
+
+export default AddToCartButton

@@ -19,3 +19,24 @@ export interface productType {
   fragranceType?: string | null;
   variants: Variant[];
 }
+
+export type CartItem = {
+  productId: string
+  name: string
+  slug: string
+
+  image: string
+
+  variant?: {
+    label: string
+    price: number
+  }
+
+  price: number        // base price
+  salePrice: number | null
+  onSale: boolean
+
+  finalPrice: number   // calculated once when added
+  quantity: number
+}
+
