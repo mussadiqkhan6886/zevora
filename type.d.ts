@@ -18,6 +18,8 @@ export interface productType {
   hasVariants: boolean;
   fragranceType?: string | null;
   variants: Variant[];
+  createdAt: number
+  updatedAt: number
 }
 
 export type CartItem = {
