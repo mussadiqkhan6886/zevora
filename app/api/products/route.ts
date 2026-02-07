@@ -21,87 +21,155 @@ export const GET = async () => {
     }
 }
 
+/* ---------- SKU helpers ---------- */
+const normalize = (str: string) =>
+  str.toUpperCase().replace(/\s+/g, "-").replace(/[^A-Z0-9-]/g, "");
+
+const generateSKU = ({
+  category,
+  productName,
+  attr,
+}: {
+  category: string;
+  productName: string;
+  attr: string;
+}) => {
+  const cat = normalize(category).slice(0, 3);
+  const prod = normalize(productName).slice(0, 4);
+  const suffix = Math.floor(100 + Math.random() * 900);
+  return `${cat}-${prod}-${normalize(attr)}-${suffix}`;
+};
+
+/* ---------- POST ---------- */
 export const POST = async (req: NextRequest) => {
-    await connectDB()
+  await connectDB();
 
-    try{
-        const formData = await req.formData()
+  try {
+    const formData = await req.formData();
 
-        const name = formData.get("name") as string
-        const slug = formData.get("slug") as string
-        const category = formData.get("category") as string
-        const price = Number(formData.get("price"))
-        const salePrice = Number(formData.get("salePrice"))
-        const onSale = formData.get("onSale") === "true"
-        const stock = Number(formData.get("stock"))
-        const description = formData.get("description") as string
-        const keywords = formData.getAll("keywords").filter((x): x is string => typeof x === "string").map(x => JSON.parse(x))
-        const sizes = formData.getAll("sizes").filter((x): x is string => typeof x === "string").map(x => JSON.parse(x))
-        const volume = formData.get("volume") as string
-        const fragranceType = formData.get("fragranceType") as string
+    /* ---------- BASIC FIELDS ---------- */
+    const name = formData.get("name") as string;
+    const slug = formData.get("slug") as string;
+    const category = formData.get("category") as string;
+    const description = formData.get("description") as string;
+    const fragranceType = formData.get("fragranceType") as string | null;
 
-        const files = formData.getAll("images")
+    const keywords = formData
+      .getAll("keywords")
+      .filter((x): x is string => typeof x === "string")
+      .map(x => JSON.parse(x));
 
+    const rawVariants = formData
+      .getAll("variants")
+      .filter((x): x is string => typeof x === "string")
+      .map(v => JSON.parse(v));
 
-        if(!name || !description || !slug || !price){
-            throw new Error("Missing required fields")
-        }
+    const files = formData.getAll("images");
 
-        if(!files || files.length === 0){
-            throw new Error("No Images Uploaded")
-        }
-
-        const uploadedImages: string[] = []
-
-        for(const file of files){
-            if(!(file instanceof File)){
-                throw new Error("Invalid File Format")
-            }
-
-            const arrayBuffer = await file.arrayBuffer()
-            const buffer = Buffer.from(arrayBuffer)
-
-            const uploadResult : any = await new Promise((resolve, reject) => {
-                cloudinary.uploader
-                    .upload_stream({
-                        folder: "zevora",
-                        resource_type: "image"
-                    },
-                    (error, result) => {
-                        if(error) reject(error)
-                        else resolve(result)
-                    }
-                )
-                .end(buffer)
-            })
-
-            uploadedImages.push(uploadResult.secure_url)
-        }
-
-        const newProduct = new ProductSchema({
-            name,
-            category,
-            slug,
-            price,
-            salePrice,
-            onSale,
-            stock,
-            description,
-            keywords,
-            sizes,
-            volume,
-            fragranceType,
-            images: uploadedImages
-        })
-
-        await newProduct.save()
-
-        return NextResponse.json({success:true, message: "Product Added Successfully", data: newProduct}, {status: 201})
-        
-    }catch(err: any){
-        console.error("❌ Upload error:", err);
-        return NextResponse.json({success: false, message: err.message || "Product Failed to Add"}, {status: 500})
+    if (!name || !slug || !category || !description) {
+      throw new Error("Missing required fields");
     }
 
-    
-}
+    if (!files || files.length === 0) {
+      throw new Error("No images uploaded");
+    }
+
+
+    /* ---------- VARIANT TYPE DECISION ---------- */
+    const resolveVariantType = (category: string): "size" | "volume" | null => {
+        const normalized = category.toLowerCase();
+
+        if (normalized.includes("ring")) return "size";
+        if (normalized.includes("perfume")) return "volume";
+
+        return null;
+    };
+
+    const variantType = resolveVariantType(category);
+    const hasVariants = Boolean(variantType);
+
+
+    /* ---------- VARIANT BUILD ---------- */
+    const variants = (rawVariants.length
+      ? rawVariants
+      : [{ label: "Default", price: 0, stock: 0 }]
+    ).map((v: any) => {
+      if (!v.label || !v.price || v.stock === undefined) {
+        throw new Error("Invalid variant data");
+      }
+
+      const attrValue = variantType === "size"
+        ? v.label
+        : variantType === "volume"
+        ? v.label
+        : "STD";
+
+      return {
+        label: v.label,
+        price: Number(v.price),
+        stock: Number(v.stock),
+        sku: generateSKU({
+          category,
+          productName: name,
+          attr: attrValue,
+        }),
+        attributes: {
+          size: variantType === "size" ? v.label : null,
+          volume: variantType === "volume" ? v.label : null,
+        },
+      };
+    });
+
+    /* ---------- IMAGE UPLOAD ---------- */
+    const uploadedImages: string[] = [];
+
+    for (const file of files) {
+      if (!(file instanceof File)) {
+        throw new Error("Invalid file format");
+      }
+
+      const buffer = Buffer.from(await file.arrayBuffer());
+
+      const uploadResult: any = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            { folder: "zevora", resource_type: "image" },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          )
+          .end(buffer);
+      });
+
+      uploadedImages.push(uploadResult.secure_url);
+    }
+
+    /* ---------- SAVE PRODUCT ---------- */
+    const newProduct = new ProductSchema({
+      name,
+      slug,
+      category,
+      description,
+      keywords,
+      fragranceType,
+      images: uploadedImages,
+      hasVariants,
+      variantType,
+      variants,
+    });
+
+    await newProduct.save();
+
+    return NextResponse.json(
+      { success: true, message: "Product added successfully", data: newProduct },
+      { status: 201 }
+    );
+  } catch (err: any) {
+    console.error("❌ Product upload error:", err);
+    return NextResponse.json(
+      { success: false, message: err.message || "Failed to add product" },
+      { status: 500 }
+    );
+  }
+};

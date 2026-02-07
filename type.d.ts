@@ -1,19 +1,26 @@
-export interface productType {
-    _id: string
-    name: string
-    slug: string
-    price: number
-    salePrice: number | null
-    onSale: boolean
-    description: string
-    category: string
-    stock: number
-    keywords: string[]
-    sizes: string[] | null
-    volume: string | null
-    fragranceType: string | null
-    images: string[]
-    createdAt: string
-    updatedAt: string
+interface Variant {
+  label: string;
+  sku: string;
+  price: number;
+  salePrice?: number | null;
+  onSale?: boolean;
+  stock: number;
+  attributes: {
+    size: string | null;
+    volume: string | null;
+  };
 }
 
+export interface productType {
+  _id: string;
+  name: string;
+  slug: string;
+  category: string;
+  description: string;
+  keywords: string[];
+  images: string[];
+  hasVariants: boolean;
+  variantType: "size" | "volume" | null;
+  fragranceType?: string | null;
+  variants: Variant[];
+}

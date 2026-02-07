@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: `/collections/${product.category}/${product.slug}`,
     },
+    keywords: product.keywords,
     openGraph: {
       title: `${product.name} | Zevora`,
       description: product.description?.slice(0, 160),

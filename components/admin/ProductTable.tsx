@@ -10,21 +10,20 @@ import { Edit, Trash } from 'lucide-react';
 import { productType } from '@/type';
 
 interface ProductTableProps {
-  products: productType[]; 
-  setProducts: (product: productType[]) => void 
+  products: productType[];
+  setProducts: (product: productType[]) => void;
 }
 
 export default function ProductTable({ products, setProducts }: ProductTableProps) {
 
-  const handleDelete = async (id: string) => {
 
+  const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
+
     try {
       const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`);
-      if (res.status === 200) {
-        alert("Product deleted successfully!");
-      }
-      setProducts(products.filter(product => product._id !== id))
+      if (res.status === 200) alert("Product deleted successfully!");
+      setProducts(products.filter(product => product._id !== id));
     } catch (err) {
       console.error(err);
       alert("Failed to delete product.");
@@ -32,87 +31,126 @@ export default function ProductTable({ products, setProducts }: ProductTableProp
   };
 
   const columns: GridColDef<any>[] = [
-  {
-    field: 'image',
-    headerName: 'Image',
-    width: 100,
-    sortable: false,
-    renderCell: (params) => (
-      params.row.images && params.row.images.length > 0 ? (
-        <img
-          src={params.row.images[0]}
-          alt={params.row.title}
-          style={{ width: 60, height: 60, objectFit: 'cover' }}
-        />
-      ) : <span>No Image</span>
-    ),
-  },
-  { field: 'name', headerName: 'Product Name', minWidth: 140 },
-  { field: 'price', headerName: 'Price', type: 'number', width: 100 },
-  {
-    field: 'stock',
-    headerName: 'Stock',
-    width: 120,
-    type: 'number',
-  },
-  {
-    field: 'onSale',
-    headerName: 'On Sale',
-    width: 80,
-    type: 'boolean',
-  },
-  {
-    field: 'salePrice',
-    headerName: 'Sale Price',
-    width: 120,
-    type: 'number',
-  },
-  {
-    field: 'category',
-    headerName: 'Category',
-    width: 200,
-    type: 'string',
-  },
-  {
-    field: 'volume',
-    headerName: 'Volume',
-    width: 80,
-    type: 'string',
-  },
-  {
-    field: 'sizes',
-    headerName: 'Sizes',
-    width: 200,
-    renderCell: (params) => params.row.sizes?.join(", ") || "-",
-  },
-  {
-    field: 'actions',
-    headerName: 'Actions',
-    sortable: false,
-    width: 120,
-    renderCell: (params) => (
-      <Box>
-        <IconButton color="primary">
-          <Link href={`/admin-dashboard/update-product/${params.row._id}`}><Edit /></Link>
-        </IconButton>
-        <IconButton color="error" onClick={() => handleDelete(params.row._id)}>
-          <Trash />
-        </IconButton>
-      </Box>
-    ),
-  },
-];
+    {
+      field: 'image',
+      headerName: 'Image',
+      width: 100,
+      sortable: false,
+      renderCell: (params) => (
+        params.row.images && params.row.images.length > 0 ? (
+          <img
+            src={params.row.images[0]}
+            alt={params.row.name}
+            style={{ width: 60, height: 60, objectFit: 'cover' }}
+          />
+        ) : <span>No Image</span>
+      ),
+    },
+    { field: 'name', headerName: 'Product Name', minWidth: 140 },
+    {
+      field: 'price',
+      headerName: 'Price',
+      width: 300,
+       renderCell: (params) => {
+        return params.row.variants.map((v: any) => v.label !== "default" ? (v.label + ": PKR " + v.price) : "PKR " + v.price).join(", ");
+      }
+    },
+
+    {
+      field: 'salePrice',
+      headerName: 'Sale Price',
+      width: 120,
+      renderCell: (params) => {
+        const variants = params.row.variants || [];
+        return (
+          <div>
+            {variants.map(
+              (item: { salePrice: number | null; label: string; onSale: boolean }, index: number) => (
+                <p key={index}>
+                  {item.onSale && item.label !== "Default"
+                    ? `${item.label}: PKR ${item.salePrice}`
+                    : item.onSale && item.label === "Default"
+                    ? `PKR ${item.salePrice}`
+                    : ""}
+                </p>
+              )
+            )}
+          </div>
+        );
+      }
+    },
+   {
+      field: 'onSale',
+      headerName: 'On Sale',
+      width: 120,
+      renderCell: (params) => {
+        const variants = params.row.variants || [];
+        return variants
+          .map((v: any) =>
+            v.label !== "Default"
+              ? `${v.label}: ${v.onSale ? "✔" : "❌"}`
+              : v.onSale
+              ? "✔"
+              : "❌"
+          )
+          .join(", ");
+      },
+    },
+    {
+      field: 'stock',
+      headerName: 'Stock',
+      width: 120,
+      renderCell: (params) => {
+        return params.row.variants.map((v: any) => v.label !== "default" ? (v.label + ": " + v.stock) : " " + v.stock).join(", ");
+      }
+    },
+    {
+      field: 'category',
+      headerName: 'Category',
+      width: 200,
+    },
+    {
+      field: 'variantType',
+      headerName: 'Variant Type',
+      width: 120,
+    },
+    {
+      field: 'variants',
+      headerName: 'Variants',
+      width: 200,
+      renderCell: (params) => {
+        if (!params.row.hasVariants) return "Default";
+        return params.row.variants.map((v: any) => v.label).join(", ");
+      }
+    },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      sortable: false,
+      width: 120,
+      renderCell: (params) => (
+        <Box>
+          <IconButton color="primary">
+            <Link href={`/admin-dashboard/update-product/${params.row._id}`}><Edit /></Link>
+          </IconButton>
+          <IconButton color="error" onClick={() => handleDelete(params.row._id)}>
+            <Trash />
+          </IconButton>
+        </Box>
+      ),
+    },
+  ];
 
   return (
     <Box sx={{ height: 600, width: '100%', p: 1, borderRadius: 2 }}>
       <DataGrid
-        rows={products}
+        rows={products as productType[]}
         columns={columns}
-        getRowId={(row) => row._id} 
+        getRowId={(row) => row._id}
         initialState={{
           pagination: { paginationModel: { pageSize: 10 } },
         }}
-        pageSizeOptions={[10, 10, 20]}
+        pageSizeOptions={[10, 20]}
         showToolbar
         disableRowSelectionOnClick
       />

@@ -5,226 +5,220 @@ import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import imageCompression from "browser-image-compression";
 import axios from "axios"
 
+type VariantInput = {
+  label: string
+  price: string
+  stock: string
+}
+
 export default function AddProductUI() {
   const [data, setData] = useState({
-      name: '',
-      slug: '',
-      category: 'watches',
-      price: '',
-      salePrice: '',
-      onSale: false,
-      stock: '',
-      description: '',
-      keywords: [],
-      sizes: [],
-      volume: '',
-      fragranceType: '',
+    name: '',
+    slug: '',
+    category: 'watches',
+    description: '',
+    keywords: [] as string[],
+    fragranceType: '',
+    hasVariants: false,
+    variantType: null as "size" | "volume" | null,
   })
 
-  const [files, setFiles] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [variants, setVariants] = useState<VariantInput[]>([
+    { label: '', price: '', stock: '' }
+  ])
+
+  const [files, setFiles] = useState<File[]>([])
+  const [previews, setPreviews] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
   const [result, setResult] = useState("")
 
+  /* ---------------- SLUG ---------------- */
   const toSlug = (str: string) =>
-    str
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/[^a-z0-9-]/g, "")
-      .replace(/-+/g, "-")
-      .replace(/^-|-$/g, "");
+    str.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
 
-  const productSlug = useMemo(() => toSlug(data.name), [data.name]);
+  const productSlug = useMemo(() => toSlug(data.name), [data.name])
 
   useEffect(() => {
-    setData((prev) => ({
+    setData(prev => ({ ...prev, slug: productSlug }))
+  }, [productSlug])
+
+  /* ---------------- HANDLERS ---------------- */
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value, type, checked } = e.target as HTMLInputElement
+    setData(prev => ({
       ...prev,
-      slug: productSlug,
-    }));
-  }, [productSlug]);
+      [name]: type === "checkbox" ? checked : value
+    }))
+  }
 
+  const handleVariantChange = (
+    index: number,
+    field: keyof VariantInput,
+    value: string
+  ) => {
+    const updated = [...variants]
+    updated[index][field] = value
+    setVariants(updated)
+  }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    // @ts-ignore
-    const { name, value, type, checked } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+  const addVariant = () => {
+    setVariants(prev => [...prev, { label: '', price: '', stock: '' }])
+  }
 
+  const removeVariant = (index: number) => {
+    setVariants(prev => prev.filter((_, i) => i !== index))
+  }
+
+  /* ---------------- IMAGES ---------------- */
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return
+    const selected = Array.from(e.target.files)
+    setFiles(prev => [...prev, ...selected])
+    setPreviews(prev => [...prev, ...selected.map(f => URL.createObjectURL(f))])
+  }
+
+  /* ---------------- SUBMIT ---------------- */
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
 
     try {
-      const formData = new FormData();
+      const formData = new FormData()
 
-      Object.entries(data).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          value.forEach((item) => formData.append(key, JSON.stringify(item)));
-        } else if (value !== undefined && value !== null) {
-          formData.append(key, value.toString());
-        }
-      });
+      formData.append("name", data.name)
+      formData.append("slug", data.slug)
+      formData.append("category", data.category)
+      formData.append("description", data.description)
+      formData.append("hasVariants", String(data.hasVariants))
+      formData.append("variantType", data.variantType ?? "")
+      formData.append("fragranceType", data.fragranceType)
+
+      data.keywords.forEach(k =>
+        formData.append("keywords", JSON.stringify(k))
+      )
+
+      variants.forEach(v =>
+        formData.append("variants", JSON.stringify(v))
+      )
 
       for (const file of files) {
-        const compressedFile = await imageCompression(file, {
+        const compressed = await imageCompression(file, {
           maxSizeMB: 1,
           maxWidthOrHeight: 1200,
           useWebWorker: true,
-        });
-        formData.append("images", compressedFile);
+        })
+        formData.append("images", compressed)
       }
 
-      const res = await axios.post("/api/products", formData);
-
+      const res = await axios.post("/api/products", formData)
 
       if (res.status === 201) {
-        setResult("✅ Product added successfully!");
+        setResult("✅ Product added successfully")
+        setVariants([{ label: '', price: '', stock: '' }])
+        setFiles([])
+        setPreviews([])
         setData({
           name: '',
           slug: '',
           category: 'watches',
-          price: '',
-          salePrice: '',
-          onSale: false,
-          stock: '',
           description: '',
-          keywords: [],
-          sizes: [],
-          volume: '',
+          keywords: [] as string[],
           fragranceType: '',
-        });
-        setFiles([]);
-        setPreviews([]);
+          hasVariants: false,
+          variantType: null as "size" | "volume" | null,
+        })
       }
     } catch (err) {
-      console.error(err);
-      setResult("❌ Failed to add product. Try again.");
+      console.error(err)
+      setResult("❌ Failed to add product")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
-   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-
-    const selectedFiles = Array.from(e.target.files);
-    setFiles((prev) => [...prev, ...selectedFiles]);
-
-    const newPreviews = selectedFiles.map((file) => URL.createObjectURL(file));
-    setPreviews((prev) => [...prev, ...newPreviews]);
-  };
-
-
-  const [keywordsInput, setKeywordsInput] = useState('');
-const [sizesInput, setSizesInput] = useState('');
-
-
-  const handleCommaSeparatedChange = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  field: 'keywords' | 'sizes'
-) => {
-  const rawValue = e.target.value;
-
-  if (field === 'keywords') setKeywordsInput(rawValue);
-  if (field === 'sizes') setSizesInput(rawValue);
-
-  setData(prev => ({
-    ...prev,
-    [field]: rawValue
-      .split(',')
-      .map(item => item.trim())
-      .filter(Boolean),
-  }));
-};
-
-
-
+  /* ---------------- KEYWORDS ---------------- */
+  const [keywordsInput, setKeywordsInput] = useState('')
+  const handleKeywords = (e: ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value
+    setKeywordsInput(raw)
+    setData(prev => ({
+      ...prev,
+      keywords: raw.split(',').map(k => k.trim()).filter(Boolean)
+    }))
+  }
 
   return (
-    <main className="p-2 md:p-8 bg-gray-50 min-h-screen max-w-6xl mx-auto">
-        <form onSubmit={handleSubmit} className="bg-white p-4 md:p-6 rounded-xl shadow">
-          <h1 className="text-3xl text-center font-bold mb-4">Add Product</h1>
+    <main className="p-6 bg-gray-50 max-w-6xl mx-auto">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow">
 
-          <div className='div'>
-            <label htmlFor="name">Product Name:</label>
-            <input required id='name' autoComplete='off' name="name" value={data.name} onChange={handleChange} placeholder="Product Name" className="input" />
-          </div>
+        <h1 className="text-3xl font-bold text-center mb-4">Add Product</h1>
 
-        <div className='div'>
-            <label htmlFor='category' className='mb-2 ml-1'>Category:</label>
-          <select required id='category' name="category" value={data.category} onChange={handleChange} className="input">
-            {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-        </div>
+        <input required name="name" value={data.name} onChange={handleChange} placeholder="Product Name" className="input" />
 
-        {data.category.includes("perfumes") && <>
+        <select name="category" value={data.category} onChange={handleChange} className="input">
+          {categories.map(cat => <option key={cat}>{cat}</option>)}
+        </select>
 
-          <div className='div'>
-            <label htmlFor="volume">Volume:</label>
-            <input required id='volume' type='number' placeholder='volume in ml' name='volume' value={data.volume} onChange={handleChange} className='input' />
-          </div>
+        <textarea required name="description" value={data.description} onChange={handleChange} placeholder="Description" className="input h-24" />
 
-          <div className='div'>
-            <label htmlFor="fragranceType">Fragrance Type:</label>
-            <input required id='fragranceType' type='text' placeholder='Unisex, Male, Women' name='fragranceType' value={data.fragranceType} onChange={handleChange} className='input' />
-          </div>
-        </>}
+        <input name="keywords" value={keywordsInput} onChange={handleKeywords} placeholder="Keywords (comma separated)" className="input" />
 
-        <div className='div'>
-          <label htmlFor="price">Price:</label>
-         <input required id='price' name="price" value={data.price} onChange={handleChange} placeholder="Price" type="number" className="input" />
-        </div>
+        <label className="flex gap-2 items-center my-2">
+          <input type="checkbox" checked={data.hasVariants}
+            onChange={e =>
+              setData(prev => ({
+                ...prev,
+                hasVariants: e.target.checked,
+                variantType: e.target.checked ? "size" : null
+              }))
+            } />
+          Has Variants (Sizes / Volume)
+        </label>
 
-        {data.onSale &&  <input required name="salePrice" value={data.salePrice} onChange={handleChange} placeholder="Sale Price" type="number" className="input" />}
-          
-          <label className="flex gap-2 items-center my-2">
-            <input type="checkbox" name="onSale" checked={data.onSale} onChange={handleChange} />
-            On Sale
-          </label>
+        {data.category.includes("perfumes") && (
+          <input name="fragranceType" value={data.fragranceType} onChange={handleChange} placeholder="Fragrance Type" className="input" />
+        )}
 
-          <div className='div'>
-            <label htmlFor="stock">Stock</label>
-            <input required id='stock' name="stock" value={data.stock} onChange={handleChange} placeholder="Stock Quantity" type="number" className="input" />
-          </div>
+        <h2 className="text-xl font-semibold mt-4">Variants</h2>
 
+        {variants.map((v, i) => (
+          <div key={i} className="border p-3 rounded-lg mt-2">
+            <input placeholder="Label (S, M, 100ml)" value={v.label}
+              onChange={e => handleVariantChange(i, "label", e.target.value)} className="input" />
+            <input placeholder="Price" type="number" value={v.price}
+              onChange={e => handleVariantChange(i, "price", e.target.value)} className="input" />
+            <input placeholder="Stock" type="number" value={v.stock}
+              onChange={e => handleVariantChange(i, "stock", e.target.value)} className="input" />
 
-          <textarea required name="description" value={data.description} onChange={handleChange} placeholder="Description" className="input h-24" />
-
-          <div className='div'>
-            <label htmlFor="keywords">Keywords: </label>
-            <input required name="keywords" value={keywordsInput}  onChange={(e) => handleCommaSeparatedChange(e, "keywords")} placeholder="Keywords (comma separated)" className="input" />
-          </div>
-          
-          <div className='div'>
-            <label htmlFor="sizes">Sizes: </label>
-            <input id='sizes' name="sizes" value={sizesInput} onChange={(e) => handleCommaSeparatedChange(e, "sizes")} placeholder="Sizes (rings only, comma separated)" className="input" />
-          </div>
-
-          <div>
-            <label className="block font-semibold mb-1">Product Images</label>
-            <input type="file" multiple accept="image/*" required onChange={handleImageChange} className="w-full border rounded-lg p-2" />
-            {previews.length > 0 && (
-              <div className="flex flex-wrap gap-3 mt-4">
-                {previews.map((url, idx) => (
-                  <Image key={idx} src={url} width={80} height={80} alt={`Preview ${idx}`} className="w-28 h-28 object-cover rounded-lg border" />
-                ))}
-              </div>
+            {variants.length > 1 && (
+              <button type="button" onClick={() => removeVariant(i)} className="text-red-500 mt-1">
+                Remove
+              </button>
             )}
           </div>
+        ))}
 
-          <button type='submit' disabled={loading} className="w-full mt-4 bg-black text-white py-2 rounded">
-            {loading ? "Loading..." : "Add Product"}
-          </button>
-          <p className='text-center mt-2'>{result}</p>
-        </form>
+        <button type="button" onClick={addVariant} className="mt-2 text-blue-600">
+          + Add Variant
+        </button>
 
-      {/* Tailwind helper */}
+        <input type="file" multiple accept="image/*" required onChange={handleImageChange} className="input mt-4" />
+
+        <div className="flex gap-3 mt-3 flex-wrap">
+          {previews.map((src, i) => (
+            <Image key={i} src={src} width={80} height={80} alt="" className="rounded" />
+          ))}
+        </div>
+
+        <button disabled={loading} className="w-full bg-black text-white py-2 mt-4 rounded">
+          {loading ? "Saving..." : "Add Product"}
+        </button>
+
+        <p className="text-center mt-2">{result}</p>
+      </form>
+
       <style jsx>{`
         .input {
           width: 100%;
@@ -232,17 +226,6 @@ const [sizesInput, setSizesInput] = useState('');
           border: 1px solid #ddd;
           border-radius: 6px;
           margin-bottom: 10px;
-        }
-        .div {
-        border: 1px solid #ddd;
-        padding: 12px 12px ;
-        margin: 10px 0px;
-        border-radius: 10px;
-        }
-        .div label {
-          font-weight: 600;
-          margin-bottom: 5px;
-          display: inline-block;
         }
       `}</style>
     </main>
