@@ -84,11 +84,11 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
 
   return (
     <main className="pt-32 px-6 max-w-7xl mx-auto">
-      <section className="grid grid-cols-1 min-h-[90vh] md:grid-cols-2 gap-10">
+      <section className="grid grid-cols-1 min-h-[90vh] md:grid-cols-2 gap-10 place-items-center">
         
         <Images images={product.images} name={product.name} />
 
-        <div className="flex flex-col justify-between lg:pt-10">
+        <div className="flex flex-col justify-between gap-6 lg:pt-10">
           <h1 className={`${serif.className} capitalize text-4xl tracking-wider`}>
             {product.name}
           </h1>
@@ -120,8 +120,8 @@ const page = async ({params}: {params: Promise<{slug: string}>}) => {
               (product.hasVariants ) && (<div>
                 <h3 className="font-semibold">Sizes:</h3>
                 <div className="flex gap-3 mt-2">
-                {product.variants.map((item: {label: string}) => (
-                  <button className="text-black border border-zinc-700 rounded-full cursor-pointer px-5 text-sm py-1 font-semibold" key={item.label}>{item.label}</button>
+                {product.variants.map((item: {label: string,  stock: number}) => (
+                  <button disabled={item.stock <= 0} className={`${item.stock <= 0 ? "line-through opacity-75 text-gray-400 border border-zinc-500 cursor-not-allowed" : "cursor-pointer text-black border border-zinc-700"}  rounded-full  px-5 text-sm py-1 font-semibold`} key={item.label}>{item.label}</button>
                 ))}
                 </div>
               </div>)

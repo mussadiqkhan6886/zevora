@@ -13,9 +13,9 @@ const Images = ({
   const [activeImage, setActiveImage] = useState(images[0])
 
   return (
-    <div className="flex flex-col-reverse md:flex-row gap-6">
+    <div className="flex flex-col-reverse lg:flex-row gap-6">
       
-      <div className="flex flex-row md:flex-col gap-4">
+      <div className="flex flex-row lg:flex-col gap-4">
         {images.map((item, i) => (
           <button
             key={i}
