@@ -1,5 +1,6 @@
 import cloudinary from "@/lib/config/cloudinary";
 import { connectDB } from "@/lib/config/database"
+import { generateSKU } from "@/lib/helpers";
 import ProductSchema from "@/lib/models/ProductSchema"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -21,24 +22,6 @@ export const GET = async () => {
     }
 }
 
-/* ---------- SKU helpers ---------- */
-const normalize = (str: string) =>
-  str.toUpperCase().replace(/\s+/g, "-").replace(/[^A-Z0-9-]/g, "");
-
-const generateSKU = ({
-  category,
-  productName,
-  attr,
-}: {
-  category: string;
-  productName: string;
-  attr: string;
-}) => {
-  const cat = normalize(category).slice(0, 3);
-  const prod = normalize(productName).slice(0, 4);
-  const suffix = Math.floor(100 + Math.random() * 900);
-  return `${cat}-${prod}-${normalize(attr)}-${suffix}`;
-};
 
 /* ---------- POST ---------- */
 export const POST = async (req: NextRequest) => {
@@ -56,6 +39,7 @@ export const POST = async (req: NextRequest) => {
     const category = formData.get("category") as string;
     const description = formData.get("description") as string;
     const fragranceType = formData.get("fragranceType") as string | null;
+    const volume = formData.get("volume") as string
 
     const keywords = formData
       .getAll("keywords")
@@ -152,6 +136,7 @@ export const POST = async (req: NextRequest) => {
       images: uploadedImages,
       hasVariants,
       variants,
+      volume
     });
 
     await newProduct.save();

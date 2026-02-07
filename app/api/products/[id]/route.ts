@@ -1,5 +1,6 @@
 import cloudinary from "@/lib/config/cloudinary";
 import { connectDB } from "@/lib/config/database";
+import { generateSKU } from "@/lib/helpers";
 import ProductSchema from "@/lib/models/ProductSchema";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -45,10 +46,10 @@ export const PATCH = async (
     const salePrice = Number(formData.get("salePrice"));
     const slug = formData.get("slug") as string;
     const category = formData.get("category") as string;
-    const sizes = formData
-    .getAll("sizes")
-    .filter((x): x is string => typeof x === "string")
-    .map((x) => JSON.parse(x));
+    const rawVariants = formData
+        .getAll("variants")
+        .filter((x): x is string => typeof x === "string")
+        .map(v => JSON.parse(v));
     const keywords = formData
     .getAll("keywords")
     .filter((x): x is string => typeof x === "string")
@@ -56,9 +57,40 @@ export const PATCH = async (
     const volume = formData.get("volume") as string
     const fragranceType = formData.get("fragranceType") as string
     const onSale = formData.get("onSale") === "true";
-    const stock = Number(formData.get("stock"))
     const files = formData.getAll("images") as File[];
     const uploadedImages: string[] = [];
+
+    const resolveVariantType = (category: string): "size" | null => {
+        const normalized = category.toLowerCase();
+
+        if (normalized.includes("ring")) return "size";
+
+        return null;
+    };
+
+    const variantType = resolveVariantType(category);
+    const hasVariants = Boolean(variantType);
+
+    const variants = (rawVariants.length
+          ? rawVariants
+          : [{ label: "Default", stock: 0 }]
+        ).map((v: any) => {
+          if (!v.label || v.stock === undefined) {
+            throw new Error("Invalid variant data");
+          }
+    
+          const attrValue = variantType === "size" ? v.label : "STD";
+    
+          return {
+            label: v.label,
+            stock: Number(v.stock),
+            sku: generateSKU({
+              category,
+              productName: name,
+              attr: attrValue,
+            }),
+          };
+        });
 
     for (const file of files) {
          if (typeof file === "string" || !file?.arrayBuffer) {
@@ -93,9 +125,8 @@ export const PATCH = async (
       salePrice,
       category,
       keywords,
-      sizes,
+      variants,
       onSale,
-      stock,
       volume,
       fragranceType,
       images: updatedImages,
