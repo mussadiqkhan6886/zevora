@@ -99,9 +99,12 @@ export const metadata: Metadata = {
     shortcut: '/logo.png',
     apple: '/logo.png',
   },
-
+  verification: {
+    google: "6xyuGHu6tzugCE0Hl9VWsugfTJi_LGEetdaZSy3cdaY"
+  },
   category: 'ecommerce',
 }
+
 
 export default function RootLayout({
   children,
