@@ -35,8 +35,8 @@ export const getOrderConfirmationEmail = (order: any) => {
     </table>
 
     <div style="margin-top:20px;">
-      <p><strong>Subtotal:</strong> ${totalPrice - (totalPrice >= 2000 ? 0 : 250)} PKR</p>
-      <p><strong>Shipping:</strong> ${totalPrice >= 2000 ? "Free Shipping" : "250 PKR"}</p>
+      <p><strong>Subtotal:</strong> ${totalPrice - 300} PKR</p>
+      <p><strong>Shipping:</strong> 300 PKR</p>
       <p style="font-size:18px;"><strong>Total:</strong> ${totalPrice} PKR</p>
     </div>
 

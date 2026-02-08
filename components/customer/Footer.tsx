@@ -9,8 +9,7 @@ const Footer = () => {
       <div className='flex flex-col justify-center items-center py-10'>
         <p className={`${serif.className} text-lg`}>Subscribe to Our Socials</p>
         <div className='flex gap-4 pt-5'>
-          <FiInstagram className='text-xl' />
-          <FiFacebook className='text-xl' />
+          <Link href={"https://www.instagram.com/zevora._official/?__pwa=1"} target='_blank'><FiInstagram className='text-xl' /></Link>
         </div>
       </div>
       <div className='border-t flex gap-4 flex-wrap items-center justify-center border-zinc-300 py-5 text-[12px] text-zinc-600'>

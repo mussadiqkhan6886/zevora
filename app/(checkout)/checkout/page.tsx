@@ -65,8 +65,8 @@ const CheckoutPage = () => {
         image: item.image,
         variant: item.variant?.label || "",
       })),
-      totalPrice: totalAmount + (totalAmount >= 2000 ? 0 : 250),
-      shippingCost: totalAmount >= 2000 ? 0 : 250,
+      totalPrice: totalAmount + 300,
+      shippingCost: 300,
       userDetails: {
         fullName: formData.fullName,
         phone: formData.phone,
@@ -189,7 +189,7 @@ const CheckoutPage = () => {
               className="border rounded p-2 mt-1"
             >
               <option value="cod">Cash on Delivery</option>
-              <option value="bank">Bank Transfer</option>
+              <option value="bank">Online Transfer</option>
             </select>
           </div>
 
@@ -197,16 +197,16 @@ const CheckoutPage = () => {
           {formData.paymentMethod === "bank" && (
             <div className="border border-blue-400 bg-blue-50 rounded-lg p-4 space-y-3 md:col-span-2">
               <h3 className="font-semibold text-blue-800 text-lg">
-                Bank Transfer
+                Online Transfer
               </h3>
               <p>
-                <strong>Bank:</strong> MCB
+                <strong>Bank:</strong> Upaisa
               </p>
               <p>
-                <strong>Account Title:</strong> Ayesha Afzaal
+                <strong>Account Title:</strong> Saira fatima
               </p>
               <p>
-                <strong>Account No:</strong> 1034024131007619
+                <strong>Phone No:</strong> 03007527214
               </p>
               <label className="block text-sm font-medium text-gray-700 mt-2">
                 Upload Payment Proof
@@ -292,11 +292,11 @@ const CheckoutPage = () => {
 
             <div className="flex justify-between mt-4 font-bold text-lg">
               <span>Shipping:</span>
-              <span>{totalAmount >= 2000 ? "Free Shipping" : "250 PKR"}</span>
+              <span>300 PKR</span>
             </div>
             <div className="flex justify-between mt-2 font-bold text-lg">
               <span>Total:</span>
-              <span>{totalAmount + (totalAmount >= 2000 ? 0 : 250)} PKR</span>
+              <span>{totalAmount + 300} PKR</span>
             </div>
           </>
         )}
