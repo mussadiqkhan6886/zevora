@@ -1,6 +1,6 @@
 // nodemailer order email template function
 export const getOrderConfirmationEmail = (order: any) => {
-  const { userDetails, shippingAddress, paymentMethod, items, totalPrice, notes, productId } = order;
+  const { userDetails, shippingAddress, paymentMethod, items, totalPrice, notes, orderId } = order;
 
   const itemsHtml = items.map((item: any) => `
     <tr style="border-bottom:1px solid #ddd;">
@@ -17,7 +17,7 @@ export const getOrderConfirmationEmail = (order: any) => {
   <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; margin:0 auto; padding:20px; background-color:#f9f9f9;">
     <h2 style="color:#222;">Thank you for your order!</h2>
     <p>Hi <strong>${userDetails.fullName}</strong>,</p>
-    <p>We’ve received your order <strong>#${productId}</strong> and it is being processed.</p>
+    <p>We’ve received your order <strong>#${orderId}</strong> and it is being processed.</p>
 
     <h3 style="margin-top:20px; border-bottom:1px solid #ddd; padding-bottom:5px;">Order Details</h3>
     <table style="width:100%; border-collapse:collapse;">

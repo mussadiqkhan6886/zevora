@@ -77,7 +77,7 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
       width: 520,
       sortable: false,
       renderCell: (params) => (
-        <div className="flex flex-col gap-2">
+        <div className="flex  gap-2">
           {params.value.map((item: any, i: number) => (
             <div key={i} className="flex items-center gap-3">
               <Image

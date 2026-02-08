@@ -103,7 +103,7 @@ export const POST = async (req: NextRequest) => {
       html: adminHtml,
     });
 
-    const customerHtml = getOrderConfirmationEmail(orderData)
+    const customerHtml = getOrderConfirmationEmail(newOrder)
 
 
     await transporter.sendMail({
