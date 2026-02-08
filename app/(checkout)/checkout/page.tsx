@@ -104,7 +104,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <main className="flex flex-col md:flex-row min-h-screen pt-32 px-5 md:px-20 gap-10">
+    <main className="flex flex-col md:flex-row min-h-screen pt-5 px-5 md:px-20 gap-10">
       {/* LEFT: FORM */}
       <div className="w-full md:w-2/3 border-r pr-5">
         <h1 className="text-3xl font-bold text-center mb-6 border-b pb-2">
