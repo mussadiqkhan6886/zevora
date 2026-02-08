@@ -98,7 +98,7 @@ export const POST = async (req: NextRequest) => {
 
     await transporter.sendMail({
       from: `"Zevora"`,
-      to: "mussadiqkhan6886@gmail.com", 
+      to: "tahamudassar811@gmail.com", 
       subject: "New Order Received",
       html: adminHtml,
     });
