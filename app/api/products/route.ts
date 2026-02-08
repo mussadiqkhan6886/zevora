@@ -39,7 +39,8 @@ export const POST = async (req: NextRequest) => {
     const category = formData.get("category") as string;
     const description = formData.get("description") as string;
     const fragranceType = formData.get("fragranceType") as string | null;
-    const hasVariants = formData.get("hasVariants") === true
+    const hasVariants = formData.get("hasVariants") === "true"
+    
     const keywords = formData
       .getAll("keywords")
       .filter((x): x is string => typeof x === "string")

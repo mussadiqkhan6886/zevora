@@ -2,6 +2,7 @@ export const headerLinks = [
   {name: "All", link: "/collections/all", subCategory: []},
   {name: "Watches", link: "/collections/watches", subCategory: []},
   {name: "Jewelry Set", link: "/collections/jewelry-set", subCategory: []},
+  {name: "Deals", link: "/collections/deals", subCategory: []},
   {name: "Perfumes", link: "/collections/perfumes", subCategory: []},
   {name: "Stainless Steel Jewelry", link: "", subCategory: [
     {name: "Stainless Steel Bracelets", link: "/collections/stainless-steel-bracelets"},
@@ -28,6 +29,7 @@ export const categories = [
   'gold-platted-earrings',
   'gold-platted-rings',
   'gold-platted-pendants',
+  'deals',
 ]
 
 
@@ -35,6 +37,7 @@ export const collections = [
     {image: "/jew1.jpg",name: "All", link: "/collections/all"},
     {image: "/jew2.jpg",name: "Watches", link: "/collections/watches"},
     {image: "/jew3.jpg",name: "Jewellery Sets", link: "/collections/jewellery-sets"},
+    {image: "/jew3.jpg",name: "Deals", link: "/collections/deals"},
     {image: "/jew4.jpg",name: "Perfumes", link: "/collections/perfumes"},
     {image: "/jew5.jpg",name: "Stainless Steel Bracelets ", link: "/collections/stainless-steel-bracelets"},
     {image: "/jew6.jpg",name: "Stainless Steel Earrings", link: "/collections/stainless-steel-earrings"},
