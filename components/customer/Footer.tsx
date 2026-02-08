@@ -15,11 +15,11 @@ const Footer = () => {
       </div>
       <div className='border-t flex gap-4 flex-wrap items-center justify-center border-zinc-300 py-5 text-[12px] text-zinc-600'>
         <p>&copy; {new Date().getFullYear()}, <Link href={"/"}>ZEVORA</Link></p>
-        <Link href={"/"}>Refund Policy</Link>
-        <Link href={"/"}>Privacy Policy</Link>
-        <Link href={"/"}>Terms Of Service</Link>
-        <Link href={"/"}>Shipping Policy</Link>
-        <Link href={"/"}>Contact Information</Link>
+        <Link href={"/return-refund-policy"}>Refund Policy</Link>
+        <Link href={"/privacy-policy"}>Privacy Policy</Link>
+        <Link href={"/terms-service"}>Terms Of Service</Link>
+        <Link href={"/shipping-policy"}>Shipping Policy</Link>
+        <Link href={"/contact-information"}>Contact Information</Link>
       </div>
     </footer>
   )
