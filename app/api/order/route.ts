@@ -107,7 +107,7 @@ export const POST = async (req: NextRequest) => {
 
 
     await transporter.sendMail({
-      from: `"Chunkd Orders"`,
+      from: `"Zevora Order"`,
       to: orderData.userDetails.email, 
       subject: "Your Order Has Been Placed 🎉",
       html: customerHtml,

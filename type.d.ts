@@ -1,3 +1,4 @@
+
 export interface Variant {
   label: string;
   sku: string;
@@ -54,3 +55,58 @@ export type checkoutItem = {
   variant: string
 }
 
+export type OrderItem = {
+  productId: string
+  name: string
+  price: number
+  onSale: boolean
+  salePrice: number | null
+  finalPrice: number
+  quantity: number
+  image: string
+  variant: string
+}
+
+export type OrderUserDetails = {
+  fullName: string
+  phone: string
+  email?: string
+}
+
+export type ShippingAddress = {
+  city?: string
+  postalCode?: string
+  address: string
+}
+
+export type OrderStatus =
+  | "pending"
+  | "processing"
+  | "shipped"
+  | "delivered"
+  | "cancelled"
+
+export type PaymentMethod = "cod" | "bank"
+
+
+export type Order = {
+  _id: string
+  orderId: string
+  items: OrderItem[]
+
+  totalPrice: number
+  shippingCost: number
+
+  userDetails: OrderUserDetails
+  notes?: string
+
+  status: OrderStatus
+
+  shippingAddress: ShippingAddress
+
+  paymentMethod: PaymentMethod
+  paymentProof?: string
+
+  createdAt: Date
+  updatedAt: Date
+}
