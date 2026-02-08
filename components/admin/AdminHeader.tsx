@@ -34,6 +34,10 @@ const AdminHeader = () => {
                 <FiShoppingBag />
                 <span className='text-sm'>Orders</span>
             </Link>
+            <Link href={"/admin-dashboard/media"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
+                <FiShoppingBag />
+                <span className='text-sm'>Media</span>
+            </Link>
         </div>
         <div className='flex gap-4 items-center'>
             <button className='border border-zinc-400'><Link className='px-4 text-sm py-2.5 bg-black text-white' href={"/"}>Go Home</Link></button>

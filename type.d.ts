@@ -110,3 +110,10 @@ export type Order = {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface mediaType {
+  _id: string
+  media: string
+  publicId: string
+  mediaType: "image" | "video"
+} 

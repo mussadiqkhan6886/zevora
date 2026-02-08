@@ -5,6 +5,7 @@ import Watches from '@/sections/Watches'
 import React from 'react'
 
 import type { Metadata } from 'next'
+import Gallery from '@/sections/Gallery'
 
 export const metadata: Metadata = {
   title: 'Premium Watches, Jewelry & Perfumes Online',
@@ -36,6 +37,7 @@ const page = () => {
       <DreamStack />
       <About />
       <NewArrival />
+      <Gallery />
     </main>
   )
 }
