@@ -32,7 +32,7 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
       orderType: order.paymentMethod, // COD / BANK
     }))
   );
-
+  console.log(rows)
   const [updatingId, setUpdatingId] = React.useState<string | null>(null);
 
   /* ---------------- DELETE ORDER ---------------- */
@@ -90,8 +90,8 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
               <div>
                 <p className="font-semibold text-sm">{item.name}</p>
                 <p className="text-xs text-gray-600">
-                  {item.quantity} × Rs.{item.price}
-                  {item.variant?.label && ` (${item.variant.label})`}
+                  {item.quantity} × Rs.{item.price} - 
+                   ({ item.variant })
                 </p>
               </div>
             </div>

@@ -158,7 +158,7 @@ export default function AddProductUI() {
           <input name="fragranceType" value={data.fragranceType} onChange={handleChange} placeholder="Fragrance Type" className="input" />
         )}
 
-        {data.category.includes("ring") && <label className="flex gap-2 items-center my-2">
+        {<label className="flex gap-2 items-center my-2">
           <input type="checkbox" checked={data.hasVariants}
             onChange={e =>
               setData(prev => ({
@@ -185,7 +185,7 @@ export default function AddProductUI() {
           </div>
         ))}
 
-        {data.category.includes("ring") && <button type="button" onClick={addVariant} className="mt-2 text-blue-600">
+        {<button type="button" onClick={addVariant} className="mt-2 text-blue-600">
           + Add Variant
         </button>}
 

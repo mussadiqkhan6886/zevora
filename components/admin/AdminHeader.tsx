@@ -1,8 +1,23 @@
+'use client';
+
+import axios from 'axios';
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react'
 import { FiList, FiPlusCircle, FiShoppingBag } from 'react-icons/fi'
 
 const AdminHeader = () => {
+  const router = useRouter()
+  const pathname = usePathname()
+
+  if(pathname.includes("login")){
+    return null
+  }
+
+  const handleLogout = async () => {
+    const res = await axios.get('/api/logout')
+    router.push("/admin-dashboard/login")
+  }
   return (
     <header className='px-2 md:px-10 lg:px-16 py-5 border-b border-zinc-400'>
       <nav className='flex flex-col md:flex-row gap-y-8 justify-between items-center'>
@@ -22,7 +37,7 @@ const AdminHeader = () => {
         </div>
         <div className='flex gap-4 items-center'>
             <button className='border border-zinc-400'><Link className='px-4 text-sm py-2.5 bg-black text-white' href={"/"}>Go Home</Link></button>
-            <button className='border border-zinc-400'><Link className='px-4 text-sm py-2.5 bg-black text-white' href={"/"}>Log Out</Link></button>
+            <button onClick={handleLogout} className='border border-zinc-400 py-1 cursor-pointer px-2'>Log Out</button>
         </div>
       </nav>
     </header>

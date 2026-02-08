@@ -56,19 +56,10 @@ export const PATCH = async (
     .map((x) => JSON.parse(x));
     const fragranceType = formData.get("fragranceType") as string
     const onSale = formData.get("onSale") === "true";
+    const hasVariants = formData.get("hasVariants") === "true";
     const files = formData.getAll("images") as File[];
     const uploadedImages: string[] = [];
 
-    const resolveVariantType = (category: string): "size" | null => {
-        const normalized = category.toLowerCase();
-
-        if (normalized.includes("ring")) return "size";
-
-        return null;
-    };
-
-    const variantType = resolveVariantType(category);
-    const hasVariants = Boolean(variantType);
 
     const variants = (rawVariants.length
           ? rawVariants
@@ -78,7 +69,7 @@ export const PATCH = async (
             throw new Error("Invalid variant data");
           }
     
-          const attrValue = variantType === "size" ? v.label : "STD";
+          const attrValue = hasVariants ? v.label : "STD";
     
           return {
             label: v.label,

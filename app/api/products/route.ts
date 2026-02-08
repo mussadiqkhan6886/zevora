@@ -39,7 +39,7 @@ export const POST = async (req: NextRequest) => {
     const category = formData.get("category") as string;
     const description = formData.get("description") as string;
     const fragranceType = formData.get("fragranceType") as string | null;
-
+    const hasVariants = formData.get("hasVariants") === true
     const keywords = formData
       .getAll("keywords")
       .filter((x): x is string => typeof x === "string")
@@ -61,18 +61,6 @@ export const POST = async (req: NextRequest) => {
     }
 
 
-    /* ---------- VARIANT TYPE DECISION ---------- */
-    const resolveVariantType = (category: string): "size" | null => {
-        const normalized = category.toLowerCase();
-
-        if (normalized.includes("ring")) return "size";
-
-        return null;
-    };
-
-    const variantType = resolveVariantType(category);
-    const hasVariants = Boolean(variantType);
-
 
     /* ---------- VARIANT BUILD ---------- */
     const variants = (rawVariants.length
@@ -83,7 +71,7 @@ export const POST = async (req: NextRequest) => {
         throw new Error("Invalid variant data");
       }
 
-      const attrValue = variantType === "size" ? v.label : "STD";
+      const attrValue = hasVariants ? v.label : "STD";
 
       return {
         label: v.label,

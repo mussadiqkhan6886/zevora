@@ -319,7 +319,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
       )}
 
       {/* RING VARIANTS */}
-      {data.category.includes("ring") && (
+      {(
         <div className="space-y-4 border-t pt-4">
           <div className="flex items-center gap-2">
             <input

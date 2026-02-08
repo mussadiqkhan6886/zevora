@@ -81,7 +81,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
       </div>
     )}
       {/* VARIANTS (RINGS / SIZES) */}
-      {hasVariants && product.category.includes('ring') && (
+      {hasVariants && (
         <div>
           <h3 className="font-semibold mb-2">Sizes</h3>
           <div className="flex gap-3 flex-wrap">
