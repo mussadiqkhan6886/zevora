@@ -4,9 +4,10 @@ import { connectDB } from '@/lib/config/database'
 import { serif } from '@/lib/fonts'
 import ProductSchema from '@/lib/models/ProductSchema'
 import { productType } from '@/type'
+import { Metadata } from 'next'
 import React from 'react'
 
-export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }) : Promise<Metadata>{
   const { collection } = await params
   const categoryName = collection.replaceAll('-', ' ')
 

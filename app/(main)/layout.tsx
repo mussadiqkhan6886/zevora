@@ -3,7 +3,7 @@ import Header from "@/components/customer/Header";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://zevora-kappa.vercel.app'),
+  metadataBase: new URL('https://www.zevoraofficial.com'),
 
   title: {
     default: 'Zevora | Premium Watches, Jewelry & Perfumes',
@@ -25,6 +25,19 @@ export const metadata: Metadata = {
     'online shopping',
     'fashion store',
     'premium accessories',
+    'watches in lahore',
+    'watches in islamabad',
+    'watches in pakistan',
+    'best watches',
+    'best jewelry in lahore',
+    'best jewelry in islamabad',
+    'best jewelry in pakistan',
+    'rings',
+    'bracelets',
+    'lahore',
+    'sale jewelry',
+    'sale watches',
+    'zevora',
   ],
 
   authors: [{ name: 'Zevora' }],
@@ -52,7 +65,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://zevora-kappa.vercel.app',
+    url: 'https://www.zevoraofficial.com/',
     siteName: 'Zevora',
     title: 'Zevora | Premium Watches, Jewelry & Perfumes',
     description:
@@ -86,8 +99,6 @@ export const metadata: Metadata = {
     shortcut: '/logo.png',
     apple: '/logo.png',
   },
-
-  // manifest: '/site.webmanifest',
 
   category: 'ecommerce',
 }

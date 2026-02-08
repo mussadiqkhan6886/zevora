@@ -34,7 +34,7 @@ export async function GET() {
     // Add static pages
     staticPages.forEach(page => {
       urls.push({
-        loc: `https://zevora.vercel.app${page}`,
+        loc: `https://www.zevoraofficial.com${page}`,
         changefreq: "weekly",
         priority: 0.7,
       });
@@ -42,7 +42,7 @@ export async function GET() {
     
     menuItems.forEach(item => {
       urls.push({
-        loc: `https://www.chunkdpk.com/collections/${item.category}/${item.slug}`,
+        loc: `https://www.zevoraofficial.com/collections/${item.category}/${item.slug}`,
         changefreq: "weekly",
         priority: 0.9,
       });

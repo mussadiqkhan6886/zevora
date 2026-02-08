@@ -91,7 +91,7 @@ export const POST = async (req: NextRequest) => {
     const adminHtml = `
       <h2>🛒 New Order Received!</h2>
       <p>A new order has been placed.</p>
-      <a href="https://www.zevora-kappa.vercel.app/admin-dashboard">
+      <a href="https://www.zevoraofficial.com/admin-dashboard">
         👉 View in Admin Dashboard
       </a>
     `;

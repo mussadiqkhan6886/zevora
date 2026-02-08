@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: 'Zevora',
     images: [
       {
-        url: '/logo.png',
+        url: '/all.jpg',
         width: 1200,
         height: 630,
         alt: 'Zevora Collections – Watches, Jewelry & Perfumes',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: 'Collections | Zevora',
     description:
       'Browse premium collections of watches, jewelry sets, and luxury perfumes. Find your perfect style.',
-    images: ['/logo.png'],
+    images: ['/all.jpg'],
   },
 }
 
