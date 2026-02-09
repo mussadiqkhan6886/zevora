@@ -7,6 +7,8 @@ import { productType } from '@/type'
 import { Metadata } from 'next'
 import React from 'react'
 
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }) : Promise<Metadata>{
   const { collection } = await params
   const categoryName = collection.replaceAll('-', ' ')
@@ -44,6 +46,16 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
       images: [ogImage],
     },
   }
+}
+
+export const generateStaticParams = async () => {
+  await connectDB()
+
+  const res = await ProductSchema.find({}).lean()
+
+  return res.map((item: productType) => ({
+    collection: item.category
+  }))
 }
 
 const page = async ({params, searchParams}: {params: Promise<{collection: string}>, searchParams: Promise<{sort?: string}>}) => {

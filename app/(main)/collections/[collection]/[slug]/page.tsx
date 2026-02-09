@@ -8,7 +8,7 @@ import { productType } from '@/type';
 import { Metadata } from 'next';
 import React from 'react';
 
-/* ---------------- METADATA ---------------- */
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -49,7 +49,15 @@ export async function generateMetadata({
   };
 }
 
-/* ---------------- PAGE ---------------- */
+export const generateStaticParams = async () => {
+  await connectDB()
+
+  const res = await ProductSchema.find({}).lean()
+
+  return res.map((item: productType) => ({
+    slug: item.slug
+  }))
+}
 
 const Page = async ({
   params,

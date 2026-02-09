@@ -30,6 +30,8 @@ export const metadata: Metadata = {
   },
 }
 
+export const dynamic = 'force-dynamic';
+
 const page = () => {
   return (
     <main className='pt-20'>
