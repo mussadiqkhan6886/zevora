@@ -5,6 +5,7 @@ export const headerLinks = [
   {name: "Deals", link: "/collections/deals", subCategory: []},
   {name: "Perfumes", link: "/collections/perfumes", subCategory: []},
   {name: "Rings", link: "/collections/rings", subCategory: []},
+  {name: "Bags", link: "/collections/bags", subCategory: []},
   {name: "Stainless Steel Jewelry", link: "", subCategory: [
     {name: "Stainless Steel Bracelets", link: "/collections/stainless-steel-bracelets"},
     {name: "Stainless Steel Earrings", link: "/collections/stainless-steel-earrings"},
@@ -13,7 +14,6 @@ export const headerLinks = [
   {name: "Gold Platted Jewelry", link: "", subCategory: [
     {name: "Gold Platted Bracelets", link: "/collections/gold-platted-bracelets"},
     {name: "Gold Platted Earrings", link: "/collections/gold-platted-earrings"},
-    {name: "Gold Platted Pendants", link: "/collections/gold-platted-pendants"},
   ]},
 ]
 export const categories = [
@@ -22,12 +22,11 @@ export const categories = [
   'perfumes',
   'stainless-steel-bracelets',
   'stainless-steel-earrings',
-  'rings',
+  'bags',
   'stainless-steel-pendants',
   'gold-platted-bracelets',
   'gold-platted-earrings',
   'rings',
-  'gold-platted-pendants',
   'deals',
 ]
 
@@ -44,5 +43,5 @@ export const collections = [
     {image: "/silver pendants.jpg",name: "Stainless Steel Pendants", link: "/collections/stainless-steel-pendants"},
     {image: "/gold bracelets.jpg",name: "Gold Platted Bracelets", link: "/collections/gold-platted-bracelets"},
     {image: "/gold earrings.jpg",name: "Gold Platted Earrings", link: "/collections/gold-platted-earrings"},
-    {image: "/gold pendants.jpg",name: "Gold Platted Pendants", link: "/collections/gold-platted-pendants"},
+    {image: "/bags.jpg",name: "Bags", link: "/collections/bags"},
 ]

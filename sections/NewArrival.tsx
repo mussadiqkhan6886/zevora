@@ -15,6 +15,7 @@ const NewArrival = async () => {
   const res = await ProductSchema
     .find({ createdAt: { $gte: sevenDaysAgo } })
     .sort({ createdAt: -1 }) // newest first
+    .limit(12)
     .lean()
 
   const products = JSON.parse(JSON.stringify(res))

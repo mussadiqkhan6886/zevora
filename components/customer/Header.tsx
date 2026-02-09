@@ -68,6 +68,7 @@ useEffect(() => {
       >
         <SwiperSlide className='py-2 text-center tracking-widest'>Delivery charges 300PKR per Order</SwiperSlide>
         <SwiperSlide className='py-2 text-center tracking-widest'>All products come with 1 year colour warranty</SwiperSlide>
+        <SwiperSlide className='py-2 text-center tracking-widest'>Orders above 5000 will get a free Gift!!</SwiperSlide>
       </Swiper>
 
       <div className={`${scrolled ? "top-0 fixed" : "top-8 absolute"} px-3 md:px-8 lg:px-18 border-b border-zinc-300 flex justify-between py-5 items-center  w-full z-50 bg-white`}> 
