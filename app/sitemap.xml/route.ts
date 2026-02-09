@@ -48,6 +48,14 @@ export async function GET() {
       });
     });
 
+    menuItems.forEach(item => {
+      urls.push({
+        loc: `https://www.zevoraofficial.com/collections/${item.category}`,
+        changefreq: "weekly",
+        priority: 0.9,
+      });
+    });
+
     // Generate final XML from typed objects
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
