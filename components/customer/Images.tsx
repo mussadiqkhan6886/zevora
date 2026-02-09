@@ -32,7 +32,7 @@ const Images = ({
             onClick={() => setActiveImage(item)}
             className={`
               flex-shrink-0
-              w-22 h-22
+              w-22 h-24
               overflow-hidden
               transition
               ${
@@ -54,7 +54,7 @@ const Images = ({
       </div>
 
       {/* MAIN IMAGE */}
-      <div className="w-full max-w-[520px] aspect-square bg-zinc-100 overflow-hidden">
+      <div className="w-full max-w-[520px]  overflow-hidden">
         <Image
           src={activeImage}
           alt={name}
