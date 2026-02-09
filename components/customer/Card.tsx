@@ -35,7 +35,7 @@ const Card = ({
           alt={name}
           width={400}
           height={400}
-          className="w-full h-[350px] object-cover"
+          className="w-full h-[380px] object-cover"
         />
 
         <div className="absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 z-40 text-black">
@@ -63,7 +63,7 @@ const Card = ({
         alt={name}
         width={400}
         height={400}
-        className="w-full h-[350px] object-cover"
+        className="w-full h-[380px] object-cover"
       />
 
       {onSale && (
