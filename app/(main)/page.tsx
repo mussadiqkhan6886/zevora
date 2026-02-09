@@ -6,6 +6,7 @@ import React from 'react'
 
 import type { Metadata } from 'next'
 import Gallery from '@/sections/Gallery'
+import FreeComp from '@/components/customer/FreeComp'
 
 export const metadata: Metadata = {
   title: 'Premium Watches, Jewelry & Perfumes Online',
@@ -35,6 +36,7 @@ export const dynamic = 'force-dynamic';
 const page = () => {
   return (
     <main className='pt-20'>
+      <FreeComp />
       <Watches />
       <DreamStack />
       <About />

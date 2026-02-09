@@ -28,6 +28,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
     salePrice: '',
     onSale: false,
   });
+  console.log(data)
 
   const [variants, setVariants] = useState<VariantInput[]>([{ label: '', stock: '' }]);
   const [files, setFiles] = useState<File[]>([]);
@@ -332,7 +333,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
             <label className="font-medium">This product has variants</label>
           </div>
 
-          {data.hasVariants && (
+          { (
             <>
               <h2 className="text-lg font-semibold">Variants</h2>
 

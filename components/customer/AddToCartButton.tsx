@@ -8,6 +8,7 @@ import { FiX } from 'react-icons/fi'
 
 const AddToCartButton = ({ product }: { product: productType }) => {
   const { addToCart, cart } = useCart()
+  console.log(product)
 
   const hasVariants = product.hasVariants && product.variants?.length > 0
 
@@ -80,7 +81,6 @@ const AddToCartButton = ({ product }: { product: productType }) => {
         </div>
       </div>
     )}
-      {/* VARIANTS (RINGS / SIZES) */}
       {hasVariants && (
         <div>
           <h3 className="font-semibold mb-2">Sizes</h3>
