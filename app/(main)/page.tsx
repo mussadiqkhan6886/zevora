@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 200;
 
 const page = () => {
   return (
