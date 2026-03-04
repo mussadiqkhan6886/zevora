@@ -114,13 +114,13 @@ const Page = async ({
               : 'text-xl font-medium'
           }`}
         >
-          Rs.{product.price}
+          PKR.{product.price}
         </span>
 
         {product.onSale && product.salePrice && (
           <>
             <span className="text-xl font-semibold">
-              Rs.{product.salePrice}
+              PKR.{product.salePrice}
             </span>
             <span className="text-xs px-3 py-1 rounded-full border">
               Sale

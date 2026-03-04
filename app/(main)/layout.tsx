@@ -1,6 +1,7 @@
 import Footer from "@/components/customer/Footer";
 import Header from "@/components/customer/Header";
 import { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.zevoraofficial.com'),
@@ -106,13 +107,30 @@ export const metadata: Metadata = {
 }
 
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Zevora",
+    "url": "https://www.zevoraofficial.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.zevoraofficial.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
   return (
     <>
+    <Script
+          id="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
     <Header />
     {children}
     <Footer />
