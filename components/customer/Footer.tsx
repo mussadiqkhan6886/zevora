@@ -8,9 +8,10 @@ const Footer = () => {
     <footer className='border-t border-zinc-300 bg-zinc-100'>
       <div className='flex flex-col justify-center items-center py-10'>
         <p className={`${serif.className} text-lg`}>Subscribe to Our Socials</p>
-        <div className='flex gap-4 pt-5'>
+        <nav className='flex gap-4 pt-5'>
           <Link aria-label='instagram link' href={"https://www.instagram.com/zevora._official/?__pwa=1"} target='_blank'><FiInstagram name='instagram icon' aria-label='instagram icon' className='text-xl' /></Link>
-        </div>
+          <Link aria-label='facebook link' href={"https://web.facebook.com/profile.php?id=61581131171531"} target='_blank'><FiFacebook name='facebook icon' aria-label='facebook icon' className='text-xl' /></Link>
+        </nav>
       </div>
       <div className='border-t flex gap-4 flex-wrap items-center justify-center border-zinc-300 py-5 text-[12px] text-zinc-600'>
         <p>&copy; {new Date().getFullYear()}, <Link href={"/"}>ZEVORA</Link></p>

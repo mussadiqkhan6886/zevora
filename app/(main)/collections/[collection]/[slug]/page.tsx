@@ -1,6 +1,7 @@
 import AddToCartButton from '@/components/customer/AddToCartButton';
 import CardTwo from '@/components/customer/CardTwo';
 import Images from '@/components/customer/Images';
+import SaleTimer from '@/components/customer/SaleTimer'; // NEW IMPORT
 import { connectDB } from '@/lib/config/database';
 import { serif } from '@/lib/fonts';
 import ProductSchema from '@/lib/models/ProductSchema';
@@ -80,12 +81,11 @@ const Page = async ({
 
   const currentPrice = product.onSale ? product.salePrice : product.price;
 
-// Map variants to Schema.org 'offers'
 const offers = product.hasVariants 
   ? product.variants.map((v: any) => ({
       "@type": "Offer",
       "sku": v.sku,
-      "price": currentPrice, // Or v.price if variants have different prices
+      "price": currentPrice,
       "priceCurrency": "PKR",
       "availability": v.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       "url": `https://www.zevoraofficial.com/collections/${product.category}/${product.slug}`,
@@ -110,7 +110,6 @@ const jsonLd = {
   },
   "keywords": product.keywords.join(", "),
   "offers": offers,
-  // Specific for your Perfume category
   ...(product.fragranceType && { "additionalProperty": [{
     "@type": "PropertyValue",
     "name": "Fragrance Type",
@@ -135,21 +134,17 @@ const jsonLd = {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* PRODUCT SECTION */}
      <section className="grid grid-cols-1 md:grid-cols-2 gap-12 min-h-screen">
-  {/* IMAGES */}
   <div>
     <Images images={product.images} name={product.name} />
   </div>
 
-  {/* STICKY WRAPPER */}
   <div className="relative">
     <div className="sticky top-20 self-start flex flex-col gap-6 lg:pt-4">
       <h1 className={`${serif.className} text-4xl capitalize tracking-wide`}>
         {product.name}
       </h1>
 
-      {/* PRICE */}
       <div className="flex items-center gap-4">
         <span
           className={`${
@@ -173,7 +168,6 @@ const jsonLd = {
         )}
       </div>
 
-      {/* PERFUME INFO */}
       {product.category.includes('perfume') && (
         <div className="text-sm space-y-1">
           <p>
@@ -189,7 +183,11 @@ const jsonLd = {
 
       <AddToCartButton product={productClient} />
 
-      {/* DESCRIPTION */}
+      {/* FAKE TIMER DIV - Only shows if onSale is true */}
+      {product.onSale && (
+        <SaleTimer />
+      )}
+
       <div>
         <h3 className="font-semibold mb-1">Description</h3>
         <p className="text-zinc-800">{product.description}</p>
@@ -202,8 +200,6 @@ const jsonLd = {
   </div>
 </section>
 
-
-      {/* RELATED PRODUCTS */}
       <section className="mt-20">
         <h3
           className={`${serif.className} text-2xl md:text-3xl mb-10`}

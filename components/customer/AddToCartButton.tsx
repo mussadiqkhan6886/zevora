@@ -18,7 +18,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
 
   const [quantity, setQuantity] = useState(1)
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState("Only Few Left In Stock (ADD)")
+  const [status, setStatus] = useState("Only Few Left In Stock (ADD TO CART)")
   const [popUp, setPopUp] = useState(false)
   const [flag, setFlag] = useState(false)
 
@@ -62,7 +62,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setStatus("Only Few Left In Stock (ADD)")
+      setStatus("Only Few Left In Stock (ADD TO CART)")
       setFlag(false)
     }, 1500)
 
