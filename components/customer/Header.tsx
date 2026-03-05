@@ -1,13 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react'
-import {Swiper, SwiperSlide} from "swiper/react"
-import {Autoplay} from "swiper/modules"
 import "swiper/css"
-import { serif } from '@/lib/fonts';
 import Link from 'next/link';
 import { headerLinks } from '@/lib/constants';
-import {FiChevronDown, FiChevronRight, FiMenu, FiSearch, FiShoppingCart, FiX} from "react-icons/fi"
+import {FiChevronDown, FiMenu, FiSearch, FiShoppingCart, FiX} from "react-icons/fi"
 import Menu from './Menu';
 import SearchBar from './SearchBar';
 import Image from 'next/image';
@@ -59,21 +56,10 @@ useEffect(() => {
 
   return (
     <header>
-      <Swiper
-        modules={[Autoplay]}
-        slidesPerView={1}
-        autoplay={{delay: 2500, disableOnInteraction: false}}
-        loop
-        className={`bg-main text-white text-[13px] ${serif.className}`}
-      >
-        <SwiperSlide className='py-2 text-center tracking-widest'>Delivery charges 300PKR per Order</SwiperSlide>
-        <SwiperSlide className='py-2 text-center tracking-widest'>All products come with 1 year colour warranty</SwiperSlide>
-        <SwiperSlide className='py-2 text-center tracking-widest'>Orders above 5000 will get a free Gift!!</SwiperSlide>
-      </Swiper>
 
-      <div className={`${scrolled ? "top-0 fixed" : "top-8 absolute"} px-3 md:px-8 lg:px-18 border-b border-zinc-300 flex justify-between py-5 items-center  w-full z-50 bg-white`}> 
+      <div className={`${scrolled ? "bg-white" : ""} top-0 fixed px-3 md:px-8 lg:px-18  flex justify-between py-5 items-center  w-full z-50 `}> 
         <Link href={"/"} className='hidden lg:block'>
-            <Image src="/logo.png" alt='logo image' className='object-cover object-center z-50' width={200} height={200} />
+            <Image src="/header-logo.png" alt='logo image' className='object-cover object-center z-50' width={200} height={200} />
         </Link>
         <nav className='flex justify-between  items-center'>
             <div className='lg:hidden'>

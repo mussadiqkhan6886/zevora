@@ -1,6 +1,6 @@
-import { Instrument_Serif, Roboto, Lavishly_Yours } from "next/font/google"
+import { Instrument_Serif, Roboto, Lavishly_Yours, Cormorant_Garamond } from "next/font/google"
 
-export const serif = Instrument_Serif({
+export const serif = Cormorant_Garamond({
     weight: "400",
     subsets: ["latin"]
 })

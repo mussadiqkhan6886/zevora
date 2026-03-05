@@ -7,6 +7,8 @@ import React from 'react'
 import type { Metadata } from 'next'
 import Gallery from '@/sections/Gallery'
 import FreeComp from '@/components/customer/FreeComp'
+import Hero from '@/sections/Hero'
+import Heading from '@/sections/Heading'
 
 export const metadata: Metadata = {
   title: 'Premium Watches, Jewelry & Perfumes Online',
@@ -37,6 +39,8 @@ const page = () => {
   return (
     <main className='pt-20'>
       <FreeComp />
+      <Hero />
+      <Heading />
       <Watches />
       <DreamStack />
       <About />

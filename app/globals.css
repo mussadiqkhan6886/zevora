@@ -32,3 +32,29 @@
   background: #ccc;
   border-radius: 10px;
 }
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent; /* thumb color | track color */
+}
+
+/* For Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 1px; /* Width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Makes the track invisible */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* Color of the scrollable handle */
+  border-radius: 20px;       /* Roundness of the handle */
+  border: 1px solid transparent; /* adds padding around thumb */
+}
+
+/* Optional: Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af; 
+}
