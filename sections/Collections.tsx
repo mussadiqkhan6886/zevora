@@ -3,7 +3,7 @@ import { serif } from '@/lib/fonts'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { FiArrowRight } from 'react-icons/fi'
+import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi'
 
 const Collections = () => {
   return (
@@ -17,10 +17,10 @@ const Collections = () => {
         </div>
       <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
         {signature.map(item => (
-            <Link key={item.name} href={item.link} aria-label={`Go to ${item.name} collection`}>
+            <Link key={item.name} className='group' href={item.link} aria-label={`Go to ${item.name} collection`}>
             <article className='flex flex-col items-center'>
-                <Image className='h-90 object-center object-cover' src={item.image} alt={item.name} width={400} height={400} />
-                <h2 className={`${serif.className} flex items-center gap-2 mt-2 text-2xl`}>{item.name} <FiArrowRight /></h2>
+                <Image className='h-90 group-hover:scale-105 transition-all duration-400  object-center object-cover' src={item.image} alt={item.name} width={400} height={400} />
+                <h2 className={`${serif.className} flex items-center gap-2 mt-3 text-2xl`}>{item.name} <FiArrowUpRight className='mt-1 inline-block' /></h2>
             </article>
             </Link>
         ))}

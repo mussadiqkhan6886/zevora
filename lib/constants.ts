@@ -33,13 +33,13 @@ export const categories = [
 
 export const collections = [
     {image: "/all.jpg",name: "All", link: "/collections/all"},
-    {image: "/watches.jpg",name: "Watches", link: "/collections/watches"},
+    {image: "/watches.webp",name: "Watches", link: "/collections/watches"},
     {image: "/set.jpg",name: "Jewellery Sets", link: "/collections/jewellery-sets"},
     {image: "/deals.jpg",name: "Deals", link: "/collections/deals"},
     {image: "/perfume.jpg",name: "Perfumes", link: "/collections/perfumes"},
-    {image: "/silver bracelets.jpg",name: "Stainless Steel Bracelets ", link: "/collections/stainless-steel-bracelets"},
-    {image: "/silver earrings.jpg",name: "Stainless Steel Earrings", link: "/collections/stainless-steel-earrings"},
-    {image: "/rings.jpg",name: "Rings", link: "/collections/rings"},
+    {image: "/silver bracelets.webp",name: "Stainless Steel Bracelets ", link: "/collections/stainless-steel-bracelets"},
+    {image: "/silver earrings.webp",name: "Stainless Steel Earrings", link: "/collections/stainless-steel-earrings"},
+    {image: "/rings.webp",name: "Rings", link: "/collections/rings"},
     {image: "/silver pendants.jpg",name: "Stainless Steel Pendants", link: "/collections/stainless-steel-pendants"},
     {image: "/gold bracelets.jpg",name: "Gold Platted Bracelets", link: "/collections/gold-platted-bracelets"},
     {image: "/gold earrings.jpg",name: "Gold Platted Earrings", link: "/collections/gold-platted-earrings"},
@@ -47,10 +47,10 @@ export const collections = [
   ]
   
   export const signature = [
-    {image: "/watches.jpg",name: "Watches", link: "/collections/watches"},
-    {image: "/rings.jpg",name: "Rings", link: "/collections/rings"},
-    {image: "/silver bracelets.jpg",name: "Bracelets ", link: "/collections/stainless-steel-bracelets"},
-    {image: "/silver earrings.jpg",name: "Earrings", link: "/collections/stainless-steel-earrings"},
+    {image: "/watches.webp",name: "Watches", link: "/collections/watches"},
+    {image: "/rings.webp",name: "Rings", link: "/collections/rings"},
+    {image: "/silver bracelets.webp",name: "Bracelets ", link: "/collections/stainless-steel-bracelets"},
+    {image: "/silver earrings.webp",name: "Earrings", link: "/collections/stainless-steel-earrings"},
 ]
 
 export const collectionMetadata = [

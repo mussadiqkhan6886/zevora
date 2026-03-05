@@ -44,7 +44,7 @@ const FreeComp = () => {
         <div className="relative h-[400px] flex items-center justify-center text-center px-6">
           
           <Image
-            src="/gift.jpg"
+            src="/gift.webp"
             alt="Free Gift"
             fill
             className="object-cover"

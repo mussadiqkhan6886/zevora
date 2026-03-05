@@ -70,14 +70,14 @@ const isSoldOut = !hasStock
   return (
     <Link
       href={`/collections/${collectionSlug}/${slug}`}
-      className="relative group mb-4 block"
+      className="relative hover:scale-105 duration-400 transition-all group mb-4 block"
     >
       <Image
         src={images?.[0] || '/placeholder.png'}
         alt={name}
         width={400}
         height={400}
-        className="object-cover object-center w-full h-[380px]"
+        className="object-cover object-center w-full group-hover:shadow-xl h-[380px]"
       />
 
       {onSale && (
@@ -87,7 +87,7 @@ const isSoldOut = !hasStock
       )}
 
       <h2
-        className={`${serif.className} capitalize text-base text-center tracking-wider mt-2 px-2 text-black group-hover:underline`}
+        className={`${serif.className} capitalize text-base text-center tracking-wider mt-2 px-2 text-black `}
       >
         {name}
       </h2>
