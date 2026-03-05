@@ -202,7 +202,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
                 .slice(0, wordIndex)
                 .reduce((sum, word) => sum + word.characters.length, 0);
               return (
-                <span key={wordIndex} className={cn(' ml-3 inline-block', splitLevelClassName)}>
+                <span key={wordIndex} className={cn('ml-3 inline-block', splitLevelClassName)}>
                   {wordObj.characters.map((char, charIndex) => (
                     <motion.span
                       key={charIndex}

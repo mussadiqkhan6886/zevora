@@ -52,7 +52,7 @@ export const collections = [
     {image: "/silver bracelets.webp",name: "Bracelets ", link: "/collections/stainless-steel-bracelets"},
     {image: "/silver earrings.webp",name: "Earrings", link: "/collections/stainless-steel-earrings"},
 ]
-
+  
 export const collectionMetadata = [
   {
     slug: "all",

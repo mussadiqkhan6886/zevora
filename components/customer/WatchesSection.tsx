@@ -33,11 +33,11 @@ const WatchesSection = ({ watches }: { watches: productType[] }) => {
         spaceBetween={24}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         breakpoints={{
-          0: { slidesPerView: 1.1 },
-          480: { slidesPerView: 1.4 },
-          640: { slidesPerView: 2.4 },
-          768: { slidesPerView: 3.4 },
-          1024: { slidesPerView: 4.4 },
+          0: { slidesPerView: 1 },
+          480: { slidesPerView: 1 },
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
         }}
       >
         {watches.map((item, index) => (

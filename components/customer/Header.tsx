@@ -59,7 +59,7 @@ useEffect(() => {
 
       <div className={`${scrolled ? "bg-white" : ""} top-0 fixed px-3 md:px-8 lg:px-18  flex justify-between py-5 items-center  w-full z-50 `}> 
         <Link href={"/"} className='hidden lg:block'>
-            <Image src="/header-logo.png" alt='logo image' className='object-cover object-center z-50' width={200} height={200} />
+            <Image src="/header-logo.png" alt='logo image in header zevora official' className='object-cover object-center z-50' width={200} height={200} />
         </Link>
         <nav className='flex justify-between  items-center'>
             <div className='lg:hidden'>
@@ -115,7 +115,7 @@ useEffect(() => {
 
         </nav>
          <Link href={"/"} className='lg:hidden'>
-           <Image src="/logo.png" alt='logo image' width={200} height={200} />
+           <Image src="/header-logo.png" alt='logo image mobile size in header zevora official' width={150} height={150} className="object-cover" />
         </Link>
         <div className='flex gap-4 md:gap-6 items-center'>
             <FiSearch className='cursor-pointer' onClick={() => setSearchOpen(true)} />

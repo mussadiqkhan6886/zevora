@@ -7,13 +7,13 @@ import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi'
 
 const Collections = () => {
   return (
-    <section className='mx-w-8xl mx-auto px-4 my-15'>
+    <section className='max-w-7xl mx-auto px-4 my-15'>
         <div className='flex justify-between items-center mb-4'>
-            <h2 className={`${serif.className}  text-[42px] leading-12 italic`}>Explore Our
+            <h2 className={`${serif.className} text-3xl sm:text-[42px] leading-12 italic`}>Explore Our
                 <br />
                 Signature Collections
             </h2>
-            <Link href={"/collections/all"} className=' border-b pb-1 uppercase font-light text-lg flex gap-2 items-center'>View All <FiArrowRight /></Link>
+            <Link href={"/collections/all"} className='hidden border-b pb-1 uppercase font-light text-lg md:flex gap-2 items-center'>View All <FiArrowRight /></Link>
         </div>
       <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
         {signature.map(item => (

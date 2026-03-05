@@ -31,7 +31,7 @@ const About = () => {
               The Zevora Legacy
             </motion.span>
             <motion.h2
-              className={`${serif.className} text-5xl md:text-[67px] leading-tight font-light`}
+              className={`${serif.className} text-4xl sm:text-5xl md:text-[67px] leading-tight font-light`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -64,7 +64,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className={`${serif.className}  text-xl md:text-2xl leading-snug text-[#1a1a1a] italic`}>
+            <p className={`${serif.className}  text-xl md:text-2xl tracking-wide leading-snug text-[#1a1a1a] italic`}>
               "We believe that luxury should be accessible. Our mission is to bring 
               premium watches and jewelry to every corner of Pakistan, combining 
               timeless design with unmatched craftsmanship."

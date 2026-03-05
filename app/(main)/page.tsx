@@ -46,7 +46,7 @@ const page = () => {
       <Collections />
       <Watches />
       <About />
-      <Image src={"/hand.png"} alt='hand image of jewelry and watches' width={1000} height={600} className='w-full h-[80vh] object-center object-cover' />
+      <Image src={"/hand.webp"} alt='hand image of jewelry and watches' width={1000} height={600} className='w-full h-[70vh] sm:h-[80vh]  sm:object-center object-right object-cover' />
       <NewArrival />
       <Gallery />
     </main>
