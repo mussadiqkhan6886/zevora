@@ -4,7 +4,7 @@ import React from 'react'
 
 const Hero = () => {
   return (
-    <section className='h-[120vh] px-4'>
+    <section className='h-[120vh] sm:h-[110vh] lg:h-[120vh] xl:h-[110vh] px-4'>
          <RotatingText
                     texts={['Watches', 'Jewelry', 'Perfumes', 'Rings']}
                     mainClassName="px-2 sm:px-2 text-3xl sm:text-4xl md:text-6xl lg:text-[93px] md:px-3 text-center max-w-8xl mx-auto my-5"
