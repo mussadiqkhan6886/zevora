@@ -20,6 +20,9 @@ const NewArrival = async () => {
 
   const products = JSON.parse(JSON.stringify(res))
 
+  if(products.length < 1){
+    return null
+  }
 
   return (
     <section className='mb-10 px-2 md:px-1'>

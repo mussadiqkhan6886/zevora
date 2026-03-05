@@ -57,10 +57,10 @@ const isSoldOut = !hasStock
 
         <div className="flex gap-5 text-black px-2 mt-1 items-center justify-center">
           <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
-            Rs.{price} PKR
+            PKR {price} 
           </p>
           {onSale && salePrice !== null && (
-            <p className="tracking-wider">Rs.{salePrice} PKR</p>
+            <p className="tracking-wider"> PKR {salePrice} </p>
           )}
         </div>
       </div>
@@ -94,10 +94,10 @@ const isSoldOut = !hasStock
 
       <div className="flex gap-5 text-black px-2 mt-1 items-center justify-center">
         <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
-          Rs.{price} PKR
+          PKR {price} 
         </p>
         {onSale && salePrice !== null && (
-          <p className="tracking-wider">Rs.{salePrice} PKR</p>
+          <p className="tracking-wider">PKR {salePrice} </p>
         )}
       </div>
     </Link>

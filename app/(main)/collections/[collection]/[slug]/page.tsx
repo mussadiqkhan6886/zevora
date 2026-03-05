@@ -78,6 +78,46 @@ const Page = async ({
     );
   }
 
+  const currentPrice = product.onSale ? product.salePrice : product.price;
+
+// Map variants to Schema.org 'offers'
+const offers = product.hasVariants 
+  ? product.variants.map((v: any) => ({
+      "@type": "Offer",
+      "sku": v.sku,
+      "price": currentPrice, // Or v.price if variants have different prices
+      "priceCurrency": "PKR",
+      "availability": v.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "url": `https://www.zevoraofficial.com/collections/${product.category}/${product.slug}`,
+    }))
+  : {
+      "@type": "Offer",
+      "price": currentPrice,
+      "priceCurrency": "PKR",
+      "availability": product.variants[0]?.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "url": `https://www.zevoraofficial.com/collections/${product.category}/${product.slug}`,
+    };
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.name,
+  "image": product.images,
+  "description": product.description,
+  "brand": {
+    "@type": "Brand",
+    "name": "Zevora Official"
+  },
+  "keywords": product.keywords.join(", "),
+  "offers": offers,
+  // Specific for your Perfume category
+  ...(product.fragranceType && { "additionalProperty": [{
+    "@type": "PropertyValue",
+    "name": "Fragrance Type",
+    "value": product.fragranceType
+  }]})
+};
+
   const relatedProducts = await ProductSchema.aggregate([
     {
       $match: {
@@ -91,6 +131,10 @@ const Page = async ({
 
   return (
     <main className="pt-32 px-6 max-w-7xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* PRODUCT SECTION */}
      <section className="grid grid-cols-1 md:grid-cols-2 gap-12 min-h-screen">
   {/* IMAGES */}

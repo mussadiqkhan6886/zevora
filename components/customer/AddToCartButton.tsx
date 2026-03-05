@@ -8,7 +8,6 @@ import { FiX } from 'react-icons/fi'
 
 const AddToCartButton = ({ product }: { product: productType }) => {
   const { addToCart, cart } = useCart()
-  console.log(product)
 
   const hasVariants = product.hasVariants && product.variants?.length > 0
 
@@ -19,7 +18,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
 
   const [quantity, setQuantity] = useState(1)
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState("Add To Cart")
+  const [status, setStatus] = useState("Only Few Left In Stock (ADD)")
   const [popUp, setPopUp] = useState(false)
   const [flag, setFlag] = useState(false)
 
@@ -57,14 +56,13 @@ const AddToCartButton = ({ product }: { product: productType }) => {
       quantity,
     })
 
-    console.log(cart)
     setLoading(false)
     setStatus("Added")
   }
 
   useEffect(() => {
     setTimeout(() => {
-      setStatus("Add To Cart")
+      setStatus("Only Few Left In Stock (ADD)")
       setFlag(false)
     }, 1500)
 
@@ -83,7 +81,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
     )}
       {hasVariants && (
         <div>
-          <h3 className="font-semibold mb-2">Sizes</h3>
+          <h3 className="font-semibold mb-2">Variant</h3>
           <div className="flex gap-3 flex-wrap">
             {product.variants.map(
               (v: { label: string; stock: number }) => (

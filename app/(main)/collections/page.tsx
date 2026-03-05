@@ -8,7 +8,7 @@ import { FiArrowRight } from 'react-icons/fi'
 export const metadata: Metadata = {
   title: 'Collections',
   description:
-    'Explore all premium collections of watches, jewelry sets, and luxury perfumes at Zevora. Browse categories and discover timeless designs.',
+    'Explore all premium collections of watches, jewelry sets, rings, and luxury perfumes at Zevora. Browse categories and discover timeless designs.',
   alternates: {
     canonical: '/collections',
   },

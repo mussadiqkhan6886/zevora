@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
   title: {
     default: 'Zevora | Premium Watches, Jewelry & Perfumes',
-    template: '%s | Zevora',
+    template: '%s | Zevora Official',
   },
 
   description:

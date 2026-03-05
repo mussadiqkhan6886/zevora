@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import Card from './Card';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
@@ -9,6 +8,7 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { productType } from '@/type';
+import CardTwo from './CardTwo';
 
 const WatchesSection = ({ watches }: { watches: productType[] }) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
@@ -42,13 +42,13 @@ const WatchesSection = ({ watches }: { watches: productType[] }) => {
       >
         {watches.map((item, index) => (
           <SwiperSlide key={index}>
-            <Card collectionSlug="collections/watches" {...item} />
+            <CardTwo collectionSlug="watches" {...item} />
           </SwiperSlide>
         ))}
       </Swiper>
 
       {/* Custom Navigation */}
-      <div className="flex items-center justify-center gap-4 mt-6">
+      <div className="flex items-center justify-center gap-4 ">
         <button
           ref={prevRef}
           aria-label="Previous"

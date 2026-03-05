@@ -4,6 +4,7 @@
 @theme{
   --color-header: rgb(222, 196, 153);
   --color-main: rgb(211, 179, 129);
+  --color-ctr: #551756;
 }
 
 @layer components {

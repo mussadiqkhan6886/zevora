@@ -1,6 +1,7 @@
 import CardTwo from '@/components/customer/CardTwo'
 import SortSelect from '@/components/customer/SortSelect'
 import { connectDB } from '@/lib/config/database'
+import { collectionMetadata } from '@/lib/constants'
 import { serif } from '@/lib/fonts'
 import ProductSchema from '@/lib/models/ProductSchema'
 import { productType } from '@/type'
@@ -18,9 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
   const sampleProduct = await ProductSchema.findOne({ category: collection }).lean()
   const ogImage = sampleProduct?.images?.[0] || '/logo.png'
 
+  const desc = collectionMetadata.find(item => item.slug === categoryName)
+
   return {
-    title: `${categoryName}`,
-    description: `Explore our premium ${categoryName} collection. Shop top-quality watches, jewelry sets, and luxury perfumes at Zevora.`,
+    title: desc?.title,
+    description: desc?.description,
     alternates: {
       canonical: `/collections/${collection}`,
     },
@@ -65,6 +68,8 @@ const page = async ({params, searchParams}: {params: Promise<{collection: string
 
   await connectDB()
 
+  const desc = collectionMetadata.find(item => item.slug === collection)
+
   const sortMap: Record<string, any> = {
   'date-old-new': { createdAt: 1 },
   'date-new-old': { createdAt: -1 },
@@ -84,7 +89,8 @@ const page = async ({params, searchParams}: {params: Promise<{collection: string
 
   return (
     <main className='pt-30 px-3 max-w-7xl mx-auto'>
-      <h1 className={`${serif.className} capitalize text-4xl my-10`}>{collection.replaceAll("-", " ")}</h1>
+      <h1 className={`${serif.className} capitalize text-4xl my-10 mb-7`}>{desc?.title}</h1>
+      <p className='mb-8 text-zinc-700'>{desc?.description}</p>
       <div className='flex justify-between items-center'>
         <div>
             <label className="text-zinc-500 text-sm inline-block mr-4">Sort By:</label>

@@ -9,6 +9,8 @@ import Gallery from '@/sections/Gallery'
 import FreeComp from '@/components/customer/FreeComp'
 import Hero from '@/sections/Hero'
 import Heading from '@/sections/Heading'
+import Collections from '@/sections/Collections'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Premium Watches, Jewelry & Perfumes Online',
@@ -41,9 +43,10 @@ const page = () => {
       <FreeComp />
       <Hero />
       <Heading />
+      <Collections />
       <Watches />
-      <DreamStack />
       <About />
+      <Image src={"/hand.png"} alt='hand image of jewelry and watches' width={1000} height={600} className='w-full h-[80vh] object-center object-cover' />
       <NewArrival />
       <Gallery />
     </main>
