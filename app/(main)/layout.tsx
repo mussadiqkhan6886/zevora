@@ -1,5 +1,6 @@
 import Footer from "@/components/customer/Footer";
 import Header from "@/components/customer/Header";
+import SalesPop from "@/components/customer/SalesPop";
 import { Metadata } from "next";
 import Script from "next/script";
 
@@ -133,6 +134,7 @@ export default function RootLayout({
         />
     <Header />
     {children}
+    <SalesPop />
     <Footer />
     </>
   );

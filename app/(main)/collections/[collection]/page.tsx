@@ -86,7 +86,7 @@ const page = async ({params, searchParams}: {params: Promise<{collection: string
 
   const products = JSON.parse(JSON.stringify(res))
 
-
+  console.log(products)
   return (
     <main className='pt-30 px-3 max-w-7xl mx-auto'>
       <h1 className={`${serif.className} capitalize text-4xl my-10 mb-7`}>{desc?.title}</h1>
