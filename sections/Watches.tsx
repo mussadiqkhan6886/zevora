@@ -16,9 +16,9 @@ const Watches = async () => {
 
   return (
     <section className='pb-4 px-2 md:px-0'>
-      <Link href={"/collections/watches"} className={`${serif.className} uppercase inline-block ml-5 md:ml-20 text-black text-4xl py-8`}>
+      <h2 className={`${serif.className}  inline-block ml-5 text-black text-4xl py-8`}>
         Watches
-      </Link>
+      </h2>
       <WatchesSection watches={watches} />
     </section>
   )

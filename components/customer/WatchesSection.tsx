@@ -25,7 +25,7 @@ const WatchesSection = ({ watches }: { watches: productType[] }) => {
   }, []);
 
   return (
-    <section className="relative w-full">
+    <section className="relative px-2 w-full">
       
       {/* Swiper */}
       <Swiper

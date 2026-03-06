@@ -52,7 +52,7 @@ const SalesPop = () => {
 
     // Initial delay 5s, then every 20s to keep it realistic
     const initialTimeout = setTimeout(triggerPop, 5000);
-    const interval = setInterval(triggerPop, 20000);
+    const interval = setInterval(triggerPop, 25000);
 
     return () => {
       clearTimeout(initialTimeout);
@@ -67,7 +67,7 @@ const SalesPop = () => {
       <div className="bg-white border border-zinc-100 shadow-[0_10px_30px_rgba(0,0,0,0.12)] rounded-2xl p-4 flex items-center gap-4 max-w-[320px] relative overflow-hidden">
         
         {/* Verification Checkmark */}
-        <div className="bg-green-500 h-12 w-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm shadow-green-200">
+        <div className="bg-green-500 h-11 w-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm shadow-green-200">
           <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
           </svg>
@@ -86,10 +86,6 @@ const SalesPop = () => {
           <div className="flex items-center gap-2 mt-1.5">
             <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
               {data.time}
-            </span>
-            <span className="h-1 w-1 bg-zinc-300 rounded-full"></span>
-            <span className="text-[10px] text-green-600 font-bold uppercase tracking-wider flex items-center gap-1">
-              Verified Buyer
             </span>
           </div>
         </div>

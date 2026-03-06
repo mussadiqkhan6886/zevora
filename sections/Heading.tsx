@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const Heading = () => {
   return (
-    <div className='px-3 max-w-7xl mx-auto md:mt-5 mb-17 overflow-hidden'>
+    <div className='px-3 max-w-7xl mx-auto md:mt-7 mb-17 overflow-hidden'>
       <motion.p 
         // Initial state: Hidden, blurred, and shifted left
         initial={{ opacity: 0, x: -50, filter: 'blur(10px)' }}
@@ -14,10 +14,10 @@ const Heading = () => {
         transition={{ 
           duration: 0.8, 
           ease: "easeOut",
-          delay: 0.2 
+          delay: 0.1 
         }}
         // Only trigger once
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true, amount: 0.3 }}
         className='text-justify md:text-center px-4 md:px-10 tracking-relaxed text-lg font-light leading-relaxed'
       >
         <span className="font-semibold">Zevora Official</span> redefines luxury with an exquisite collection of 

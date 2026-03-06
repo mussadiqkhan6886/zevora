@@ -183,7 +183,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
 
     return (
       <motion.h1
-        className={cn(`flex flex-wrap text-center w-full whitespace-pre-wrap relative ${serif.className}`, mainClassName)}
+        className={cn(`flex sm:px-0 flex-wrap text-center w-full whitespace-pre-wrap relative ${serif.className}`, mainClassName)}
         {...rest}
         layout
         transition={transition}
@@ -202,7 +202,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
                 .slice(0, wordIndex)
                 .reduce((sum, word) => sum + word.characters.length, 0);
               return (
-                <span key={wordIndex} className={cn('ml-3 inline-block', splitLevelClassName)}>
+                <span key={wordIndex} className={cn('min-[466px]:ml-2.5 inline-block', splitLevelClassName)}>
                   {wordObj.characters.map((char, charIndex) => (
                     <motion.span
                       key={charIndex}
