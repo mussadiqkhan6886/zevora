@@ -14,7 +14,7 @@ export const generateMetadata = async ({searchParams}: { searchParams: Promise<{
 
   return {
     title: `Search Result for ${query}`,
-    description: `Search Result for ${query}, Discover Premium Watches, Jewelry and perfumes`
+    description: `Search Result for ${query}, Discover Premium Watches, Jewelry, rings and long lasting perfumes`
 } };
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {

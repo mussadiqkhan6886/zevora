@@ -53,11 +53,10 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
 
 export const generateStaticParams = async () => {
   await connectDB()
-
-  const res = await ProductSchema.find({}).lean()
-
-  return res.map((item: productType) => ({
-    collection: item.category
+  const categories = await ProductSchema.distinct("category")
+  
+  return categories.map((cat: string) => ({
+    collection: cat
   }))
 }
 
@@ -86,9 +85,67 @@ const page = async ({params, searchParams}: {params: Promise<{collection: string
 
   const products = JSON.parse(JSON.stringify(res))
 
-  console.log(products)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": desc?.title || collection,
+  "description": desc?.description,
+  "url": `https://www.zevoraofficial.com/collections/${collection}`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": products.length,
+    "itemListElement": products.map((product: any, index: number) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `https://www.zevoraofficial.com/collections/${product.category}/${product.slug}`,
+      "name": product.name,
+      "image": product.images?.[0],
+      // Adding price info here helps Google show a price range for the category
+      "offers": {
+        "@type": "Offer",
+        "price": product.onSale ? product.salePrice : product.price,
+        "priceCurrency": "PKR",
+        "availability": "https://schema.org/InStock"
+      }
+    }))
+  }
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.zevoraofficial.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Collections",
+      "item": "https://www.zevoraofficial.com/collections"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": desc?.title || collection,
+      "item": `https://www.zevoraofficial.com/collections/${collection}`
+    }
+  ]
+};
+
   return (
     <main className='pt-30 px-3 max-w-7xl mx-auto'>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <h1 className={`${serif.className} capitalize text-4xl my-10 mb-7`}>{desc?.title}</h1>
       <p className='mb-8 text-zinc-700'>{desc?.description}</p>
       <div className='flex justify-between items-center'>
