@@ -3,148 +3,153 @@
 import { useCart } from '@/hooks/useCart'
 import { productType } from '@/type'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { FiX } from 'react-icons/fi'
+import React, { useState } from 'react'
+import { FiX, FiCheck } from 'react-icons/fi'
 
 const AddToCartButton = ({ product }: { product: productType }) => {
-  const { addToCart, cart } = useCart()
-
+  const { addToCart, cart } = useCart() // Bringing in 'cart' to check existing quantities
   const hasVariants = product.hasVariants && product.variants?.length > 0
-
   const [selectedVariant, setSelectedVariant] = useState<{
     label: string
     stock: number
   } | null>(null)
 
   const [quantity, setQuantity] = useState(1)
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState("Only Few Left In Stock (ADD TO CART)")
-  const [popUp, setPopUp] = useState(false)
-  const [flag, setFlag] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [added, setAdded] = useState(false)
+  const [showError, setShowError] = useState(false)
 
-  const baseFinalPrice = product.onSale && product.salePrice
-    ? product.salePrice
-    : product.price
+  const finalPrice = product.onSale && product.salePrice ? product.salePrice : product.price
 
-  const finalPrice = baseFinalPrice
-
-  const addToCartHandler = () => {
-    setFlag(true)
-   
-
+  const handleAddToCart = (e?: React.MouseEvent) => {
+    // 1. Variant selection check
     if (hasVariants && !selectedVariant) {
-      setPopUp(true)
+      setShowError(true)
       return
     }
+
+    const target = product.hasVariants ? selectedVariant : product.variants[0]
+    const currentInCart = cart.find(
+      item => item.productId === product._id && item.variant?.label === target?.label
+    )
+    const totalProposedQuantity = (currentInCart?.quantity || 0) + quantity
+    const stockLimit = target?.stock ?? 999
+
+    if (totalProposedQuantity > stockLimit) {
+      alert(`Only ${stockLimit} items available. You already have ${currentInCart?.quantity || 0} in bag.`)
+      return 
+    }
+
+    // 3. Success Logic
     setLoading(true)
-    addToCart({
-      productId: product._id,
-      name: product.name,
-      slug: product.slug,
-      image: product.images[0],
+    
+    // Slight delay for luxury feel
+    setTimeout(() => {
+      addToCart({
+        productId: product._id,
+        name: product.name,
+        slug: product.slug,
+        image: product.images[0],
+        variant: target ?? { label: target?.label, stock: target?.stock },
+        price: product.price,
+        salePrice: product.salePrice ?? null,
+        onSale: Boolean(product.onSale),
+        finalPrice,
+        quantity,
+      })
 
-      variant: selectedVariant ?? {
-        label: product.variants[0].label,
-        stock: product.variants[0].stock
-      },
-
-      price: product.price,
-      salePrice: product.salePrice ?? null,
-      onSale: Boolean(product.onSale),
-
-      finalPrice,
-      quantity,
-    })
-
-    setLoading(false)
-    setStatus("Added")
+      setLoading(false)
+      setAdded(true)
+      setTimeout(() => setAdded(false), 2500)
+    }, 500)
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      setStatus("Only Few Left In Stock (ADD TO CART)")
-      setFlag(false)
-    }, 1500)
-
-  }, [cart, flag])
-
-
   return (
-    <>
-    {popUp && (
-      <div className='fixed inset-0 bg-black/30 flex items-center justify-center z-50'>
-        <div className='p-10 bg-white relative cursor-pointer'>
-          <FiX onClick={() => setPopUp(false)} className='absolute top-4 right-4' />
-          <h2 className='text-3xl font-semibold'>Please Select Variant</h2>
-        </div>
-      </div>
-    )}
-      {hasVariants && (
-        <div>
-          <h3 className="font-semibold mb-2">Variant</h3>
-          <div className="flex gap-3 flex-wrap">
-            {product.variants.map(
-              (v: { label: string; stock: number }) => (
-                <button
-                  key={v.label}
-                  disabled={v.stock <= 0}
-                  onClick={() =>
-                    setSelectedVariant({ label: v.label, stock: v.stock })
-                  }
-                  className={`px-5 py-1 rounded-full border text-sm font-semibold
-                    ${
-                      selectedVariant?.label === v.label
-                        ? 'bg-black text-white'
-                        : 'hover:bg-black hover:text-white'
-                    }
-                    ${
-                      v.stock <= 0
-                        ? 'line-through opacity-40 cursor-not-allowed'
-                        : ''
-                    }
-                  `}
-                >
-                  {v.label}
-                </button>
-              )
-            )}
+    <div className="flex flex-col gap-8">
+      {/* ERROR MODAL */}
+      {showError && (
+        <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm flex items-center justify-center z-[200]">
+          <div className="bg-white p-12 relative max-w-sm w-full text-center shadow-2xl">
+            <button onClick={() => setShowError(false)} className="absolute top-4 right-4 text-stone-400">
+              <FiX size={20} />
+            </button>
+            <h2 className="text-xl font-light tracking-widest uppercase mb-4 text-stone-900">Select Variant</h2>
+            <p className="text-stone-500 text-sm mb-6">Please select a size or style to continue.</p>
+            <button 
+              onClick={() => setShowError(false)}
+              className="w-full py-3 bg-stone-900 text-white text-[10px] uppercase tracking-widest"
+            >
+              Back to Selection
+            </button>
           </div>
         </div>
       )}
 
-      {/* QUANTITY */}
-      <div>
-        <p className="text-sm font-medium mb-1">Quantity</p>
-        <div className="flex items-center w-max border px-1 py-2 gap-4">
-          <button className=' px-4 py-1'
-            onClick={() => setQuantity(q => Math.max(1, q - 1))}
-          >
-            −
-          </button>
-          <span>{quantity}</span>
-          <button className=' px-4 py-1' onClick={() => setQuantity(q => q + 1)}>+</button>
+      {/* VARIANT SELECTION */}
+      {hasVariants && (
+        <div className="space-y-4">
+          <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-stone-900">Selection</h3>
+          <div className="flex gap-3 flex-wrap">
+            {product.variants.map((v) => (
+              <button
+                key={v.label}
+                disabled={v.stock <= 0}
+                onClick={() => {
+                  setSelectedVariant({ label: v.label, stock: v.stock })
+                  setShowError(false)
+                }}
+                className={`min-w-[80px] py-2 px-4 border transition-all duration-300 text-[12px] tracking-widest uppercase
+                  ${selectedVariant?.label === v.label 
+                    ? 'border-stone-900 bg-stone-900 text-white' 
+                    : 'border-stone-200 text-stone-600 hover:border-stone-900'}
+                  ${v.stock <= 0 ? 'opacity-30 cursor-not-allowed border-dashed' : ''}
+                `}
+              >
+                {v.label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* CTA */}
-      <div className="flex flex-col gap-3 mt-4">
-        <button
-          onClick={addToCartHandler}
-          disabled={loading || status === "Added"}
-          className="w-full py-3 disabled:opacity-70 bg-black text-white not-disabled:hover:bg-white not-disabled:hover:text-black not-disabled:cursor-pointer border border-black transition"
-        >
-          {loading ? <p className='animate-bounce'>Loading...</p>  : status}
-        </button>
+      {/* ACTIONS */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-4">
+          {/* Quantity Toggle */}
+          <div className="flex items-center border border-stone-200 h-14">
+            <button className="px-4 text-stone-400" onClick={() => setQuantity(q => Math.max(1, q - 1))}>−</button>
+            <span className="w-6 text-center text-sm">{quantity}</span>
+            <button className="px-4 text-stone-400" onClick={() => setQuantity(q => q + 1)}>+</button>
+          </div>
+          
+          {/* Main Add Button */}
+          <button
+            onClick={() => handleAddToCart()}
+            disabled={loading || added}
+            className={`flex-1 h-14 text-[11px] uppercase tracking-[0.3em] transition-all relative
+              ${added ? 'bg-ctr text-white' : 'bg-stone-900 text-white hover:bg-stone-800'}
+            `}
+          >
+            <span className={loading ? 'opacity-0' : 'opacity-100 flex items-center justify-center gap-2'}>
+              {added ? <><FiCheck /> Added to Bag</> : 'Add to Bag'}
+            </span>
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              </div>
+            )}
+          </button>
+        </div>
 
         <Link
           href="/checkout"
-          onClick={addToCartHandler}
-          className="w-full text-center py-3 border border-black hover:bg-black hover:text-white transition"
+          onClick={() => handleAddToCart()}
+          className="block w-full text-center py-4 border border-stone-900 text-[11px] uppercase tracking-[0.3em] hover:bg-stone-50 transition-colors"
         >
-          Buy it now
+          Express Checkout
         </Link>
       </div>
-    </>
+    </div>
   )
 }
 

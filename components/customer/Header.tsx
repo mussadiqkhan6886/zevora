@@ -8,6 +8,7 @@ import {FiChevronDown, FiMenu, FiSearch, FiShoppingCart, FiX} from "react-icons/
 import Menu from './Menu';
 import SearchBar from './SearchBar';
 import Image from 'next/image';
+import SideBarCart from './SideBarCart';
 
 const Header = () => {
 
@@ -16,7 +17,7 @@ const Header = () => {
     const [scrolled, setScrolled ] = useState(false)
    const [openMenu, setOpenMenu] = useState<string | null>(null)
    const [small, setSmall] = useState(false)
-
+  const [sideBarCartOpen, setSideBarCartOpen] = useState(false)
 
     useEffect(() => {
       const handleScroll = () => {
@@ -120,10 +121,11 @@ useEffect(() => {
         <div className='flex gap-4 md:gap-6 items-center'>
             <FiSearch className='cursor-pointer' onClick={() => setSearchOpen(true)} />
             {searchOpen && <SearchBar isSearchOpen={setSearchOpen} />}
-            <Link aria-label='cart link' href="/cart">
+            <button className="cursor-pointer" onClick={() => setSideBarCartOpen(true)} title="open sidebar cart" aria-label='cart button'>
               <FiShoppingCart name='cart icon' aria-label='shopping cart icon' />
-            </Link>
+            </button>
         </div>
+        {sideBarCartOpen && <SideBarCart isOpen={sideBarCartOpen} setIsOpen={setSideBarCartOpen} />}
       </div>
     </header>
   )

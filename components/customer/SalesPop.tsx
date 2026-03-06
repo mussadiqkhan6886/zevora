@@ -64,7 +64,7 @@ const SalesPop = () => {
 
   return (
     <div className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-[100] animate-in fade-in slide-in-from-bottom-5 duration-700">
-      <div className="bg-white border border-zinc-100 shadow-[0_10px_30px_rgba(0,0,0,0.12)] rounded-2xl p-4 flex items-center gap-4 max-w-[320px] relative overflow-hidden">
+      <div className="bg-white border border-zinc-100 shadow-[0_10px_30px_rgba(0,0,0,0.12)] rounded-2xl p-3 flex items-center gap-4 max-w-[320px] relative overflow-hidden">
         
         {/* Verification Checkmark */}
         <div className="bg-green-500 h-11 w-11 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm shadow-green-200">
@@ -74,12 +74,12 @@ const SalesPop = () => {
         </div>
 
         <div className="flex flex-col pr-4">
-          <p className="text-[13px] text-zinc-500 leading-tight">
+          <p className="text-[11px] text-zinc-500 leading-tight">
             <span className="font-bold text-zinc-900">{data.name}</span> from <span className="font-bold text-zinc-900">{data.city}</span>
           </p>
           <Link 
             href={`/collections/${data.category}/${data.slug}`}
-            className="text-[13px] text-zinc-700 mt-0.5 hover:underline decoration-red-500 underline-offset-2"
+            className="text-[11px] text-zinc-700 mt-0.5 hover:underline decoration-red-500 underline-offset-2"
           >
             purchased <span className="text-red-600 font-semibold">{data.product}</span>
           </Link>
