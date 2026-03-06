@@ -104,12 +104,21 @@ const SideBarCart = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (val: 
           <Link href="/checkout" className="w-full block text-center bg-zinc-900 text-white py-4 text-[12px] uppercase tracking-[0.3em] hover:bg-zinc-800 transition-all active:scale-[0.98]">
             Proceed to Checkout
           </Link>
-          <button 
+          <div className='flex gap-2 items-center mt-2'>
+            <button 
             onClick={() => setIsOpen(false)}
-            className="w-full text-center text-[10px] uppercase tracking-widest text-stone-400 hover:text-zinc-900 transition-colors"
+            className="w-full text-center pb-1 text-[10px] uppercase tracking-widest text-stone-600 hover:text-zinc-900 transition-colors"
           >
             Continue Shopping
           </button>
+          <Link 
+          href="/cart"
+            onClick={() => setIsOpen(false)}
+            className="w-full border-b border-zinc-400 pb-1 text-center text-[10px] uppercase tracking-widest text-stone-600 hover:text-zinc-900 transition-colors"
+          >
+            Cart
+          </Link>
+          </div>
         </div>
       </aside>
     </>

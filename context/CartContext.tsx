@@ -1,7 +1,7 @@
 'use client'
 
 import { CartItem } from '@/type'
-import { createContext, useContext, useState, useMemo } from 'react'
+import { createContext, useContext, useState, useMemo, useEffect } from 'react'
 
 type CartContextType = {
   cart: CartItem[]
@@ -16,6 +16,25 @@ export const CartContext = createContext<CartContextType | null>(null)
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([])
+  const [isInitialized, setIsInitialized] = useState(false)
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem('zevora-cart')
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart))
+      } catch (error) {
+        console.error("Failed to parse cart", error)
+      }
+    }
+    setIsInitialized(true)
+  }, [])
+
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem('zevora-cart', JSON.stringify(cart))
+    }
+  }, [cart, isInitialized])
 
   // 1. Calculate Total Price Dynamically
   const totalPrice = useMemo(() => {

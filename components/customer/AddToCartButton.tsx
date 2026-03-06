@@ -147,7 +147,12 @@ const AddToCartButton = ({ product }: { product: productType }) => {
 
         <Link
           href="/checkout"
-          onClick={() => handleAddToCart()}
+          onClick={() => {
+            handleAddToCart();
+            if (!added) {
+              setTimeout(() => window.location.href = "/checkout", 700);
+            }
+          }}
           className="block w-full text-center py-4 border border-stone-900 text-[11px] uppercase tracking-[0.3em] hover:bg-stone-50 transition-colors"
         >
           Express Checkout
