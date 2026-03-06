@@ -12,7 +12,6 @@ const CartPage = () => {
     (acc, item) => acc + item.finalPrice * item.quantity,
     0
   )
-  console.log(cart)
   if (cart.length === 0) {
     return (
       <main className="min-h-[90vh] flex flex-col items-center justify-center gap-4">

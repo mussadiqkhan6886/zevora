@@ -123,9 +123,9 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: '/hero.webp',
-    shortcut: '/hero.webp',
-    apple: '/hero.webp',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 
   verification: {
