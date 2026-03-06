@@ -42,6 +42,10 @@ const AddToCartButton = ({ product }: { product: productType }) => {
 
     // 3. Success Logic
     setLoading(true)
+
+    if(!target){
+      return
+    }
     
     // Slight delay for luxury feel
     setTimeout(() => {
@@ -50,7 +54,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
         name: product.name,
         slug: product.slug,
         image: product.images[0],
-        variant: target ?? { label: target?.label, stock: target?.stock },
+        variant: { label: target?.label, stock: target?.stock },
         price: product.price,
         salePrice: product.salePrice ?? null,
         onSale: Boolean(product.onSale),
