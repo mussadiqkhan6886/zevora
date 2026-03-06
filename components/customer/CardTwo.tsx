@@ -42,7 +42,7 @@ const isSoldOut = !hasStock
           alt={name}
           width={400}
           height={400}
-          className="object-cover object-center w-full h-[380px]"
+          className="object-cover object-center w-full h-[360px] min-[420px]:h-[380px]"
         />
 
         <div className="absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 text-black">
@@ -56,11 +56,11 @@ const isSoldOut = !hasStock
         </h2>
 
         <div className="flex gap-5 text-black px-2 mt-1 items-center justify-center">
-          <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
+          <p className={`${onSale ? 'line-through text-[11px] min-[420px]:text-[12px]' : 'text-sm'}`}>
             PKR {price} 
           </p>
           {onSale && salePrice !== null && (
-            <p className="tracking-wider"> PKR {salePrice} </p>
+            <p className="tracking-wider text-[11px] min-[420px]:text-[12px]">PKR {salePrice} </p>
           )}
         </div>
       </div>
@@ -77,7 +77,7 @@ const isSoldOut = !hasStock
         alt={name}
         width={400}
         height={400}
-        className="object-cover object-center w-full group-hover:shadow-xl h-[380px]"
+        className="object-cover object-center w-full group-hover:shadow-xl h-[300px] min-[420px]:h-[380px]"
       />
 
       {onSale && (
@@ -87,17 +87,17 @@ const isSoldOut = !hasStock
       )}
 
       <h2
-        className={`${serif.className} capitalize text-base text-center tracking-wider mt-2 px-2 text-black `}
+        className={`${serif.className} capitalize text-sm min-[420px]:text-base text-center tracking-wider mt-2 px-2 text-black `}
       >
         {name}
       </h2>
 
       <div className="flex gap-5 text-black px-2 mt-1 items-center justify-center">
-        <p className={`${onSale ? 'line-through text-[12px]' : 'text-sm'}`}>
+        <p className={`${onSale ? 'line-through text-[11px] min-[420px]:text-[12px]' : 'text-sm'}`}>
           PKR {price} 
         </p>
         {onSale && salePrice !== null && (
-          <p className="tracking-wider">PKR {salePrice} </p>
+          <p className="tracking-wider text-[11px] min-[420px]:text-[12px]">PKR {salePrice} </p>
         )}
       </div>
     </Link>

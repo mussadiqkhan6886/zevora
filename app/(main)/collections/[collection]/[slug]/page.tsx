@@ -129,96 +129,118 @@ const jsonLd = {
 
 
   return (
-    <main className="pt-32 px-6 max-w-7xl mx-auto">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-     <section className="grid grid-cols-1 md:grid-cols-2 gap-12 min-h-screen">
-  <div>
-    <Images images={product.images} name={product.name} />
-  </div>
+  <main className="pt-27 pb-20 px-2 md:px-6 lg:px-12 max-w-[1400px] mx-auto ">
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
 
-  <div className="relative">
-    <div className="sticky top-20 self-start flex flex-col gap-6 lg:pt-4">
-      <h1 className={`${serif.className} text-4xl capitalize tracking-wide`}>
-        {product.name}
-      </h1>
-
-      <div className="flex items-center gap-4">
-        <span
-          className={`${
-            product.onSale
-              ? 'line-through text-zinc-400'
-              : 'text-xl font-medium'
-          }`}
-        >
-          PKR.{product.price}
-        </span>
-
-        {product.onSale && product.salePrice && (
-          <>
-            <span className="text-xl font-semibold">
-              PKR.{product.salePrice}
-            </span>
-            <span className="text-xs px-3 py-1 rounded-full border">
-              Sale
-            </span>
-          </>
-        )}
-      </div>
-
-      {product.category.includes('perfume') && (
-        <div className="text-sm space-y-1">
-          <p>
-            <span className="font-semibold">Volume:</span>{' '}
-            {product.variants?.[0]?.label}
-          </p>
-          <p>
-            <span className="font-semibold">Fragrance Type:</span>{' '}
-            {product.fragranceType}
-          </p>
+    {/* Product Hero Section */}
+    <section className="grid px-3 md:px-0 grid-cols-1 lg:grid-cols-11 gap-16 lg:gap-24">
+      
+      <div className="lg:col-span-6">
+        <div className="bg-stone-50 rounded-sm overflow-hidden">
+          <Images images={product.images} name={product.name} />
         </div>
-      )}
-
-      <AddToCartButton product={productClient} />
-
-      {/* FAKE TIMER DIV - Only shows if onSale is true */}
-      {product.onSale && (
-        <SaleTimer />
-      )}
-
-      <div>
-        <h3 className="font-semibold mb-1">Description</h3>
-        <p className="text-zinc-800">{product.description}</p>
       </div>
 
-      <p className="text-sm text-zinc-500">
-        Shipping calculated at checkout
-      </p>
-    </div>
-  </div>
-</section>
+      {/* Right: Product Details (Takes 5 columns) */}
+      <div className="lg:col-span-5 relative">
+        <div className="sticky top-32 flex flex-col gap-8">
+          
+          {/* Header */}
+          <div className="space-y-2">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-medium">
+              Fine Jewelry Collection
+            </p>
+            <h1 className={`${serif.className} text-4xl lg:text-5xl leading-tight text-zinc-900`}>
+              {product.name}
+            </h1>
+          </div>
 
-      <section className="mt-20">
-        <h3
-          className={`${serif.className} text-2xl md:text-3xl mb-10`}
-        >
-          You May Also Like
+          {/* Pricing - Refined */}
+          <div className="flex items-baseline gap-4 border-b border-stone-200 pb-5">
+            <span className={`text-2xl font-light tracking-tight ${product.onSale ? 'text-stone-400 line-through text-lg' : 'text-zinc-900'}`}>
+              PKR {product.price.toLocaleString()}
+            </span>
+            {product.onSale && product.salePrice && (
+              <span className="text-2xl font-medium text-rose-900">
+                PKR {product.salePrice.toLocaleString()}
+              </span>
+            )}
+          </div>
+
+          {/* Product Specifics (e.g. Perfume or Jewelry specs) */}
+          <div className="space-y-3 py-2">
+            {product.category.includes('perfume') && (
+              <div className="grid grid-cols-2 gap-4 text-[13px] uppercase tracking-wider text-stone-600">
+                <div>
+                  <span className="block text-[10px] text-stone-400 mb-1">Volume</span>
+                  {product.variants?.[0]?.label}
+                </div>
+                <div>
+                  <span className="block text-[10px] text-stone-400 mb-1">Concentration</span>
+                  {product.fragranceType}
+                </div>
+              </div>
+            )}
+            
+            {/* Added Luxury Note */}
+            <p className="text-[12px] italic text-stone-500">
+              * Each piece is handcrafted and may vary slightly in finish.
+            </p>
+          </div>
+
+          {/* Actions */}
+          <div className="space-y-4">
+            <AddToCartButton product={productClient} />
+            <p className="text-[11px] text-center uppercase tracking-widest text-stone-400">
+              Complimentary shipping on all orders
+            </p>
+          </div>
+
+          {/* Sale Timer - Styled as a subtle notification */}
+          {product.onSale && (
+            <div className="bg-stone-100 p-4 border-l-2 border-stone-800">
+              <SaleTimer />
+            </div>
+          )}
+
+          {/* Description - Collapsible or minimalist */}
+          <div className="pt-6 border-t border-stone-200">
+            <h3 className="text-[11px] uppercase tracking-[0.2em] font-bold mb-3 text-zinc-900">
+              Details & Materials
+            </h3>
+            <p className="text-stone-700 leading-relaxed text-[15px] font-light">
+              {product.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Related Products Section */}
+    <section className="mt-10 border-t border-stone-100 pt-20">
+      <div className="flex flex-col items-center mb-16 space-y-4">
+        <h3 className={`${serif.className} text-center text-3xl text-zinc-900`}>
+          Complementary Pieces
         </h3>
+        <div className="h-px w-12 bg-stone-400" />
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {relatedProducts.map((item: productType) => (
-            <CardTwo
-              key={item._id}
-              collectionSlug={item.category}
-              {...item}
-            />
-          ))}
-        </div>
-      </section>
-    </main>
-  );
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-10">
+        {relatedProducts.map((item: productType) => (
+          <div key={item._id} className="group">
+             <CardTwo
+                collectionSlug={item.category}
+                {...item}
+              />
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+);
 };
 
 export default Page;
