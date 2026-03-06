@@ -79,7 +79,7 @@ const About = () => {
             transition={{ duration: 0.8 }}
           >
             <Image 
-              src="/mission.jpg" 
+              src="/mission.webp" 
               alt="Zevora's mission and craftsmanship" 
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110" 

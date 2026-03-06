@@ -38,7 +38,7 @@ const isSoldOut = !hasStock
     return (
       <div className="relative mb-4 opacity-60 cursor-not-allowed">
         <Image
-          src={images?.[0] || '/placeholder.png'}
+          src={images?.[0] || '/header-logo.png'}
           alt={name}
           width={400}
           height={400}
@@ -73,7 +73,7 @@ const isSoldOut = !hasStock
       className="relative hover:scale-105 duration-400 transition-all group mb-4 block"
     >
       <Image
-        src={images?.[0] || '/placeholder.png'}
+        src={images?.[0] || '/header-logo.png'}
         alt={name}
         width={400}
         height={400}
