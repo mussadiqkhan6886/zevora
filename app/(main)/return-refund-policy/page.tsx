@@ -1,51 +1,24 @@
-"use client";
+import Refund from '@/components/customer/Return'
+import { Metadata } from 'next';
+import React from 'react'
 
-import React from "react";
-import { RefreshCcw, Box, DollarSign, CheckCircle } from "lucide-react";
-import { serif } from "@/lib/fonts";
-
-const RefundPolicyPage = () => {
-  return (
-    <main className="min-h-screen bg-gray-50 py-24 px-5 md:px-20 flex justify-center">
-      <div className="max-w-3xl bg-white shadow-lg rounded-lg p-8 md:p-12 space-y-6">
-        <h1 className={`${serif.className} text-3xl md:text-4xl font-bold text-gray-800 text-center`}>
-          Refund & Return Policy
-        </h1>
-
-        <p className="text-gray-700 text-lg md:text-xl">
-          <CheckCircle className="inline-block mr-2 text-green-500" />
-          We want you to be fully satisfied with your purchase.
-        </p>
-
-        <ul className="space-y-3 text-gray-700 text-lg md:text-xl">
-          <li className="flex items-center gap-3">
-            <RefreshCcw className="text-blue-500" />
-            Returns are accepted within 7 days of delivery.
-          </li>
-          <li className="flex items-center gap-3">
-            <Box className="text-yellow-500" />
-            Item must be unused and in original packaging.
-          </li>
-          <li className="flex items-center gap-3">
-            <CheckCircle className="text-green-500" />
-            Damaged or wrong items can be exchanged.
-          </li>
-          <li className="flex items-center gap-3">
-            <DollarSign className="text-purple-500" />
-            Refunds are processed within 5–7 working days after approval.
-          </li>
-          <li className="flex items-center gap-3">
-            <DollarSign className="text-red-500" />
-            Delivery charges are non-refundable.
-          </li>
-        </ul>
-
-        <p className="text-gray-700 text-lg md:text-xl">
-          To request a return, contact us with your <strong>order number</strong> and <strong>pictures of the product</strong>.
-        </p>
-      </div>
-    </main>
-  );
+export const metadata : Metadata= {
+  title: "Returns & Refund Policy ",
+  description: "Shop with confidence at Zevora Official. Our 7-day easy return and exchange policy covers damaged or incorrect items across Pakistan. Learn about our refund process and packaging requirements.",
+  alternates: {
+    canonical: "/return-refund-policy",
+  },
+  openGraph: {
+    title: "Easy 7-Day Returns | Zevora Official",
+    description: "Not satisfied? We offer hassle-free returns and exchanges on all unused luxury items within 7 days.",
+    images: ["/header-logo.png"],
+  },
 };
 
-export default RefundPolicyPage;
+const page = () => {
+  return (
+    <Refund />
+  )
+}
+
+export default page

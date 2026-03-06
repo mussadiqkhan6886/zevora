@@ -14,7 +14,7 @@ import Image from 'next/image'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Affordable Watches, Jewelry & Perfumes Online',
+  title: 'Zevora Official | Affordable Watches, Jewelry & Perfumes Online',
   description:
     'Shop premium watches, elegant jewelry sets, rings, bracelets, and long-lasting perfumes online in Pakistan at Zevora Official. Affordable luxury accessories with fast delivery, cash on delivery, and trusted quality.',
 
@@ -154,15 +154,16 @@ const page = () => {
   id="homepage-schema"
   type="application/ld+json"
   dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+  strategy="afterInteractive"
 />
       <FreeComp />
       <Hero />
       <Heading />
       <Collections />
+      <NewArrival />
       <Watches />
       <About />
       <Image src={"/hand.webp"} alt='hand image of jewelry and watches' width={1000} height={600} className='w-full h-[70vh] sm:h-[80vh]  sm:object-center object-right object-cover' />
-      <NewArrival />
       <Gallery />
     </main>
   )
