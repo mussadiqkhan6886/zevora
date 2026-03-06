@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
   await connectDB()
 
   const sampleProduct = await ProductSchema.findOne({ category: collection }).lean()
-  const ogImage = sampleProduct?.images?.[0] || '/logo.png'
+  const ogImage = sampleProduct?.images?.[0] || '/header-logo.png'
 
   const desc = collectionMetadata.find(item => item.slug === categoryName)
 

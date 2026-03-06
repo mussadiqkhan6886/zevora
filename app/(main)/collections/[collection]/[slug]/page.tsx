@@ -28,7 +28,7 @@ export async function generateMetadata({
     };
   }
 
-  const ogImage = product.images?.[0] || '/logo.png';
+  const ogImage = product.images?.[0] || '/header-logo.png';
 
   return {
     title: product.name,
