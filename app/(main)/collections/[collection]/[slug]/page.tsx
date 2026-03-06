@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: 'Product Not Found | Zevora',
+      title: 'Product Not Found | Zevora Official',
       description: 'This product could not be found.',
     };
   }
@@ -38,7 +38,7 @@ export async function generateMetadata({
     },
     keywords: product.keywords,
     openGraph: {
-      title: `${product.name} | Zevora`,
+      title: `${product.name} | Zevora Official`,
       description: product.description?.slice(0, 160),
       images: [{ url: ogImage }],
     },

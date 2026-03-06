@@ -14,7 +14,7 @@ import Image from 'next/image'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Zevora Official | Affordable Watches, Jewelry & Perfumes Online',
+  title: 'Zevora Official - Affordable Watches, Jewelry & Perfumes Online',
   description:
     'Shop premium watches, elegant jewelry sets, rings, bracelets, and long-lasting perfumes online in Pakistan at Zevora Official. Affordable luxury accessories with fast delivery, cash on delivery, and trusted quality.',
 

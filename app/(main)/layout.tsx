@@ -9,14 +9,14 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      'Zevora Official – Buy Watches, Jewelry & Perfumes Online in Pakistan',
+      'Zevora Official – Best Watches, Jewelry & Perfumes Online in Pakistan',
     template: '%s | Zevora Official',
   },
 
   description:
     'Shop premium watches, elegant jewelry sets, rings, bracelets, and long-lasting perfumes online in Pakistan at Zevora Official. Affordable luxury accessories with fast delivery, cash on delivery, and trusted quality.',
 
-  applicationName: 'Zevora',
+  applicationName: 'Zevora Official',
 
   keywords: [
     // Brand
@@ -67,9 +67,9 @@ export const metadata: Metadata = {
     'jewelry in karachi',
   ],
 
-  authors: [{ name: 'Zevora' }],
-  creator: 'Zevora',
-  publisher: 'Zevora',
+  authors: [{ name: 'Zevora Official' }],
+  creator: 'Zevora Official',
+  publisher: 'Zevora Official',
 
   formatDetection: {
     email: false,

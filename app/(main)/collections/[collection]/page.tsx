@@ -28,23 +28,23 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
       canonical: `/collections/${collection}`,
     },
     openGraph: {
-      title: `${categoryName} | Zevora`,
+      title: `${categoryName} | Zevora Official`,
       description: `Discover the best ${categoryName} products at Zevora. Elegant designs and fast delivery.`,
       url: `/collections/${collection}`,
       type: 'website',
-      siteName: 'Zevora',
+      siteName: 'Zevora Official',
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${categoryName} Collection - Zevora`,
+          alt: `${categoryName} Collection - Zevora Official`,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${categoryName} | Zevora`,
+      title: `${categoryName} | Zevora Official`,
       description: `Shop premium ${categoryName} products at Zevora. Elegant designs and fast delivery.`,
       images: [ogImage],
     },

@@ -14,25 +14,25 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'Collections | Zevora',
+    title: 'Collections | Zevora Official',
     description:
       'Browse all premium collections of watches, jewelry sets, and luxury perfumes. Find your perfect style.',
     url: '/collections',
     type: 'website',
-    siteName: 'Zevora',
+    siteName: 'Zevora Official',
     images: [
       {
         url: '/all.jpg',
         width: 1200,
         height: 630,
-        alt: 'Zevora Collections – Watches, Jewelry & Perfumes',
+        alt: 'Zevora Official Collections – Watches, Jewelry & Perfumes',
       },
     ],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Collections | Zevora',
+    title: 'Collections | Zevora Official',
     description:
       'Browse premium collections of watches, jewelry sets, and luxury perfumes. Find your perfect style.',
     images: ['/all.jpg'],
