@@ -117,3 +117,9 @@ export interface mediaType {
   publicId: string
   mediaType: "image" | "video"
 } 
+
+export interface ReviewType {
+  name: string
+  message: string
+  _id: string
+}
