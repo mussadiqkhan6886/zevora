@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
   const desc = collectionMetadata.find(item => item.slug === categoryName)
 
   return {
-    title: desc?.title,
+    title: `Trending ${desc?.title} for Women`,
     description: desc?.description,
     alternates: {
       canonical: `/collections/${collection}`,
