@@ -10,7 +10,7 @@
 @layer components {
   .swiper-btn {
     @apply w-11 h-11 rounded-full 
-           bg-header text-white
+           bg-ctr text-white
            flex items-center justify-center
            text-xl
            transition-all duration-300

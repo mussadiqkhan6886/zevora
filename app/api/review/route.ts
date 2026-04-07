@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/config/db";
+import { connectDB } from "@/lib/config/database";
 import { ReviewSchema } from "@/lib/models/ReviewSchema";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -37,7 +37,7 @@ export const POST = async (req: NextRequest) => {
       !message
     ) {
       return NextResponse.json(
-        { error: "All language fields are required" },
+        { error: "all fields are required" },
         { status: 400 }
       );
     }

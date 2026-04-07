@@ -1,35 +1,119 @@
 'use client'
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
+import Image from 'next/image'
+import { serif } from '@/lib/fonts' // Assuming your serif font is imported here
 
 const Heading = () => {
+  // Animation variants for staggered text reveal
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
+      },
+    },
+  } as Variants
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      filter: 'blur(0px)',
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+    },
+  } as Variants
+
+  const imageVariants = {
+    hidden: { scale: 0, opacity: 0, rotate: -10 },
+    visible: { 
+      scale: 1, 
+      opacity: 1, 
+      rotate: 0,
+      transition: { duration: 0.6, ease: "easeOut" } 
+    }
+  } as Variants
+
   return (
-    <div className='px-3 max-w-7xl mx-auto md:mt-7 mb-17 overflow-hidden'>
-      <motion.p 
-        // Initial state: Hidden, blurred, and shifted left
-        initial={{ opacity: 0, x: -50, filter: 'blur(10px)' }}
-        // Final state when in view
-        whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-        // Animation settings
-        transition={{ 
-          duration: 0.8, 
-          ease: "easeOut",
-          delay: 0.1 
-        }}
-        // Only trigger once
-        viewport={{ once: true, amount: 0.3 }}
-        className='text-justify md:text-center px-4 md:px-10 tracking-relaxed text-lg font-light leading-relaxed'
+    <section className="relative px-6 py-0 md:py-32 max-w-7xl mx-auto overflow-hidden">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className={`${serif.className} text-3xl md:text-5xl lg:text-6xl leading-[1.2] md:leading-[1.1] tracking-tight text-gray-900 text-center md:text-left`}
       >
-        <span className="font-semibold">Zevora Official</span> redefines luxury with an exquisite collection of 
-        premium watches, <strong className="font-normal italic">designer jewelry</strong>, and 
-        luxury <strong className="font-normal italic">perfumes</strong> at Pakistan’s most affordable prices. 
-        From timeless <strong className="font-normal italic">gold-plated pieces</strong> and durable 
-        <strong className="font-normal italic"> stainless steel rings</strong> to elegant handbags, our curated 
-        selection caters to every style. Based in <span className="font-medium">Lahore</span> and serving 
-        Islamabad, Karachi, and all over <span className="font-medium">Pakistan</span>, Zevora is your 
-        <strong> trusted</strong> destination for high-quality fashion that combines elegance with exceptional value.
-      </motion.p>
-    </div>
+        <motion.div variants={itemVariants} className="block mb-4">
+          <span className="font-semibold">Zevora Official</span> redefines luxury 
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="inline-flex flex-wrap items-center justify-center md:justify-start gap-x-4">
+          <span>with an exquisite collection of </span>
+          <div className="relative group inline-block">
+            <motion.div variants={imageVariants} className="inline-block align-middle">
+              <Image 
+                src="/watches.webp" 
+                alt="Jewelry" 
+                width={160} height={80} 
+                className="object-cover w-[90px] h-[45px] md:w-[140px] md:h-[70px] rounded-full grayscale hover:grayscale-0 transition-all duration-500 border border-gray-200 shadow-xl" 
+              />
+            </motion.div>
+          </div>
+          <span className="italic font-light">premium watches</span>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="inline-flex flex-wrap items-center justify-center md:justify-start gap-x-4">
+          <span className="font-normal italic">designer jewelry</span>
+          <div className="relative group inline-block">
+            <motion.div variants={imageVariants} className="inline-block align-middle">
+              <Image 
+                src="/silver earrings.webp" 
+                alt="Jewelry" 
+                width={160} height={80} 
+                className="object-cover w-[90px] h-[45px] md:w-[140px] md:h-[70px] rounded-full shadow-xl" 
+              />
+            </motion.div>
+          </div>
+          <span>and luxury</span>
+          <span className="underline decoration-1 underline-offset-8 decoration-ctr/30 italic">perfumes</span>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="inline-flex flex-wrap items-center justify-center md:justify-start gap-x-4">
+           <span>at Pakistan’s</span>
+           <motion.div variants={imageVariants} className="inline-block align-middle">
+              <Image 
+                src="/deals.jpg" 
+                alt="Luxury Deals" 
+                width={160} height={80} 
+                className="object-cover w-[90px] h-[45px] md:w-[140px] md:h-[70px] rounded-full shadow-lg" 
+              />
+           </motion.div>
+           <span>most</span>
+           <span className="font-bold">affordable prices.</span>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="block mt-6 text-lg md:text-2xl font-sans font-light text-gray-500 max-w-3xl leading-relaxed">
+          From timeless gold-plated pieces to durable stainless steel, our curated selection serves
+          <span className="text-gray-900 font-medium"> Lahore, Islamabad, and Karachi</span> with elegance.
+        </motion.div>
+      </motion.div>
+
+      {/* Modern Floating CTA or Footer Detail */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="mt-16 flex justify-center md:justify-start"
+      >
+        <div className="flex items-center gap-4 text-xs tracking-widest uppercase font-bold text-gray-400">
+          <div className="w-12 h-px bg-gray-300" />
+          <span>Trusted nationwide</span>
+        </div>
+      </motion.div>
+    </section>
   )
 }
 

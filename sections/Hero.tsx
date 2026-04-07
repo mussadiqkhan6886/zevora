@@ -17,7 +17,7 @@ const Hero = () => {
               transition={{ type: "spring", damping: 30, stiffness: 400 }}
               rotationInterval={2300}
           />
-        <Image src="/hero.webp" width={1000} height={1000} priority fetchPriority='high' alt='hero' className='w-full h-[77vh] md:h-[90vh] object-cover object-center' />
+        <Image src="/hero.webp" width={1000} height={1000} priority fetchPriority='high' alt='hero' className='w-full h-[77vh] md:h-[90vh] object-cover object-center rounded-b-4xl' />
     </section>
   )
 }
