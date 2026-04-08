@@ -35,7 +35,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: any) => {
         className="w-full py-7 flex justify-between items-center text-left transition-all group"
         onClick={onClick}
       >
-        <span className={`${serif.className} text-xl md:text-2xl text-zinc-900 group-hover:text-amber-800 transition-colors`}>
+        <span className={`${serif.className} text-lg sm:text-xl md:text-2xl text-zinc-900 group-hover:text-amber-800 transition-colors`}>
           {question}
         </span>
         <div className="ml-4 flex-shrink-0 text-stone-400 group-hover:text-zinc-900 transition-colors">
@@ -51,7 +51,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: any) => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="pb-8 text-stone-500 leading-relaxed max-w-3xl font-light text-base md:text-lg">
+            <p className="pb-8 text-stone-500 leading-relaxed max-w-3xl font-light text-sm md:text-lg">
               {answer}
             </p>
           </motion.div>
@@ -91,7 +91,7 @@ const FAQSection = () => {
           <span className="text-[10px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-4 block">
             Customer Care
           </span>
-          <h2 className={`${serif.className} text-4xl md:text-6xl text-zinc-900`}>
+          <h2 className={`${serif.className} text-3xl sm:text-4xl md:text-6xl text-zinc-900`}>
             Frequently Asked <br /> Questions
           </h2>
         </header>

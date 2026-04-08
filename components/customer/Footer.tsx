@@ -53,18 +53,19 @@ const Footer = () => {
               <Link href="/shipping-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Shipping & Delivery</Link>
               <Link href="/return-refund-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Returns & Exchanges</Link>
               <Link href="/privacy-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Privacy Policy</Link>
+              <Link href="/terms-service" className='text-[13px] block sm:hidden font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Terms of Service</Link>
             </nav>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className='border-t border-zinc-100 bg-zinc-50 py-8 px-6'>
-        <div className='max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] tracking-widest text-zinc-400 uppercase'>
+      <div className='border-t border-zinc-100 bg-zinc-50 py-8 px-3 sm:px-6'>
+        <div className='max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] sm:text-[11px] tracking-widest text-zinc-400 uppercase'>
           <p>&copy; {new Date().getFullYear()} ZEVORA OFFICIAL. ALL RIGHTS RESERVED.</p>
-          <div className='flex gap-8'>
-            <Link href="/terms-service" className='hover:text-zinc-900 transition-colors'>Terms of Service</Link>
-            <p className='hidden md:block'>Designed & Developed by <Link className="italic underline font-semibold text-zinc-900" target="_blank" href="https://scrupulous.vercel.app">Scrupulous</Link></p>
+          <div className='flex gap-1 sm:gap-3 md:gap-8'>
+            <Link href="/terms-service" className='hover:text-zinc-900 transition-colors hidden sm:block'>Terms of Service</Link>
+            <p className='block'>Designed & Developed by <Link className="italic underline font-semibold text-zinc-900" target="_blank" href="https://scrupulous.vercel.app">Scrupulous</Link></p>
           </div>
         </div>
       </div>
