@@ -3,6 +3,7 @@
 import { ReviewType } from '@/type';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { FiTrash } from 'react-icons/fi';
 
 const Page = () => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
@@ -44,7 +45,7 @@ const Page = () => {
       ) : reviews.length === 0 ? (
         <p>No reviews found.</p>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {reviews.map(review => (
             <div
               key={review._id}
@@ -52,7 +53,7 @@ const Page = () => {
             >
               <div className="mb-2">
                 <p className="font-semibold">
-                  EN: {review.name}
+                  {review.name}
                 </p>
                
               </div>
@@ -64,9 +65,9 @@ const Page = () => {
 
               <button
                 onClick={() => deleteReview(review._id)}
-                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition"
+                className="bg-red-500 text-white px-2 py-2 rounded hover:bg-red-600 transition"
               >
-                Delete
+                <FiTrash />
               </button>
             </div>
           ))}

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react'
-import { FiList, FiPlusCircle, FiShoppingBag } from 'react-icons/fi'
+import { FiList, FiPlusCircle, FiShoppingBag, FiStar } from 'react-icons/fi'
 
 const AdminHeader = () => {
   const router = useRouter()
@@ -37,6 +37,10 @@ const AdminHeader = () => {
             <Link href={"/admin-dashboard/media"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
                 <FiShoppingBag />
                 <span className='text-sm'>Media</span>
+            </Link>
+            <Link href={"/admin-dashboard/reviews"} className='flex gap-2 items-center border border-zinc-400 px-2 md:px-4 py-1.5'>
+                <FiStar />
+                <span className='text-sm'>Reviews</span>
             </Link>
         </div>
         <div className='flex gap-4 items-center'>
