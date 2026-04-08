@@ -48,9 +48,13 @@ export async function GET() {
       });
     });
 
-    menuItems.forEach(item => {
+    // 1. Get an array of unique category names
+    const uniqueCategories = [...new Set(menuItems.map(item => item.category))];
+
+    // 2. Map those unique categories to your URL objects
+    uniqueCategories.forEach(category => {
       urls.push({
-        loc: `https://www.zevoraofficial.com/collections/${item.category}`,
+        loc: `https://www.zevoraofficial.com/collections/${category}`,
         changefreq: "weekly",
         priority: 0.9,
       });
