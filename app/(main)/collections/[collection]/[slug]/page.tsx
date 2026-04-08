@@ -1,4 +1,5 @@
 import AddToCartButton from '@/components/customer/AddToCartButton';
+import BreadCrumps from '@/components/customer/BreadCrumps';
 import CardTwo from '@/components/customer/CardTwo';
 import Images from '@/components/customer/Images';
 import SaleTimer from '@/components/customer/SaleTimer'; // NEW IMPORT
@@ -167,7 +168,9 @@ const jsonLd = {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-    {/* Product Hero Section */}
+
+      <BreadCrumps collection={product.category} product={product.name} />
+
     <section className="grid px-3 md:px-0 grid-cols-1 lg:grid-cols-11 gap-16 lg:gap-24">
       
       <div className="lg:col-span-6">
