@@ -9,24 +9,34 @@ import Link from "next/link";
 
 const features = [
   { 
-    text: "Master Craftsmanship", 
+    text: "Complimentary Shipping", 
+    icon: <Truck size={24} />, 
+    desc: "Experience luxury delivered to your doorstep. Enjoy Free Shipping on all orders above PKR 5,000." 
+  },
+  { 
+    text: "Exclusive Surprise Gift", 
     icon: <Sparkles size={24} />, 
-    desc: "Every piece is a testament to precision, using handpicked premium materials." 
+    desc: "A token of our appreciation—receive a handcrafted accessory with every order exceeding PKR 5,000." 
   },
   { 
     text: "Direct-to-Consumer Luxury", 
     icon: <Award size={24} />, 
-    desc: "Eliminating middleman markups to provide high-end jewelry at honest prices." 
+    desc: "We eliminate middleman markups to provide world-class craftsmanship at honest, direct-to-you prices." 
   },
   { 
-    text: "Nationwide Logistics", 
-    icon: <Truck size={24} />, 
-    desc: "Insured and express delivery to Karachi, Lahore, Islamabad, and beyond." 
+    text: "Nationwide Express", 
+    icon: <MapPin size={24} />, // Changed icon for variety
+    desc: "Insured and rapid delivery reaching Karachi, Lahore, Islamabad, and every corner of Pakistan." 
+  },
+  { 
+    text: "Master Craftsmanship", 
+    icon: <ShieldCheck size={24} />, 
+    desc: "Every Zevora piece is a testament to precision, using premium, tarnish-free, and skin-friendly materials." 
   },
   { 
     text: "Concierge Support", 
     icon: <Headphones size={24} />, 
-    desc: "Our jewelry experts are available 24/7 to assist with your selection." 
+    desc: "Our dedicated jewelry experts are available 24/7 to assist you with selection and styling." 
   },
 ];
 
