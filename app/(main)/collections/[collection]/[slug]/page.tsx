@@ -79,6 +79,31 @@ const Page = async ({
     );
   }
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.zevoraofficial.com",
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": product.category,
+        "item": `https://www.zevoraofficial.com/collections/${product.category}`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": product.name,
+        "item": `https://www.zevoraofficial.com/collections/${product.category}/${product.slug}`,
+      },
+    ],
+  };
+
   const currentPrice = product.onSale ? product.salePrice : product.price;
 
 const offers = product.hasVariants 
@@ -117,6 +142,7 @@ const jsonLd = {
   }]})
 };
 
+
   const relatedProducts = await ProductSchema.aggregate([
     {
       $match: {
@@ -134,6 +160,11 @@ const jsonLd = {
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
+
+    <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
     {/* Product Hero Section */}
     <section className="grid px-3 md:px-0 grid-cols-1 lg:grid-cols-11 gap-16 lg:gap-24">
