@@ -15,7 +15,7 @@ import Reviews from '@/sections/Reviews'
 import ImageSection from '@/sections/ImageSection'
 
 export const metadata: Metadata = {
-  title: 'Zevora Official - Affordable Watches, Jewelry & Perfumes Online',
+  title: 'Zevora Official | Buy Watches, Jewelry & Perfumes Online in Pakistan',
   description:
     'Shop premium watches, elegant jewelry sets, rings, bracelets, and long-lasting perfumes online in Pakistan at Zevora Official. Affordable luxury accessories with fast delivery, cash on delivery, and trusted quality.',
 
@@ -46,6 +46,7 @@ export const metadata: Metadata = {
     'watches in Lahore',
     'watches in Karachi',
     'watches in Islamabad',
+    'branded watches Pakistan cheap',
 
     // Jewelry — high volume
     'jewelry online Pakistan',

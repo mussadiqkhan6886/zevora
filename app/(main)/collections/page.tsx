@@ -18,6 +18,10 @@ export const metadata: Metadata = {
     'online accessories collections pakistan',
     'buy jewelry watches online pakistan',
     'fashion collections pakistan',
+    'watches in Pakistan',
+    'buy watches online Pakistan',
+    'jewelry online Pakistan',
+    'affordable watches Lahore',
   ],
 
   openGraph: {

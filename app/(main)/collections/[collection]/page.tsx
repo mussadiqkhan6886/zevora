@@ -137,7 +137,7 @@ const breadcrumbJsonLd = {
 };
 
   return (
-    <main className='pt-16 lg:pt-30 px-3 max-w-7xl mx-auto'>
+    <main className='pt-16 lg:pt-20 px-3 max-w-7xl mx-auto'>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

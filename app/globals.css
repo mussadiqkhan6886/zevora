@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+html{
+  scroll-behavior: smooth;
+}
 
 @theme{
   --color-header: rgb(222, 196, 153);

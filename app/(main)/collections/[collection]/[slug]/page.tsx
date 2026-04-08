@@ -7,6 +7,7 @@ import { serif } from '@/lib/fonts';
 import ProductSchema from '@/lib/models/ProductSchema';
 import { productType } from '@/type';
 import { Metadata } from 'next';
+import Link from 'next/link';
 import React from 'react';
 
 export const revalidate = 60;
@@ -31,7 +32,7 @@ export async function generateMetadata({
   const ogImage = product.images?.[0] || '/header-logo.png';
 
   return {
-    title: product.name,
+    title: product.name + ' | Buy Online in Pakistan',
     description: product.description?.slice(0, 160),
     alternates: {
       canonical: `/collections/${product.category}/${product.slug}`,
@@ -182,7 +183,7 @@ const jsonLd = {
           {/* Header */}
           <div className="space-y-2">
             <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-medium">
-              Fine Jewelry Collection
+              Fine <Link className="italic text-stone-800 underline" href={`/collections/${product.category}`}>{product.category}</Link> Collection
             </p>
             <h1 className={`${serif.className} text-4xl lg:text-5xl leading-tight text-zinc-900`}>
               {product.name}

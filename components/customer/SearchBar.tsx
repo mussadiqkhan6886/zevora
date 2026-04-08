@@ -16,7 +16,7 @@ const SearchBar = ({isSearchOpen}: {isSearchOpen: (searchOpen: boolean) => void}
     };
 
   return (
-    <div className='w-full h-full bg-black/20 fixed inset-0 top-10'>
+    <div className='w-full h-full bg-black/20 fixed inset-0 top-0'>
       <div className='bg-white flex items-center justify-center py-10'>
         <form onSubmit={handleSearch} className='border flex items-center relative w-md sm:w-lg md:w-2xl lg:w-4xl px-5'>
             <p className='absolute text-[10px] text-zinc-700 top-2 left-5'>Search</p>

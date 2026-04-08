@@ -1,25 +1,73 @@
+import { collections } from '@/lib/constants'
 import { serif } from '@/lib/fonts'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { FiFacebook, FiInstagram } from 'react-icons/fi'
 
 const Footer = () => {
   return (
-    <footer className='border-t border-zinc-300 bg-zinc-100'>
-      <div className='flex flex-col justify-center items-center py-10'>
-        <p className={`${serif.className} text-lg`}>Subscribe to Our Socials</p>
-        <nav className='flex gap-4 pt-5'>
-          <Link aria-label='instagram link' href={"https://www.instagram.com/zevora._official/?__pwa=1"} target='_blank'><FiInstagram name='instagram icon' aria-label='instagram icon' className='text-xl' /></Link>
-          <Link aria-label='facebook link' href={"https://web.facebook.com/profile.php?id=61581131171531"} target='_blank'><FiFacebook name='facebook icon' aria-label='facebook icon' className='text-xl' /></Link>
-        </nav>
+    <footer className='border-t border-zinc-200 bg-white text-zinc-900'>
+      <div className='max-w-7xl mx-auto px-6 py-16 md:py-24'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+          
+          {/* Brand Column */}
+          <div className='space-y-6'>
+            <Link href="/" className={`mb-3 inline-block`}>
+              <Image src="/header-logo.png" alt="header logo in footer zevora official" width={180} height={120} />
+            </Link>
+            <p className='text-zinc-500 text-sm leading-relaxed max-w-xs font-light'>
+              Redefining luxury craftsmanship in Pakistan. From timeless timepieces to handcrafted jewelry, we bring elegance to your every moment.
+            </p>
+            <div className='flex gap-5 pt-2'>
+              <Link aria-label='Instagram' href="https://www.instagram.com/zevora._official/?__pwa=1" target='_blank' className='hover:text-amber-800 transition-colors'>
+                <FiInstagram size={20} />
+              </Link>
+              <Link aria-label='Facebook' href="https://web.facebook.com/profile.php?id=61581131171531" target='_blank' className='hover:text-amber-800 transition-colors'>
+                <FiFacebook size={20} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Collections Column - High SEO Value */}
+          <div className='lg:col-span-2'>
+            <h3 className='text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-zinc-600'>Collections</h3>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4'>
+              {collections.map((item) => (
+                <Link 
+                  key={item.link} 
+                  href={item.link}
+                  className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 hover:translate-x-1 transition-all'
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links Column */}
+          <div>
+            <h3 className='text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-zinc-400'>Client Services</h3>
+            <nav className='flex flex-col gap-4'>
+              <Link href="/about" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Our Story</Link>
+              <Link href="/contact-information" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Contact Us</Link>
+              <Link href="/shipping-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Shipping & Delivery</Link>
+              <Link href="/return-refund-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Returns & Exchanges</Link>
+              <Link href="/privacy-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Privacy Policy</Link>
+            </nav>
+          </div>
+        </div>
       </div>
-      <div className='border-t flex gap-4 flex-wrap items-center justify-center border-zinc-300 py-5 text-[12px] text-zinc-600'>
-        <p>&copy; {new Date().getFullYear()}, <Link href={"/"}>ZEVORA</Link></p>
-        <Link href={"/return-refund-policy"}>Refund Policy</Link>
-        <Link href={"/privacy-policy"}>Privacy Policy</Link>
-        <Link href={"/terms-service"}>Terms Of Service</Link>
-        <Link href={"/shipping-policy"}>Shipping Policy</Link>
-        <Link href={"/contact-information"}>Contact Information</Link>
+
+      {/* Bottom Bar */}
+      <div className='border-t border-zinc-100 bg-zinc-50 py-8 px-6'>
+        <div className='max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] tracking-widest text-zinc-400 uppercase'>
+          <p>&copy; {new Date().getFullYear()} ZEVORA OFFICIAL. ALL RIGHTS RESERVED.</p>
+          <div className='flex gap-8'>
+            <Link href="/terms-service" className='hover:text-zinc-900 transition-colors'>Terms of Service</Link>
+            <p className='hidden md:block'>Designed & Developed by <Link className="italic underline font-semibold text-zinc-900" target="_blank" href="https://scrupulous.vercel.app">Scrupulous</Link></p>
+          </div>
+        </div>
       </div>
     </footer>
   )

@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { serif } from "@/lib/fonts";
 import { FileText, AlertCircle, ShieldCheck, Scale, RefreshCw } from "lucide-react";
+import Link from "next/link";
 
 const terms = [
   {
@@ -96,9 +97,9 @@ const Terms = () => {
           <p className="text-sm text-gray-400 font-light italic text-center md:text-left">
             Last updated: March 2026. For questions, contact our support team.
           </p>
-          <button className="bg-[#1a1a1a] text-white px-10 py-4 rounded-full text-[10px] tracking-widest uppercase hover:bg-ctr transition-all">
+          <Link href="/" className="bg-[#1a1a1a] text-white px-10 py-4 rounded-full text-[10px] tracking-widest uppercase hover:bg-ctr transition-all">
             Return to Store
-          </button>
+          </Link>
         </motion.div>
       </div>
     </main>

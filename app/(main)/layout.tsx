@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      'Zevora Official – Best Watches, Jewelry & Perfumes Online in Pakistan',
+      'Zevora Official | Buy Watches, Jewelry & Perfumes Online in Pakistan',
     template: '%s | Zevora Official',
   },
 
