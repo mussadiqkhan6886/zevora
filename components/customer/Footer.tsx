@@ -31,7 +31,7 @@ const Footer = () => {
 
           {/* Collections Column - High SEO Value */}
           <div className='lg:col-span-2'>
-            <h3 className='text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-zinc-600'>Collections</h3>
+            <h3 className='text-[11px] uppercase tracking-[0.3em] font-bold mb-8 text-zinc-800'>Collections</h3>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4'>
               {collections.map((item) => (
                 <Link 
@@ -47,7 +47,7 @@ const Footer = () => {
 
           {/* Quick Links Column */}
           <div>
-            <h3 className='text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-zinc-400'>Client Services</h3>
+            <h3 className='text-[11px] uppercase tracking-[0.3em] font-bold mb-8 text-zinc-800'>Client Services</h3>
             <nav className='flex flex-col gap-4'>
               <Link href="/contact-information" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Contact Us</Link>
               <Link href="/shipping-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Shipping & Delivery</Link>
