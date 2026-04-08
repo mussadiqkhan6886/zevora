@@ -3,90 +3,95 @@
 import { lavish } from '@/lib/fonts';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 
-const FreeComp = () => {
+const FreeGiftPopup = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [once, setOnce] = useState(true)
 
   useEffect(() => {
     const hasSeenPopup = sessionStorage.getItem('free-gift-popup');
-
     if (!hasSeenPopup) {
-      setShowPopup(true);
+      // Small delay to let the page load before showing luxury
+      const timer = setTimeout(() => setShowPopup(true), 2000);
       sessionStorage.setItem('free-gift-popup', 'true');
+      return () => clearTimeout(timer);
     }
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-        setOnce(false)
-    }, 1400);
-  }, [])
-
-
-  if(!showPopup){
-    return null
-  }
-
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm">
-      
-      <div className="relative max-w-3xl w-[90%] rounded-xl  shadow-2xl animate-fadeIn">
-        
-        <button
-          onClick={() => setShowPopup(false)}
-          className="absolute top-3 right-3 z-10 text-black bg-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-200"
+    <AnimatePresence>
+      { showPopup && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-md"
         >
-          ✕
-        </button>
+          <motion.div 
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 10 }}
+            className="relative max-w-4xl w-full aspect-[16/10] md:aspect-[16/8] bg-white rounded-sm overflow-hidden shadow-[0_30px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col md:flex-row"
+          >
+            {/* Close Button - Minimalist */}
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-5 right-5 z-30 text-zinc-400 hover:text-zinc-900 transition-colors"
+              aria-label="Close"
+            >
+              <X size={20} strokeWidth={1.5} />
+            </button>
 
-        <div className="relative h-[400px] flex items-center justify-center text-center px-6">
-          
-          <Image
-            src="/gift.webp"
-            alt="Free Gift"
-            fill
-            className="object-cover"
-            priority
-          />
+            {/* Left Side: Imagery */}
+            <div className="relative w-full md:w-1/2 h-full bg-stone-100 overflow-hidden">
+              <Image
+                src="/gift.jpg"
+                alt="Zevora Exclusive Gift"
+                fill
+                className="object-cover transition-transform duration-[3000ms] hover:scale-105"
+                priority
+              />
+              <div className="absolute inset-0 bg-black/5" />
+            </div>
 
-          <div className="absolute inset-0 bg-black/10" />
+            {/* Right Side: Content */}
+            <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-center text-center p-10 md:p-14 bg-white">
+              <span className="text-[10px] uppercase tracking-[0.5em] text-amber-800 mb-6 font-bold">
+                Limited Celebration
+              </span>
+              
+              <h2 className={`${lavish.className} text-4xl lg:text-6xl text-zinc-900 leading-tight mb-6`}>
+                A Gift for <br /> The Connoisseur
+              </h2>
+              
+              <div className="w-12 h-px bg-stone-300 mb-8" />
+              
+              <p className="text-stone-500 text-sm md:text-base font-light leading-relaxed max-w-[350px] mb-10">
+                Receive an exclusive handcrafted accessory with your order above 
+                <span className="text-zinc-900 font-medium ml-1">PKR 5,000</span>.
+              </p>
 
-          <div className="relative z-10 text-white">
-            <h2 className={`${lavish.className} text-6xl md:text-8xl mb-4`}>
-              Get a Free Gift
-            </h2>
-            <p className="text-lg uppercase md:text-xl font-light">
-              On orders above <span className="font-bold">PKR 5,000</span>
-            </p>
-          </div>
+              <button 
+                onClick={() => setShowPopup(false)}
+                className="group relative overflow-hidden bg-zinc-900 text-white px-10 py-5 text-[10px] uppercase tracking-[0.3em] flex items-center justify-center transition-all hover:bg-zinc-800"
+              >
+                <span className="relative z-10">Claim My Offer</span>
+                <div className="absolute inset-0 bg-amber-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </button>
 
-          {once && <Image
-            src="/confetti.gif"
-            alt="Confetti"
-            width={250}
-            height={250}
-            className="object-cover pointer-events-none absolute bottom-0  "
-          />}
-          {once && <Image
-            src="/confetti.gif"
-            alt="Confetti"
-            width={250}
-            height={250}
-            className="object-cover pointer-events-none absolute right-10 top-0  "
-          />}
-          {once && <Image
-            src="/confetti.gif"
-            alt="Confetti"
-            width={250}
-            height={250}
-            className="object-cover pointer-events-none absolute -left-20 -top-20 "
-          />}
-        </div>
-      </div>
-    </div>
+              <p className="mt-6 text-[9px] uppercase tracking-[0.1em] text-stone-400">
+                * Offer applied automatically at checkout
+              </p>  
+            </div>
+
+            {/* Subtle Inner Border for "Luxury Print" feel */}
+            <div className="absolute inset-4 border border-stone-100 pointer-events-none hidden md:block" />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
-export default FreeComp;
+export default FreeGiftPopup;
