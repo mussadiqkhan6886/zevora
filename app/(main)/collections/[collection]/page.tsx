@@ -137,7 +137,7 @@ const breadcrumbJsonLd = {
 };
 
   return (
-    <main className='pt-20 lg:pt-30 px-3 max-w-7xl mx-auto'>
+    <main className='pt-16 lg:pt-30 px-3 max-w-7xl mx-auto'>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -155,7 +155,7 @@ const breadcrumbJsonLd = {
         </div>
         <p className="text-sm text-zinc-500">{products.length} products</p>
       </div>
-      <section className='grid gap-6 grid-col-2 md:grid-cols-3 lg:grid-cols-4 my-10'>
+      <section className='grid gap-3 md:gap-6 lg:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-10'>
         {products.map((item : productType) => (
             <CardTwo key={item._id} collectionSlug={collection} {...item} />
         ))}

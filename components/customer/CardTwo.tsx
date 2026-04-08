@@ -42,7 +42,7 @@ const isSoldOut = !hasStock
           alt={name}
           width={400}
           height={400}
-          className="object-cover object-center w-full h-[360px] min-[420px]:h-[380px]"
+          className="object-cover object-center w-full h-[380px]"
         />
 
         <div className="absolute bg-white rounded-full top-5 right-5 text-[12px] px-3 py-1 text-black">
@@ -77,7 +77,7 @@ const isSoldOut = !hasStock
         alt={name}
         width={400}
         height={400}
-        className="object-cover object-center w-full group-hover:shadow-xl h-[300px] min-[420px]:h-[380px]"
+        className="object-cover object-center w-full group-hover:shadow-xl h-[380px]"
       />
 
       {onSale && (
