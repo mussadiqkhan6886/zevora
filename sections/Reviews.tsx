@@ -125,9 +125,9 @@ const Reviews = () => {
           </Swiper>
         )}
 
-        <div className="flex items-center justify-center gap-4 mt-8">
-          <button ref={prevRef} className="p-4 rounded-full border border-gray-200 hover:bg-white hover:shadow-md transition-all"><FiArrowLeft /></button>
-          <button ref={nextRef} className="p-4 rounded-full border border-gray-200 hover:bg-white hover:shadow-md transition-all"><FiArrowRight /></button>
+        <div className="flex items-center justify-center gap-4">
+          <button ref={prevRef} className="p-4 bg-ctr rounded-full text-white hover:text-black border border-gray-200 hover:bg-white hover:shadow-md transition-all"><FiArrowLeft /></button>
+          <button ref={nextRef} className="p-4 bg-ctr rounded-full text-white hover:text-black border border-gray-200 hover:bg-white hover:shadow-md transition-all"><FiArrowRight /></button>
         </div>
       </div>
 
