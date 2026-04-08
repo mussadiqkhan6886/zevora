@@ -11,7 +11,7 @@ export default function ScrollZoom({ children }: { children: React.ReactNode }) 
   });
 
   // Scale from 0.8 (smaller) to 1 (full size)
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
   // Optional: Add a slight fade-in
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0.5, 1]);
 
