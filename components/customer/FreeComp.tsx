@@ -21,7 +21,7 @@ const FreeGiftPopup = () => {
 
   return (
     <AnimatePresence>
-      { showPopup && (
+      {showPopup && (
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -32,7 +32,7 @@ const FreeGiftPopup = () => {
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 10 }}
-            className="relative max-w-4xl w-full aspect-[16/10] md:aspect-[16/8] bg-white rounded-sm overflow-hidden shadow-[0_30px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col md:flex-row"
+            className="relative max-w-4xl w-full aspect-[16/10] md:aspect-[16/8] bg-white rounded-sm overflow-hidden shadow-[0_30px_100px_-20px_rgba(0,0,0,0.5)] flex flex-col h-full md:h-fit md:flex-row"
           >
             {/* Close Button - Minimalist */}
             <button
@@ -43,7 +43,7 @@ const FreeGiftPopup = () => {
               <X size={20} strokeWidth={1.5} />
             </button>
 
-            {/* Left Side: Imagery */}
+            {/* Left Side: Image  ry */}
             <div className="relative w-full md:w-1/2 h-full bg-stone-100 overflow-hidden">
               <Image
                 src="/gift.jpg"
