@@ -49,7 +49,6 @@ const Footer = () => {
           <div>
             <h3 className='text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-zinc-400'>Client Services</h3>
             <nav className='flex flex-col gap-4'>
-              <Link href="/about" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Our Story</Link>
               <Link href="/contact-information" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Contact Us</Link>
               <Link href="/shipping-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Shipping & Delivery</Link>
               <Link href="/return-refund-policy" className='text-[13px] font-light text-zinc-600 hover:text-zinc-900 transition-colors'>Returns & Exchanges</Link>
