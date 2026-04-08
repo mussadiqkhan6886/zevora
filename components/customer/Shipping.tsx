@@ -52,7 +52,7 @@ const Shipping = () => {
             </div>
             <div>
               <p className="text-sm text-gray-400 uppercase tracking-wider">Estimated Time</p>
-              <p className="text-xl font-semibold">3 – 6 Working Days</p>
+              <p className="text-xl font-semibold">3 – 5 Working Days</p>
             </div>
           </div>
           <div className="bg-white p-8 rounded-3xl border border-gray-100 flex items-center gap-6 shadow-sm">

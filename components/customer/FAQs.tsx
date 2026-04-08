@@ -6,9 +6,9 @@ import { Plus, Minus } from "lucide-react";
 import { serif } from "@/lib/fonts";
 
 const faqs = [
-  {
-    question: "What materials are used in Zevora jewelry?",
-    answer: "We use premium-grade 316L Stainless Steel for its hypoallergenic properties and durability. Our gold pieces feature thick 18K Gold Plating, ensuring a deep, authentic luster that stands the test of time while remaining accessible."
+ {
+    question: "Do you offer Cash on Delivery (COD) all over Pakistan?",
+    answer: "Yes, we offer Cash on Delivery to all major cities and towns across Pakistan. You only pay when the parcel reaches your doorstep. For your peace of mind, all our shipments are sent through reliable couriers like TCS and Leopards."
   },
   {
     question: "How long does delivery take within Pakistan?",
@@ -22,10 +22,10 @@ const faqs = [
     question: "What is your return and exchange policy?",
     answer: "We offer a 7-day return and exchange window for unworn items in their original packaging. Your satisfaction is our priority; if the piece isn't perfect for you, we'll make it right."
   },
-  {
-    question: "How should I care for my Zevora pieces?",
-    answer: "To maintain brilliance, avoid contact with perfumes, hairsprays, and water. Wipe your jewelry with a soft cloth after wearing and store it in the provided Zevora luxury box to prevent oxidation."
-  }
+ {
+    question: "Do you offer Free Delivery?",
+    answer: "Yes! We offer complimentary shipping across Pakistan on all orders above PKR 5,000. For orders below this amount, a small standard shipping fee applies. We ensure your luxury pieces are packed securely and delivered to your doorstep at no extra cost to you."
+  },
 ];
 
 const FAQItem = ({ question, answer, isOpen, onClick }: any) => {
@@ -79,7 +79,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="bg-white py-20 px-6 md:px-12 lg:py-32">
+    <section className="bg-white pb-10 px-6 md:px-12">
       {/* Injecting the Schema into the Head */}
       <script
         type="application/ld+json"
