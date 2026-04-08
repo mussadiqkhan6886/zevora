@@ -13,6 +13,7 @@ import Image from 'next/image'
 import Script from 'next/script'
 import Reviews from '@/sections/Reviews'
 import ImageSection from '@/sections/ImageSection'
+import FAQSection from '@/components/customer/FAQs'
 
 export const metadata: Metadata = {
   title: 'Zevora Official | Buy Watches, Jewelry & Perfumes Online in Pakistan',
@@ -194,6 +195,7 @@ const page = () => {
       <ImageSection />
       <Gallery />
       <Reviews />
+      <FAQSection />
     </main>
   )
 }
