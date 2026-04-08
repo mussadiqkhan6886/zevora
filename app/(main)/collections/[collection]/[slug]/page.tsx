@@ -157,7 +157,7 @@ const jsonLd = {
 
 
   return (
-  <main className="pt-27 lg:pt-33 pb-20 px-2 md:px-6 lg:px-12 max-w-[1400px] mx-auto ">
+  <main className="pt-19 lg:pt-25 pb-20 px-2 md:px-6 lg:px-12 max-w-[1400px] mx-auto ">
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

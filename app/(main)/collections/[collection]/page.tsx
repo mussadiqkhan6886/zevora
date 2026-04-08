@@ -1,3 +1,4 @@
+import BreadCrumps from '@/components/customer/BreadCrumps'
 import CardTwo from '@/components/customer/CardTwo'
 import SortSelect from '@/components/customer/SortSelect'
 import { connectDB } from '@/lib/config/database'
@@ -137,7 +138,7 @@ const breadcrumbJsonLd = {
 };
 
   return (
-    <main className='pt-16 lg:pt-20 px-3 max-w-7xl mx-auto'>
+    <main className='pt-18 lg:pt-24 px-3 max-w-7xl mx-auto'>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -146,6 +147,8 @@ const breadcrumbJsonLd = {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      <BreadCrumps collection={collection} />
+
       <h1 className={`${serif.className} capitalize text-4xl my-10 mb-7`}>{desc?.title}</h1>
       <p className='mb-8 text-zinc-700'>{desc?.description}</p>
       <div className='flex justify-between items-center'>

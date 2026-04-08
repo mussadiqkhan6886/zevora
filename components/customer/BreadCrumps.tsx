@@ -9,8 +9,8 @@ type Props = {
 
 const BreadCrumps = ({collection, product}: Props) => {
   return (
-    <div>
-      <Link href="/">Home</Link> <FiChevronRight /> <Link href={`/collections/${collection}`}>{collection}</Link> <FiChevronRight /> {product}
+    <div className='flex ml-4 md:ml-0 gap-1 uppercase text-sm text-zinc-600 items-center my-4'>
+      <Link href="/">Home</Link> <FiChevronRight /> <Link href={`/collections/${collection}`}>{collection}</Link> {product && <FiChevronRight />} {product}
     </div>
   )
 }
