@@ -3,129 +3,156 @@
 import { serif } from "@/lib/fonts";
 import React from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, Truck, Headphones, Sparkles, Award } from "lucide-react";
+import { ShieldCheck, Truck, Headphones, Sparkles, Award, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const features = [
-  { text: "Premium Quality", icon: <Sparkles size={24} />, desc: "Handpicked luxury materials." },
-  { text: "Affordable Luxury", icon: <Award size={24} />, desc: "High-end style without the markup." },
-  { text: "Express Delivery", icon: <Truck size={24} />, desc: "Swift shipping across Pakistan." },
-  { text: "24/7 Support", icon: <Headphones size={24} />, desc: "Dedicated to your satisfaction." },
+  { 
+    text: "Master Craftsmanship", 
+    icon: <Sparkles size={24} />, 
+    desc: "Every piece is a testament to precision, using handpicked premium materials." 
+  },
+  { 
+    text: "Direct-to-Consumer Luxury", 
+    icon: <Award size={24} />, 
+    desc: "Eliminating middleman markups to provide high-end jewelry at honest prices." 
+  },
+  { 
+    text: "Nationwide Logistics", 
+    icon: <Truck size={24} />, 
+    desc: "Insured and express delivery to Karachi, Lahore, Islamabad, and beyond." 
+  },
+  { 
+    text: "Concierge Support", 
+    icon: <Headphones size={24} />, 
+    desc: "Our jewelry experts are available 24/7 to assist with your selection." 
+  },
 ];
 
 const About = () => {
   return (
-    <section className="bg-[#FCF9F6] h-full text-[#1a1a1a] py-20 px-6 md:px-12 overflow-hidden">
+    <section className="bg-[#FCF9F6] h-full text-[#1a1a1a] py-20 px-6 md:px-12 overflow-hidden border-t border-stone-100">
       <div className="max-w-7xl flex flex-col mx-auto">
         
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        {/* Header Section: SEO-Optimized Heading */}
+        <header className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
             <motion.span 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-4 block"
+              className="text-[10px] uppercase tracking-[0.4em] text-amber-800 font-bold mb-4 block"
             >
-              The Zevora Legacy
+              The Zevora Legacy — Est. 2024
             </motion.span>
             <motion.h2
-              className={`${serif.className} text-4xl sm:text-5xl md:text-[67px] leading-tight font-light`}
+              className={`${serif.className} text-4xl sm:text-5xl md:text-[60px] leading-[1.1] font-light text-zinc-900`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              Crafting Elegance <br /> For Your Every Moment
+              Defining the New Standard of <br /> 
+              <span className="italic">Luxury in Pakistan</span>
             </motion.h2>
           </div>
+          
+          {/* Trust Badge */}
           <motion.div 
-            className="flex items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            className="flex items-center gap-5 bg-white p-5 pr-8 rounded-full shadow-sm border border-stone-200"
+            whileHover={{ y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
-            <div className="bg-amber-100 p-3 rounded-full text-amber-700">
-              <ShieldCheck size={32} />
+            <div className="bg-stone-900 p-3 rounded-full text-white">
+              <ShieldCheck size={28} />
             </div>
             <div>
-              <p className="text-2xl font-bold">80k+</p>
-              <p className="text-sm text-gray-500">Satisfied Clients</p>
+              <p className="text-xl font-bold leading-none italic">80k+</p>
+              <p className="text-[10px] uppercase tracking-widest text-stone-500 mt-1">Verified Experiences</p>
             </div>
           </motion.div>
-        </div>
+        </header>
 
-        {/* Mission Statement Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 h-auto  gap-6 mb-6">
-          <motion.div 
-            className="bg-white  p-8 rounded-3xl border border-gray-100 flex flex-col justify-center shadow-sm"
+        {/* Mission Statement: The "Why Us" */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <motion.article 
+            className="bg-white p-10 md:p-16 rounded-[40px] border border-stone-100 flex flex-col justify-center shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)]"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
-            <p className={`${serif.className}  text-xl md:text-2xl tracking-wide leading-snug text-[#1a1a1a] italic`}>
-              "We believe that luxury should be accessible. Our mission is to bring 
-              premium watches and jewelry to every corner of Pakistan, combining 
-              timeless design with unmatched craftsmanship."
+            <p className={`${serif.className} text-xl md:text-3xl tracking-tight text-zinc-800`}>
+              "We believe luxury isn't a price tag it's an experience. Our mission is to democratize 
+              premium watches and fine jewelry across Pakistan, blending 
+              timeless aesthetics with <span className="text-amber-800">uncompromising quality</span>."
             </p>
-          </motion.div>
+          </motion.article>
 
           <motion.div 
-            className="relative overflow-hidden min-h-[300px] md:h-full rounded-3xl border border-gray-100 shadow-sm group"
+            className="relative overflow-hidden min-h-[350px] rounded-[40px] shadow-sm group"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
             <Image 
               src="/mission.webp" 
-              alt="Zevora's mission and craftsmanship" 
+              alt="Zevora luxury craftsmanship - Premium Watches and Jewelry Pakistan" 
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110" 
+              className="object-cover transition-transform duration-1000 group-hover:scale-105" 
             />
-            <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60" />
           </motion.div>
         </div>
 
-        {/* Feature Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              className="bg-white p-8 rounded-3xl border border-gray-100 group hover:bg-ctr transition-colors duration-500 cursor-default"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-            >
-              <div className="text-amber-700 group-hover:text-amber-400 transition-colors mb-6">
-                {feature.icon}
-              </div>
-              <h4 className="text-xl font-semibold mb-2 group-hover:text-white transition-colors">
-                {feature.text}
-              </h4>
-              <p className="text-sm text-gray-400 group-hover:text-gray-400 transition-colors font-light">
-                {feature.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+        {/* Value Proposition Grid */}
+        <section className="mt-12">
+          <div className="flex items-center gap-4 mb-10">
+            <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-stone-900">Why Connoisseurs Choose Zevora</h3>
+            <div className="h-px flex-1 bg-stone-200" />
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-8 rounded-3xl border border-stone-100 hover:border-stone-900 transition-all duration-500 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="text-stone-900 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h4 className="text-lg font-bold mb-3 text-zinc-900">
+                  {feature.text}
+                </h4>
+                <p className="text-sm text-stone-500 leading-relaxed font-light">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-        {/* Footer */}
-        <motion.div 
-          className="text-center border-t border-gray-200 pt-10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-500 max-w-xl mx-auto mb-8 font-light">
-            Experience the Zevora standard. Based in Lahore, serving Islamabad, Karachi, and all over Pakistan.
+        {/* SEO Footer with Geo-Tagging */}
+        <footer className="text-center border-t border-stone-200 pt-12">
+          <div className="flex items-center justify-center gap-2 text-stone-400 mb-4">
+            <MapPin size={14} />
+            <span className="text-[11px] uppercase tracking-[0.2em]">Based in Lahore • Shipping Nationwide</span>
+          </div>
+          <p className="text-stone-500 max-w-2xl mx-auto mb-10 font-light text-[15px] leading-relaxed">
+            From the heart of Lahore to the streets of Islamabad and around the world, we are proud to be Pakistan's 
+            fastest-growing luxury destination. Experience the Zevora standard today.
           </p>
-          <Link href="/collections" className="bg-ctr text-white px-10 py-4 rounded-full text-xs tracking-[0.2em] uppercase transition-all shadow-lg active:scale-95">
-            Explore Collection
+          <Link 
+            href="/collections" 
+            className="inline-block bg-zinc-900 text-white px-12 py-5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-zinc-800 transition-all shadow-xl active:scale-95"
+          >
+            Enter the Collection
           </Link>
-        </motion.div>
+        </footer>
       </div>
     </section>
   );

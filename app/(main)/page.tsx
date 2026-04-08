@@ -12,6 +12,7 @@ import Collections from '@/sections/Collections'
 import Image from 'next/image'
 import Script from 'next/script'
 import Reviews from '@/sections/Reviews'
+import ImageSection from '@/sections/ImageSection'
 
 export const metadata: Metadata = {
   title: 'Zevora Official - Affordable Watches, Jewelry & Perfumes Online',
@@ -189,7 +190,7 @@ const page = () => {
       <NewArrival />
       <Watches />
       <About />
-      <Image src={"/hand.webp"} alt='hand image of jewelry and watches' width={1000} height={600} className='w-full h-[70vh] sm:h-[80vh]  sm:object-center object-right object-cover' />
+      <ImageSection />
       <Gallery />
       <Reviews />
     </main>
