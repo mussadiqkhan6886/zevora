@@ -59,7 +59,7 @@ const Reviews = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="text-left">
-            <h2 className={`${serif.className} text-4xl md:text-5xl font-bold text-gray-900 mb-2`}>
+            <h2 className={`${serif.className} text-[30px] sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2`}>
               What Customers Say
             </h2>
             <p className="text-gray-500 font-light tracking-wide">Real stories from our global community.</p>

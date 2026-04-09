@@ -42,7 +42,7 @@ const features = [
 
 const About = () => {
   return (
-    <section className="bg-[#FCF9F6] h-full text-[#1a1a1a] py-20 px-6 md:px-12 overflow-hidden border-t border-stone-100">
+    <section className="bg-[#FCF9F6] h-full text-[#1a1a1a] py-20 px-4 sm:px-6 md:px-12 overflow-hidden border-t border-stone-100">
       <div className="max-w-7xl flex flex-col mx-auto">
         
         {/* Header Section: SEO-Optimized Heading */}
@@ -87,7 +87,7 @@ const About = () => {
         {/* Mission Statement: The "Why Us" */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <motion.article 
-            className="bg-white p-10 md:p-16 rounded-[40px] border border-stone-100 flex flex-col justify-center shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)]"
+            className="bg-white p-7 sm:p-10 md:p-16 rounded-[40px] border border-stone-100 flex flex-col justify-center shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)]"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

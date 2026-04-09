@@ -49,7 +49,7 @@ const Collections = () => {
         <div className="w-full">
           <div className='max-w-7xl mx-auto px-4'>
             <div className='flex justify-between items-center mt-17 md:mt-10 mb-6 sm:mb-10'>
-                <h2 className={`${serif.className} text-[27px] sm:text-[42px] leading-12 italic`}>
+                <h2 className={`${serif.className} text-[26px] sm:text-[42px] leading-9 sm:leading-12 italic`}>
                     Explore Our <br /> Signature Collections
                 </h2>
                 <Link href={"/collections/all"} className='hidden border-b pb-1 uppercase font-light text-lg md:flex gap-2 items-center'>
