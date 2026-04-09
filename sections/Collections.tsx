@@ -42,14 +42,14 @@ const Collections = () => {
   const x = useTransform(scrollYProgress, [0, 1], xRange);
 
   return (
-    <section ref={targetRef} className="relative h-[400vh] bg-white">
+    <section ref={targetRef} className="relative h-[600vh] bg-white">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         
         {/* We move the max-w-7xl inside so the container can stretch full-width for the scroll */}
         <div className="w-full">
           <div className='max-w-7xl mx-auto px-4'>
             <div className='flex justify-between items-center mt-17 md:mt-10 mb-6 sm:mb-10'>
-                <h2 className={`${serif.className} text-3xl sm:text-[42px] leading-12 italic`}>
+                <h2 className={`${serif.className} text-[27px] sm:text-[42px] leading-12 italic`}>
                     Explore Our <br /> Signature Collections
                 </h2>
                 <Link href={"/collections/all"} className='hidden border-b pb-1 uppercase font-light text-lg md:flex gap-2 items-center'>

@@ -38,7 +38,7 @@ const Heading = () => {
   } as Variants
 
   return (
-    <section className="relative px-6 py-0 md:py-32 max-w-7xl mx-auto overflow-hidden">
+    <section className="relative px-4 sm:px-6 py-0 md:py-32 max-w-7xl mx-auto overflow-hidden">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -81,7 +81,7 @@ const Heading = () => {
           <span className="underline decoration-1 underline-offset-8 decoration-ctr/30 italic">perfumes</span>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="inline-flex flex-wrap items-center justify-center md:justify-start gap-x-4">
+        <motion.div variants={itemVariants} className="inline-flex flex-wrap items-center justify-center md:justify-start gap-x-3">
            <span>at Pakistan’s</span>
            <motion.div variants={imageVariants} className="inline-block align-middle">
               <Image 
@@ -91,13 +91,12 @@ const Heading = () => {
                 className="object-cover w-[90px] h-[45px] md:w-[140px] md:h-[70px] rounded-full shadow-lg" 
               />
            </motion.div>
-           <span>most</span>
-           <span className="font-bold">affordable prices.</span>
+           <span>most affordable prices.</span>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="block mt-6 text-lg md:text-2xl font-sans font-light text-gray-500 max-w-3xl leading-relaxed">
+        <motion.div variants={itemVariants} className="block mt-6 text-lg md:text-2xl font-sans font-light text-gray-600 max-w-3xl leading-relaxed">
           From timeless gold-plated pieces to durable stainless steel, our curated selection serves
-          <span className="text-gray-900 font-medium"> Lahore, Islamabad, and Karachi</span> with elegance.
+          <span className="text-gray-900 font-medium"> Lahore, Islamabad and Karachi</span> with elegance.
         </motion.div>
       </motion.div>
     </section>

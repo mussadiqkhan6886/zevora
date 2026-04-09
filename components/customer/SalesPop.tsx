@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { productType } from '@/type';
 
 const cities = ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Rawalpindi", "Multan", "Peshawar", "Quetta", "Sialkot", "Gujranwala", "Mardan"];
-const names = ["Ayesha", "Sana", "Zainab", "Fatima", "Hina", "Maryam", "Kiran", "Amna", "Sadia", "Anum", "Hira", "Jannat", "Laiba", "Ahmed", "Kashaf", "Manwahid hussain", "omer", "Khusbakht", "Gulwareen"];
+const names = ["Ayesha", "Sana", "Zainab", "Fatima", "Hina", "Maryam", "Kiran", "Amna", "Sadia", "Anum", "Hira", "Laiba", "Ahmed", "Kashaf", "Manwahid hussain", "omer", "Khusbakht", "Gulwareen"];
 
 const SalesPop = () => {
   const [show, setShow] = useState(false);
@@ -47,12 +47,12 @@ const SalesPop = () => {
       setShow(true);
 
       // Hide after 6 seconds
-      setTimeout(() => setShow(false), 6000);
+      setTimeout(() => setShow(false), 4000);
     };
 
     // Initial delay 5s, then every 20s to keep it realistic
-    const initialTimeout = setTimeout(triggerPop, 5000);
-    const interval = setInterval(triggerPop, 25000);
+    const initialTimeout = setTimeout(triggerPop, 6000);
+    const interval = setInterval(triggerPop, 30000);
 
     return () => {
       clearTimeout(initialTimeout);
@@ -84,7 +84,7 @@ const SalesPop = () => {
             purchased <span className="text-red-600 font-semibold">{data.product}</span>
           </Link>
           <div className="flex items-center gap-2 mt-1.5">
-            <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
+            <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">
               {data.time}
             </span>
           </div>

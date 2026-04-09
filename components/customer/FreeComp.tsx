@@ -13,7 +13,7 @@ const FreeGiftPopup = () => {
     const hasSeenPopup = sessionStorage.getItem('free-gift-popup');
     if (!hasSeenPopup) {
       // Small delay to let the page load before showing luxury
-      const timer = setTimeout(() => setShowPopup(true), 1500);
+      const timer = setTimeout(() => setShowPopup(true), 1000);
       sessionStorage.setItem('free-gift-popup', 'true');
       return () => clearTimeout(timer);
     }
