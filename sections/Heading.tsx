@@ -100,19 +100,6 @@ const Heading = () => {
           <span className="text-gray-900 font-medium"> Lahore, Islamabad, and Karachi</span> with elegance.
         </motion.div>
       </motion.div>
-
-      {/* Modern Floating CTA or Footer Detail */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="mt-16 flex justify-center md:justify-start"
-      >
-        <div className="flex items-center gap-4 text-xs tracking-widest uppercase font-bold text-gray-400">
-          <div className="w-12 h-px bg-gray-300" />
-          <span>Trusted nationwide</span>
-        </div>
-      </motion.div>
     </section>
   )
 }

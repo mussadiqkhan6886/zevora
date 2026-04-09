@@ -12,8 +12,7 @@ type Props = {
 export default function SmoothScroll({ children }: Props) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      smooth: true,
+      duration: 1.3,
     });
 
     gsap.registerPlugin(ScrollTrigger);

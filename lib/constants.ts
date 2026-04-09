@@ -46,16 +46,16 @@ export const collections = [
     {image: "/bags.jpg",name: "Bags", link: "/collections/bags"},
   ]
   
-  export const signature = [
-    {image: "/watches.webp",name: "Watches", link: "/collections/watches"},
-    {image: "/rings.webp",name: "Rings", link: "/collections/rings"},
-    {image: "/silver bracelets.webp",name: "Bracelets ", link: "/collections/stainless-steel-bracelets"},
-    {image: "/silver earrings.webp",name: "Earrings", link: "/collections/stainless-steel-earrings"},
-    {image: "/watches.webp",name: "Watchess", link: "/collections/watches"},
-    {image: "/rings.webp",name: "Rinsgs", link: "/collections/rings"},
-    {image: "/silver bracelets.webp",name: "Bracselets ", link: "/collections/stainless-steel-bracelets"},
-    {image: "/silver earrings.webp",name: "Earsrings", link: "/collections/stainless-steel-earrings"},
-]
+//   export const signature = [
+//     {image: "/watches.webp",name: "Watches", link: "/collections/watches"},
+//     {image: "/rings.webp",name: "Rings", link: "/collections/rings"},
+//     {image: "/silver bracelets.webp",name: "Bracelets ", link: "/collections/stainless-steel-bracelets"},
+//     {image: "/silver earrings.webp",name: "Earrings", link: "/collections/stainless-steel-earrings"},
+//     {image: "/watches.webp",name: "Watchess", link: "/collections/watches"},
+//     {image: "/rings.webp",name: "Rinsgs", link: "/collections/rings"},
+//     {image: "/silver bracelets.webp",name: "Bracselets ", link: "/collections/stainless-steel-bracelets"},
+//     {image: "/silver earrings.webp",name: "Earsrings", link: "/collections/stainless-steel-earrings"},
+// ]
   
 export const collectionMetadata = [
   {
