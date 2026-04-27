@@ -18,7 +18,7 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
   const [rows, setRows] = React.useState(
     orders.map((order) => ({
       id: order._id,
-      orderId: order.orderId,
+      orderId: order.orderId.slice(0,7),
       userName: order.userDetails.fullName,
       email: order.userDetails.email,
       phone: order.userDetails.phone,

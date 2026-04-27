@@ -1,9 +1,8 @@
 import cloudinary from "@/lib/config/cloudinary";
 import { connectDB } from "@/lib/config/database";
-import { getOrderConfirmationEmail } from "@/lib/helpers/nodemailer";
+import { getAdminNewOrderEmail, getOrderConfirmationEmail } from "@/lib/helpers/nodemailer";
 import order from "@/lib/models/OrderSchema";
 import ProductSchema from "@/lib/models/ProductSchema";
-import { checkoutItem, productType } from "@/type";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
@@ -88,13 +87,7 @@ export const POST = async (req: NextRequest) => {
       },
     });
 
-    const adminHtml = `
-      <h2>🛒 New Order Received!</h2>
-      <p>A new order has been placed.</p>
-      <a href="https://www.zevoraofficial.com/admin-dashboard">
-        👉 View in Admin Dashboard
-      </a>
-    `;
+    const adminHtml = getAdminNewOrderEmail(newOrder);
 
     await transporter.sendMail({
       from: `"Zevora"`,

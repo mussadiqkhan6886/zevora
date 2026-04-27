@@ -51,7 +51,7 @@ const ThankYouPage = async ({
 
         {/* Order Info */}
         <div className="border-t pt-4 text-sm space-y-1">
-          <p><strong>Order ID:</strong> {order.orderId}</p>
+          <p><strong>Order ID:</strong> <span className="uppercase"> {order.orderId.slice(0,7)} </span></p>
           <p><strong>Name:</strong> {order.userDetails.fullName}</p>
           <p><strong>Phone:</strong> {order.userDetails.phone}</p>
           <p><strong>Email:</strong> {order.userDetails.email || "-"}</p>
