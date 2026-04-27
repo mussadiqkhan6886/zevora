@@ -13,6 +13,7 @@ export const getOrderConfirmationEmail = (order: any) => {
     </tr>
   `).join("");
 
+  
   return `
   <div style="font-family: Arial, sans-serif; color:#333; line-height:1.5; max-width:600px; margin:0 auto; padding:20px; background-color:#f9f9f9;">
     <h2 style="color:#222;">Thank you for your order!</h2>
