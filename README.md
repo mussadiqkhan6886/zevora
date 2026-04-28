@@ -92,6 +92,7 @@ The store serves customers nationwide across Karachi, Lahore, and Islamabad, wit
 - **MongoDB** — flexible document model for product variants, order states, and review data
 - **NextAuth** — session-based auth protecting all admin routes
 - **SEO-first architecture** — every page has unique metadata generated server-side
+- **Indexing** — Indexed every page on google search console, sitemap.xml, robots.txt
 
 ---
 
