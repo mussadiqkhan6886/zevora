@@ -94,7 +94,7 @@ const Heading = () => {
            <span>most affordable prices.</span>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="block mt-6 text-lg md:text-2xl font-sans font-light text-gray-600 max-w-3xl leading-relaxed">
+        <motion.div variants={itemVariants} className="block mt-6 text-lg md:text-xl font-sans font-light text-gray-600 max-w-3xl leading-relaxed">
           From timeless gold-plated pieces to durable stainless steel, our curated selection serves
           <span className="text-gray-900 font-medium"> Lahore, Islamabad and Karachi</span> with elegance.
         </motion.div>
