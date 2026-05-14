@@ -44,7 +44,7 @@ const Heading = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className={`${serif.className} text-3xl md:text-5xl lg:text-6xl leading-[1.2] md:leading-[1.1] tracking-tight text-gray-900 text-center md:text-left`}
+        className={`${serif.className} text-2xl md:text-3xl lg:text-4xl leading-[1.2] md:leading-[1.1] tracking-tight text-gray-900 text-center md:text-left`}
       >
         <motion.div variants={itemVariants} className="block mb-4">
           <span className="font-semibold">Zevora Official</span> redefines luxury 
@@ -58,8 +58,8 @@ const Heading = () => {
                 src="/watches.webp" 
                 alt="Jewelry" 
                 width={160} height={80} 
-                className="object-cover w-[90px] h-[45px] md:w-[140px] md:h-[70px] rounded-full grayscale hover:grayscale-0 transition-all duration-500 border border-gray-200 shadow-xl" 
-              />
+                className="object-cover w-[80px] h-[45px] md:w-[120px] md:h-[60px] rounded-full grayscale hover:grayscale-0 transition-all duration-500 border border-gray-200 shadow-xl" 
+                />
             </motion.div>
           </div>
           <span className="italic font-light">premium watches</span>
@@ -73,7 +73,7 @@ const Heading = () => {
                 src="/silver earrings.webp" 
                 alt="Jewelry" 
                 width={160} height={80} 
-                className="object-cover w-[90px] h-[45px] md:w-[140px] md:h-[70px] rounded-full shadow-xl" 
+                className="object-cover w-[80px] h-[45px] md:w-[120px] md:h-[60px] rounded-full shadow-xl" 
               />
             </motion.div>
           </div>
@@ -88,7 +88,7 @@ const Heading = () => {
                 src="/deals.jpg" 
                 alt="Luxury Deals" 
                 width={160} height={80} 
-                className="object-cover w-[90px] h-[45px] md:w-[140px] md:h-[70px] rounded-full shadow-lg" 
+                className="object-cover w-[80px] h-[45px] md:w-[120px] md:h-[60px] rounded-full shadow-lg" 
               />
            </motion.div>
            <span>most affordable prices.</span>
