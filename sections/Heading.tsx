@@ -55,7 +55,7 @@ const Heading = () => {
           <div className="relative group inline-block">
             <motion.div variants={imageVariants} className="inline-block align-middle">
               <Image 
-                src="/watches.webp" 
+                src="/watches.jpg" 
                 alt="Jewelry" 
                 width={160} height={80} 
                 className="object-cover w-[80px] h-[45px] md:w-[120px] md:h-[60px] rounded-full grayscale hover:grayscale-0 transition-all duration-500 border border-gray-200 shadow-xl" 
