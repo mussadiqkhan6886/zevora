@@ -123,11 +123,11 @@ const Page = () => {
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionsJsonLd) }}
       />
-      <main className='pt-35 max-w-7xl mx-auto mb-14'>
+      <main className='pt-35 max-w-6xl mx-auto mb-14'>
         <h1 className={`${serif.className} text-5xl mb-10 ml-10 md:ml-1`}>
           Collections
         </h1>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-8'>
           {collections.map((item) => (
             <Link
               key={item.name}
@@ -136,7 +136,7 @@ const Page = () => {
             >
               <article className='flex flex-col items-center'>
                 <Image
-                  className='h-110 object-center object-cover'
+                  className='h-100 object-center object-cover'
                   src={item.image}
                   alt={`${item.name} collection — Zevora Official Pakistan`}
                   width={400}
@@ -144,7 +144,7 @@ const Page = () => {
                   loading='lazy'
                 />
                 <h2
-                  className={`${serif.className} flex items-center gap-2 mt-2 text-2xl`}
+                  className={`${serif.className} flex items-center gap-2 mt-2 text-xl`}
                 >
                   {item.name} <FiArrowRight />
                 </h2>

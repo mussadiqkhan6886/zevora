@@ -20,10 +20,15 @@ const Hero = () => {
               rotationInterval={2300}
           />
         <Image src="/hero.webp" width={1000} height={1000} priority fetchPriority='high' alt='hero' className='w-full h-[77vh] md:h-[90vh] object-cover object-center rounded-b-4xl' />
-        <div className='absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-[130%]'>
+        <div className='absolute w-full flex flex-col sm:flex-row justify-start sm:justify-center items-start sm:items-center gap-4 left-1/2 top-1/2 ml-3 sm:ml-0 -translate-x-1/2 translate-y-[40%] sm:translate-y-[300%] lg:translate-y-[130%]'>
           <button>
-            <Link className={`${serif.className} px-6 py-2 font-semibold backdrop-blur-sm border rounded-full border-white bg-zinc-50/20 text-black text-center w-full block shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300`} href="/collections">
+            <Link className={`${serif.className} text-sm md:text-base px-6 py-2 font-semibold backdrop-blur-sm border rounded-full border-white bg-zinc-50/20 text-black text-center w-full block shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300`} href="/collections">
               Explore Collections
+            </Link>
+          </button>
+          <button>
+            <Link className={`${serif.className}  text-sm md:text-base px-6 py-2 font-semibold border rounded-full border-zinc-800 bg-ctr  text-white text-center w-full block shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300`} href="/collections/all">
+              All Accessories
             </Link>
           </button>
         </div>
