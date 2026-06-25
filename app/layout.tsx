@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { roboto } from "@/lib/fonts";
 import { CartProvider } from "@/context/CartContext";
 import SmoothScroll from "../components/customer/Scroll";
+import MetaPixel from "@/components/admin/MetaPixel";
 
 export default function RootLayout({
   children,
@@ -14,6 +14,7 @@ export default function RootLayout({
       <body
         className={`antialiased ${roboto.className}`}
       >
+        <MetaPixel />
         <SmoothScroll>
           <CartProvider>
           {children}
