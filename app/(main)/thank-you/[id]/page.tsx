@@ -1,11 +1,7 @@
-'use client';
-
 import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-
 import Order from "@/lib/models/OrderSchema";
 import { connectDB } from "@/lib/config/database";
 import MetaPurchase from "@/components/admin/MetaPurchase";
