@@ -1,3 +1,4 @@
+import MetaViewContent from '@/components/admin/MetaViewContent';
 import AddToCartButton from '@/components/customer/AddToCartButton';
 import BreadCrumps from '@/components/customer/BreadCrumps';
 import CardTwo from '@/components/customer/CardTwo';
@@ -169,6 +170,14 @@ const jsonLd = {
       />
 
 
+      <MetaViewContent
+        productId={product._id.toString()}
+        name={product.name}
+        price={product.price}
+        salePrice={product.salePrice}
+        onSale={product.onSale}
+      />
+      
       <BreadCrumps collection={product.category} product={product.name} />
 
     <section className="grid px-3 md:px-0 grid-cols-1 lg:grid-cols-11 gap-16 lg:gap-24">

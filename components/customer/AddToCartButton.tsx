@@ -1,6 +1,7 @@
 'use client'
 
 import { useCart } from '@/hooks/useCart'
+import { trackEvent } from '@/lib/metaEvent'
 import { productType } from '@/type'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -46,6 +47,15 @@ const AddToCartButton = ({ product }: { product: productType }) => {
     if(!target){
       return
     }
+
+    trackEvent("AddToCart", {
+      content_ids: [product._id],
+      content_name: product.name,
+      content_type: "product",
+      value: finalPrice,
+      currency: "PKR",
+      quantity,
+    });
     
     // Slight delay for luxury feel
     setTimeout(() => {
@@ -61,6 +71,7 @@ const AddToCartButton = ({ product }: { product: productType }) => {
         finalPrice,
         quantity,
       })
+      
 
       setLoading(false)
       setAdded(true)
@@ -150,6 +161,13 @@ const AddToCartButton = ({ product }: { product: productType }) => {
           onClick={() => {
             handleAddToCart();
             if (!added) {
+              trackEvent("InitiateCheckout", {
+                content_ids: cart.map((item) => item.productId),
+                num_items: cart.reduce((total, item) => total + item.quantity, 0),
+                value: finalPrice,
+                currency: "PKR",
+                quantity,
+              });
               setTimeout(() => window.location.href = "/checkout", 700);
             }
           }}

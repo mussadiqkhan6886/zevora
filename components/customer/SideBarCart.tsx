@@ -5,6 +5,7 @@ import { useCart } from '@/hooks/useCart';
 import { serif } from '@/lib/fonts';
 import Image from 'next/image';
 import Link from 'next/link';
+import { trackEvent } from '@/lib/metaEvent';
 
 const SideBarCart = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (val: boolean) => void }) => {
   const { cart, removeFromCart, totalPrice, updateQuantity } = useCart()
@@ -12,6 +13,17 @@ const SideBarCart = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (val: 
   const FREE_SHIPPING_THRESHOLD = 5000;
   const progress = Math.min((totalPrice / FREE_SHIPPING_THRESHOLD) * 100, 100);
   const remaining = FREE_SHIPPING_THRESHOLD - totalPrice;
+
+  const handleCheckout = () => {
+      trackEvent("InitiateCheckout", {
+        content_ids: cart.map((item) => item.productId),
+        num_items: cart.reduce((total, item) => total + item.quantity, 0),
+        value: totalPrice,
+        currency: "PKR",
+      });
+
+    };
+
   return (
     <>
       {/* Overlay */}
@@ -101,7 +113,7 @@ const SideBarCart = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (val: 
             <span className="uppercase text-[11px] tracking-[0.2em] text-stone-500">Subtotal</span>
             <span className="text-xl font-light text-zinc-900">PKR {totalPrice.toLocaleString()}</span>
           </div>
-          <Link href="/checkout" className="w-full block text-center bg-zinc-900 text-white py-4 text-[12px] uppercase tracking-[0.3em] hover:bg-zinc-800 transition-all active:scale-[0.98]">
+          <Link onClick={handleCheckout} href="/checkout" className="w-full block text-center bg-zinc-900 text-white py-4 text-[12px] uppercase tracking-[0.3em] hover:bg-zinc-800 transition-all active:scale-[0.98]">
             Proceed to Checkout
           </Link>
           <div className='flex gap-2 items-center mt-2'>

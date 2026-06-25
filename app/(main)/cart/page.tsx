@@ -1,6 +1,7 @@
 'use client'
 
 import { useCart } from '@/hooks/useCart'
+import { trackEvent } from '@/lib/metaEvent'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -12,6 +13,16 @@ const CartPage = () => {
     (acc, item) => acc + item.finalPrice * item.quantity,
     0
   )
+
+  const handleCheckout = () => {
+    trackEvent("InitiateCheckout", {
+      content_ids: cart.map((item) => item.productId),
+      num_items: cart.reduce((total, item) => total + item.quantity, 0),
+      value: subtotal,
+      currency: "PKR",
+    });
+  };
+
   if (cart.length === 0) {
     return (
       <main className="min-h-[90vh] flex flex-col items-center justify-center gap-4">
@@ -115,6 +126,7 @@ const CartPage = () => {
           </div>
 
           <Link
+            onClick={handleCheckout}
             href="/checkout"
             className="block mt-6 w-full text-center py-3 bg-black text-white hover:bg-white hover:text-black border border-black transition"
           >

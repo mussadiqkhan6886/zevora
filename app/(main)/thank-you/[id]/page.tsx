@@ -1,3 +1,5 @@
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle } from "lucide-react";
@@ -6,6 +8,7 @@ import { notFound } from "next/navigation";
 
 import Order from "@/lib/models/OrderSchema";
 import { connectDB } from "@/lib/config/database";
+import MetaPurchase from "@/components/admin/MetaPurchase";
 
 interface OrderItem {
   productId: string;
@@ -37,6 +40,15 @@ const ThankYouPage = async ({
 
   return (
     <main className="flex pt-28 justify-center items-center min-h-screen bg-gray-50 px-4">
+       <MetaPurchase
+        orderId={order._id.toString()}
+        totalPrice={order.totalPrice}
+        items={order.items.map((item: OrderItem) => ({
+          productId: item.productId.toString(),
+          quantity: item.quantity,
+        }))}
+      />
+
       <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl w-full">
 
         <CheckCircle size={40} className="mx-auto text-green-600 mb-4" />
