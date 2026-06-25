@@ -1,4 +1,3 @@
-import MetaPixel from "@/components/admin/MetaPixel";
 import Footer from "@/components/customer/Footer";
 import Header from "@/components/customer/Header";
 import SalesPop from "@/components/customer/SalesPop";
@@ -265,7 +264,6 @@ export default function RootLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <MetaPixel />
     <Header />
     {children}
     <SalesPop />
