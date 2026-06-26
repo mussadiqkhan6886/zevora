@@ -18,31 +18,27 @@ export async function GET() {
 <description>Zevora Product Feed</description>
 
 ${products
-  .map((product) => {
+  .flatMap((product) => {
     const price =
       product.onSale && product.salePrice
         ? product.salePrice
         : product.price;
 
-    return `
+    // No variants
+    if (!product.hasVariants || product.variants.length === 0) {
+      return `
 <item>
 <g:id>${product._id}</g:id>
 
 <g:title><![CDATA[${product.name}]]></g:title>
 
-<g:description><![CDATA[
-${product.description}
-]]></g:description>
+<g:description><![CDATA[${product.description}]]></g:description>
 
 <g:link>${siteUrl}/products/${product.slug}</g:link>
 
-<g:image_link>${product.images[0]}</g:image_link>
+<g:image_link>${siteUrl}${product.images[0]}</g:image_link>
 
-<g:availability>${
-      product.variants?.some((v: {stock: number}) => v.stock > 0)
-        ? "in stock"
-        : "out of stock"
-    }</g:availability>
+<g:availability>in stock</g:availability>
 
 <g:condition>new</g:condition>
 
@@ -54,6 +50,42 @@ ${product.description}
 
 </item>
 `;
+    }
+
+    // Products with variants
+    return product.variants.map(
+      (variant: { label: string; sku: string; stock: number }) => `
+<item>
+
+<g:id>${variant.sku}</g:id>
+
+<g:item_group_id>${product._id}</g:item_group_id>
+
+<g:title><![CDATA[${product.name} - ${variant.label}]]></g:title>
+
+<g:description><![CDATA[${product.description}]]></g:description>
+
+<g:link>${siteUrl}/products/${product.slug}</g:link>
+
+<g:image_link>${siteUrl}${product.images[0]}</g:image_link>
+
+<g:availability>${
+        variant.stock > 0 ? "in stock" : "out of stock"
+      }</g:availability>
+
+<g:condition>new</g:condition>
+
+<g:price>${price.toFixed(2)} PKR</g:price>
+
+<g:brand>Zevora</g:brand>
+
+<g:product_type>${product.category}</g:product_type>
+
+<g:custom_label_0>${variant.label}</g:custom_label_0>
+
+</item>
+`
+    );
   })
   .join("")}
 
