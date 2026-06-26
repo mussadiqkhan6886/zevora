@@ -13,6 +13,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <MetaPixel />
+        <meta name="facebook-domain-verification" content="b0ojpnj3ymhjrklgj2d4shzd7hrk4s" />
       </head>
       <body
         className={`antialiased ${roboto.className}`}
