@@ -46,7 +46,7 @@ ${product.description}
 
 <g:condition>new</g:condition>
 
-<g:price>${price.toFixed(2)} GBP</g:price>
+<g:price>${price.toFixed(2)} PKR</g:price>
 
 <g:brand>Zevora</g:brand>
 
