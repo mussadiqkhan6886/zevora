@@ -42,7 +42,7 @@ const WatchesSection = ({ watches }: { watches: productType[] }) => {
       >
         {watches.map((item, index) => (
           <SwiperSlide key={index}>
-            <CardTwo collectionSlug="watches" {...item} />
+            <CardTwo collectionSlug={item.category} {...item} />
           </SwiperSlide>
         ))}
       </Swiper>

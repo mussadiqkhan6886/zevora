@@ -1,19 +1,16 @@
 import About from '@/sections/About'
 import NewArrival from '@/sections/NewArrival'
-import Watches from '@/sections/Watches'
-import React from 'react'
-
 import type { Metadata } from 'next'
 import Gallery from '@/sections/Gallery'
 import FreeComp from '@/components/customer/FreeComp'
 import Hero from '@/sections/Hero'
 import Heading from '@/sections/Heading'
 import Collections from '@/sections/Collections'
-import Image from 'next/image'
 import Script from 'next/script'
 import Reviews from '@/sections/Reviews'
 import ImageSection from '@/sections/ImageSection'
 import FAQSection from '@/components/customer/FAQs'
+import HotSeller from '@/sections/HotSeller'
 
 export const metadata: Metadata = {
   title: 'Zevora Official | Buy Watches, Jewelry & Perfumes Online in Pakistan',
@@ -191,7 +188,7 @@ const page = () => {
       <Heading />
       <Collections />
       <NewArrival />
-      <Watches />
+      <HotSeller />
       <About />
       <ImageSection />
       <Gallery />
