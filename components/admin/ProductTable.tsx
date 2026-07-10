@@ -11,7 +11,7 @@ import { productType } from '@/type';
 
 interface ProductTableProps {
   products: productType[];
-  setProducts: (product: productType[]) => void;
+  setProducts: React.Dispatch<React.SetStateAction<productType[]>>
 }
 
 export default function ProductTable({ products, setProducts }: ProductTableProps) {
@@ -30,6 +30,34 @@ export default function ProductTable({ products, setProducts }: ProductTableProp
     }
   };
 
+  const [loadingId, setLoadingId] = React.useState<string | null>(null);
+
+ const changeHotSellerValue = async (
+  id: string,
+  hotSeller: boolean
+) => {
+  try {
+    setLoadingId(id);
+
+    await axios.patch(`/api/products/${id}/hot-seller`, {
+      hotSeller,
+    });
+
+    setProducts(prev =>
+      prev.map(product =>
+        product._id === id
+          ? { ...product, hotSeller }
+          : product
+      )
+    );
+  } catch (err) {
+    console.log(err);
+    alert("Failed to update.");
+  } finally {
+    setLoadingId(null);
+  }
+};
+
   const columns: GridColDef<any>[] = [
     {
       field: 'image',
@@ -46,6 +74,20 @@ export default function ProductTable({ products, setProducts }: ProductTableProp
         ) : <span>No Image</span>
       ),
     },
+    { field: 'hotSeller', headerName: 'Hot Seller', minWidth: 70, renderCell: (params) =>
+  loadingId === params.row._id ? (
+    <div className="w-3 h-3 rounded-full border border-black border-t-transparent animate-spin" />
+  ) : (
+    <input
+      type="checkbox"
+      className="cursor-pointer"
+      checked={params.row.hotSeller ?? false}
+      onChange={() =>
+        changeHotSellerValue(params.row._id, !params.row.hotSeller)
+      }
+    />
+  )
+     },
     { field: 'name', headerName: 'Product Name', minWidth: 190 },
     {
       field: 'price',

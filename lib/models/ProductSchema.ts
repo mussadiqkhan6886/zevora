@@ -14,6 +14,7 @@ const ProductSchema = new Schema(
     price: { type: Number, required: true },
     salePrice: { type: Number, default: null },
     onSale: { type: Boolean, default: false },
+    hotSeller: { type: Boolean, default: false },
     description: { type: String, required: true },
     keywords: { type: [String], required: true },
     images: { type: [String], required: true },

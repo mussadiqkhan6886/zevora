@@ -12,6 +12,7 @@ export interface productType {
   price: number;
   salePrice?: number | null;
   onSale?: boolean;
+  hotSeller?: boolean;
   category: string;
   description: string;
   keywords: string[];

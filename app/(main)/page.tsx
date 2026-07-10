@@ -177,6 +177,7 @@ const page = () => {
     ]
   }
 };
+
   return (
     <main className='pt-20'>
       <Script
