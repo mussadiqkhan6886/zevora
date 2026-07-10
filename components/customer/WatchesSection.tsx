@@ -40,7 +40,7 @@ const WatchesSection = ({ watches }: { watches: productType[] }) => {
           1024: { slidesPerView: 4 },
         }}
       >
-        {watches.map((item, index) => (
+        {watches.map((item: productType, index) => (
           <SwiperSlide key={index}>
             <CardTwo collectionSlug={item.category} {...item} />
           </SwiperSlide>

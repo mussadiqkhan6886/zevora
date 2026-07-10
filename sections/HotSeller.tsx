@@ -13,7 +13,7 @@ const HotSeller = async () => {
 
 
   return (
-    <section className='pb-4 px-2 md:px-0'>
+    <section className='py-8 px-2'>
       <h2 className={`${serif.className}  inline-block ml-5 text-black text-4xl py-8`}>
         Hot Sellers
       </h2>
