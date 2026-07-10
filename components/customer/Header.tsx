@@ -9,6 +9,7 @@ import Menu from './Menu';
 import SearchBar from './SearchBar';
 import Image from 'next/image';
 import SideBarCart from './SideBarCart';
+import { useCart } from '@/hooks/useCart';
 
 const Header = () => {
 
@@ -18,6 +19,7 @@ const Header = () => {
    const [openMenu, setOpenMenu] = useState<string | null>(null)
    const [small, setSmall] = useState(false)
   const [sideBarCartOpen, setSideBarCartOpen] = useState(false)
+  const {cart} = useCart()
 
     useEffect(() => {
       const handleScroll = () => {
@@ -121,8 +123,9 @@ useEffect(() => {
         <div className='flex gap-4 md:gap-6 items-center'>
             <FiSearch className='cursor-pointer' onClick={() => setSearchOpen(true)} />
             {searchOpen && <SearchBar isSearchOpen={setSearchOpen} />}
-            <button className="cursor-pointer" onClick={() => setSideBarCartOpen(true)} title="open sidebar cart" aria-label='cart button'>
+            <button className="cursor-pointer relative" onClick={() => setSideBarCartOpen(true)} title="open sidebar cart" aria-label='cart button'>
               <FiShoppingCart name='cart icon' aria-label='shopping cart icon' />
+              {cart.length > 0 && <div className="bg-red-600 rounded-full w-2.5 h-2.5 absolute -top-1 -right-1" />}
             </button>
         </div>
         {sideBarCartOpen && <SideBarCart isOpen={sideBarCartOpen} setIsOpen={setSideBarCartOpen} />}
