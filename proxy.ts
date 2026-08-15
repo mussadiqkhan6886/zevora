@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import jwt form "jsonwebtoken"
+import jwt from "jsonwebtoken"
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
