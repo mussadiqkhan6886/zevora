@@ -36,7 +36,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [cart, isInitialized])
 
-  // 1. Calculate Total Price Dynamically
   const totalPrice = useMemo(() => {
     return cart.reduce((acc, item) => {
       const price = item.salePrice || item.price;
@@ -44,7 +43,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }, 0);
   }, [cart]);
 
-  // 2. Fixed Update Quantity Logic
   const updateQuantity = (productId: string, variantLabel: string | undefined, action: 'increment' | 'decrement') => {
     setCart(prev =>
       prev.map(item => {
@@ -58,7 +56,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             }
             return { ...item, quantity: item.quantity + 1 };
           } else {
-            // Prevent quantity from going below 1
             return { ...item, quantity: Math.max(1, item.quantity - 1) };
           }
         }
