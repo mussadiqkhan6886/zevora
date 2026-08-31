@@ -59,8 +59,8 @@ export const collectionMetadata = [
     description: "Discover sophisticated timepieces and premium watches for men and women. Zevora offers luxury watch designs with durable straps and precise movements, delivered nationwide from Lahore."
   },
   {
-    slug: "jewellery-sets",
-    title: "Jewellery Sets",
+    slug: "jewelry-set",
+    title: "Jewelry Set",
     description: "Shop elegant jewelry sets featuring matching necklaces and earrings. Perfect for weddings and special occasions, our sets combine luxury aesthetics with affordable pricing."
   },
   {

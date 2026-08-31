@@ -19,10 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
 
   const sampleProduct = await ProductSchema.findOne({ category: collection }).lean()
   const ogImage = sampleProduct?.images?.[0] || '/header-logo.png'
-
-  const desc = collectionMetadata.find(item => item.slug === categoryName)
-
-  return {
+  const desc = collectionMetadata.find(item => item.slug.toLowerCase() === collection.toLowerCase())
+  return {  
     title: `Trending ${desc?.title} for Women`,
     description: desc?.description,
     alternates: {
